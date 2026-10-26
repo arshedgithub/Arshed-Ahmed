@@ -1,6 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
+import { THEME_COLORS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function ThemeToggle({ className }: { className?: string }) {
@@ -8,6 +9,9 @@ export function ThemeToggle({ className }: { className?: string }) {
     const root = document.documentElement;
     const next = root.dataset.theme === "light" ? "dark" : "light";
     root.dataset.theme = next;
+    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((m) => {
+      m.content = THEME_COLORS[next];
+    });
     try {
       localStorage.setItem("theme", next);
     } catch {}

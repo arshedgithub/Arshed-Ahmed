@@ -20,8 +20,12 @@
   --success: #22c55e;
   --danger: #f87171;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
-  --photo-from: #1c2738;
-  --photo-to: #0d131c;
+  --photo-glow: rgb(59 130 246 / 0.18);
+  /* Availability badge: 15:1 text contrast */
+  --avail-bg: rgb(34 197 94 / 0.14);
+  --avail-border: rgb(34 197 94 / 0.45);
+  --avail-fg: #f0fdf4;
+  --avail-dot: #22c55e;
   color-scheme: dark;
 }
 
@@ -40,8 +44,13 @@
   --success: #15803d;
   --danger: #b91c1c;
   --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 12px 32px -16px rgb(15 23 42 / 0.18);
-  --photo-from: #dfe6ef;
-  --photo-to: #b9c5d4;
+  --photo-glow: #e2e8f0; /* slate-200 */
+  --photo-tile: #e8f0fa; /* pale blue, just off the page background */
+  /* Availability badge: 8.4:1 text contrast */
+  --avail-bg: #dcfce7;
+  --avail-border: #86efac;
+  --avail-fg: #14532d;
+  --avail-dot: #16a34a;
   color-scheme: light;
 }
 
@@ -66,8 +75,10 @@
 
 /* ---------- Base ---------- */
 @layer base {
+  /* color-scheme is set per theme on :root above; the scrollbar is themed explicitly so no light gutter shows. */
   html {
     background: var(--base);
+    scrollbar-color: var(--line-strong) var(--base);
     scroll-behavior: smooth;
     scroll-padding-top: 72px;
     -webkit-tap-highlight-color: transparent;
@@ -111,17 +122,86 @@
   box-shadow: var(--shadow-card);
 }
 
-/* Photo backdrop: neutral charcoal-blue gradient, soft vignette, 1px accent ring. No glow. */
-@utility photo-frame {
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  background:
-    radial-gradient(120% 90% at 50% 18%, transparent 55%, rgb(0 0 0 / 0.28) 100%),
-    radial-gradient(80% 60% at 50% 30%, var(--photo-from), var(--photo-to));
-  box-shadow:
-    inset 0 0 0 1px rgb(59 130 246 / 0.45),
-    var(--shadow-card);
+/* Transparent cutout straight on the page: no box, the bottom edge fades into the background.
+   The hero source keeps the cutout's full width, so the shoulders never end in a hard side edge. */
+@utility photo-cutout {
+  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+}
+
+/* Light theme: the photo sits in a square pale-blue tile instead of floating as a cutout. */
+@utility photo-tile {
+  [data-theme="light"] & {
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--photo-tile);
+  }
+  [data-theme="light"] & .photo-cutout {
+    mask-image: none;
+  }
+}
+
+/* Hero photo box. Phones: height capped so everything down to the social icons clears the tab bar;
+   square in dark, full-width tile in light. From md: square, width-driven, up to 480px. */
+@utility hero-photo-size {
+  height: 36svh;
+  aspect-ratio: 1;
+  [data-theme="light"] & {
+    width: 100%;
+    aspect-ratio: auto;
+  }
+  @media (max-height: 760px) {
+    height: 30svh;
+  }
+  /* Below 360px the buttons stack, so the photo gives up the extra row. */
+  @media (max-width: 359px) {
+    height: 26svh;
+  }
+  @media (width >= 48rem) {
+    &,
+    [data-theme="light"] & {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      aspect-ratio: 1;
+    }
+  }
+}
+
+/* Large soft light behind the head. Pure gradient, so it never shows an edge. */
+@utility photo-glow {
+  background: radial-gradient(closest-side, var(--photo-glow), transparent);
+}
+
+/* Faint grid with a soft accent wash, used behind project fallback cards. */
+@utility project-pattern {
+  background-image:
+    radial-gradient(90% 70% at 100% 0%, var(--accent-soft), transparent 70%),
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+  background-position: 0 0, -1px -1px, -1px -1px;
+}
+
+/* ---------- Availability badge dot: slow pulse ---------- */
+@keyframes avail-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.avail-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--avail-dot);
+  animation: avail-pulse 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 /* ---------- Hero load reveal (CSS-only so it runs before hydration and never delays LCP) ---------- */
@@ -181,14 +261,18 @@
   border-radius: 999px;
   background: var(--accent);
 }
+/* Link text in the foreground colour (accent on the raised card is under 4.5:1), accent underline. */
 .prose-case a:not([class]) {
-  color: var(--accent);
+  color: var(--fg);
+  font-weight: 500;
   text-decoration: underline;
+  text-decoration-color: var(--accent);
   text-underline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .avail-dot::after { display: none; }
   *,
   *::before,
   *::after {

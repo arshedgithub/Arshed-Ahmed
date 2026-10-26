@@ -11,8 +11,7 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "check": "eslint && next typegen && tsc --noEmit",
-    "images:photo": "node scripts/process-photo.mjs",
-    "images:placeholders": "node scripts/make-placeholders.mjs"
+    "images:photo": "node scripts/process-photo.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.0",

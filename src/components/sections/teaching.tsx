@@ -5,7 +5,7 @@ import { teaching } from "@/lib/site";
 
 export function Teaching() {
   return (
-    <Section id="teaching" labelledBy="teaching-title" className="pt-0 md:pt-0">
+    <Section id="teaching" labelledBy="teaching-title" className="pt-0 md:pt-0 lg:pt-0">
       <SectionHeading id="teaching-title" eyebrow="Teaching" title="Teaching and mentoring" />
       <div className="grid gap-4 md:grid-cols-2">
         {teaching.map((t, i) => (

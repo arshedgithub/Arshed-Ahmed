@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { site } from "@/lib/site";
 import { ogPortrait } from "./og-portrait";
 
 export const ogSize = { width: 1200, height: 630 };
@@ -66,7 +67,7 @@ export function renderOg({
           </div>
           <div style={{ display: "flex", fontSize: 24, color: C.muted }}>
             <span style={{ color: C.fg, fontWeight: 600 }}>Arshed Ahmed</span>
-            <span style={{ marginLeft: 12 }}>· arshedahmed.com</span>
+            <span style={{ marginLeft: 12 }}>· {new URL(site.url).host}</span>
           </div>
         </div>
         <div

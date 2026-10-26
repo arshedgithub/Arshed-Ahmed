@@ -1,8 +1,9 @@
-import { Mail } from "lucide-react";
+import { Clock, Mail, MapPin, Plane } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/ui/brand-icons";
+import { CopyButton } from "@/components/ui/copy-button";
 import { Section, SectionHeading } from "@/components/ui/primitives";
-import { site } from "@/lib/site";
+import { LOCATION_LINE, NOTICE_PERIOD, VISA_STATUS, site } from "@/lib/site";
 import { LazyContactForm } from "./lazy-contact-form";
 
 const channels = [
@@ -26,7 +27,7 @@ function contactEndpoint() {
 export function Contact() {
   return (
     <Section id="contact" labelledBy="contact-title">
-      <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
         <Reveal>
           <SectionHeading
             id="contact-title"
@@ -34,13 +35,35 @@ export function Contact() {
             title="Get in touch"
             description="Hiring for a full-stack role, or have a product to build? Send a message or reach me directly."
           />
+          <ul className="mb-6 grid gap-2 text-sm">
+            <li className="flex items-center gap-2">
+              <Clock size={16} className="shrink-0 text-accent" aria-hidden="true" />
+              <span>
+                <span className="font-medium text-fg">Notice period:</span> <span className="text-muted">{NOTICE_PERIOD}</span>
+              </span>
+            </li>
+            {VISA_STATUS && (
+              <li className="flex items-center gap-2">
+                <Plane size={16} className="shrink-0 text-accent" aria-hidden="true" />
+                <span>
+                  <span className="font-medium text-fg">Visa status:</span> <span className="text-muted">{VISA_STATUS}</span>
+                </span>
+              </li>
+            )}
+            <li className="flex items-center gap-2">
+              <MapPin size={16} className="shrink-0 text-accent" aria-hidden="true" />
+              <span className="text-muted">{LOCATION_LINE}</span>
+            </li>
+          </ul>
           <ul className="grid gap-2">
             {channels.map(({ label, value, href, Icon }) => (
-              <li key={label}>
+              <li key={label} className="flex min-w-0 items-center gap-2">
                 <a
                   href={href}
-                  {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group flex min-h-14 items-center gap-4 rounded-xl border border-transparent px-2 py-2 transition-colors hover:border-line hover:bg-surface"
+                  {...(href.startsWith("http")
+                    ? { target: "_blank", rel: label === "WhatsApp" ? "noopener noreferrer" : "noopener noreferrer me" }
+                    : {})}
+                  className="group flex min-h-14 min-w-0 flex-1 items-center gap-4 rounded-xl border border-transparent px-2 py-2 transition-colors hover:border-line hover:bg-surface"
                 >
                   <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-line text-accent">
                     <Icon size={18} aria-hidden="true" />
@@ -50,6 +73,7 @@ export function Contact() {
                     <span className="block truncate font-medium group-hover:text-accent">{value}</span>
                   </span>
                 </a>
+                {label === "Email" && <CopyButton value={site.email} label="Copy email address" />}
               </li>
             ))}
           </ul>

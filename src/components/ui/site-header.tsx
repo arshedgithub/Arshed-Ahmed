@@ -7,9 +7,9 @@ import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/95">
+    <header className="sticky top-0 z-40 border-b border-line bg-canvas">
       <div className="container-page relative flex h-14 items-center justify-between gap-4 md:h-16">
-        <Logo />
+        <Logo variant="monogram-mobile" />
 
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-1">

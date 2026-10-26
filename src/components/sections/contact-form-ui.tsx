@@ -38,11 +38,10 @@ export function Field({ id, label, error, children }: { id: string; label: strin
   );
 }
 
-/** Off-screen honeypot, skipped by keyboard and screen readers. */
+/** Spam honeypot: off-screen, hidden from screen readers, out of the tab order, no visible text. */
 export function HoneypotWrapper({ children }: { children: ReactNode }) {
   return (
-    <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-      <label htmlFor="_gotcha">Leave this field empty</label>
+    <div aria-hidden="true" className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden opacity-0">
       {children}
     </div>
   );

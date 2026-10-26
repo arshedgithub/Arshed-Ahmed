@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/sections/site-footer";
 import { ThemeScript } from "@/components/seo/theme-script";
 import { BottomNav } from "@/components/ui/bottom-nav";
 import { SiteHeader } from "@/components/ui/site-header";
-import { site } from "@/lib/site";
+import { THEME_COLORS, site } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,28 +31,18 @@ export const metadata: Metadata = {
   applicationName: site.name,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
-  keywords: [
-    "Arshed Ahmed",
-    "full-stack engineer",
-    "software engineer UAE",
-    "Next.js developer Dubai",
-    "TypeScript",
-    "Node.js",
-    "Stripe",
-    "SaaS",
-  ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "/",
     siteName: site.name,
-    title: `${site.name} | Full-Stack Software Engineer`,
+    title: `${site.name} | Full-Stack Software Engineer in the UAE`,
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | Full-Stack Software Engineer`,
+    title: `${site.name} | Full-Stack Software Engineer in the UAE`,
     description: site.description,
   },
   robots: { index: true, follow: true },
@@ -61,9 +51,10 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0b0f14" },
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.dark },
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.light },
   ],
+  colorScheme: "dark light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

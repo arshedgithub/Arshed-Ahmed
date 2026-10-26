@@ -3,17 +3,25 @@
  * Facts come from the CV. Do not add metrics, clients or testimonials that are not in it.
  */
 
-export const LINKEDIN_URL = "https://linkedin.com/in/arshed-ahmed";
+/** Canonical host. The www host must 301 to this one (see README, "Canonical host"). */
+export const SITE_URL = "https://arshedahmed.com";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/arshedahmed";
 export const ACADEMY_NAME = "Solitrium Academy";
+export const SLMARKET_START = { label: "Jul 2026", iso: "2026-07" } as const;
+export const LOCATION_LINE = "Based in the UAE · Open to roles in Dubai and Abu Dhabi";
+export const NOTICE_PERIOD = "Immediate";
+export const VISA_STATUS = "";
 
 /**
  * "system": first visit follows the OS light/dark preference (dark when unknown).
  * "dark": first visit is always dark; the toggle still persists the visitor's choice.
  */
-export const THEME_DEFAULT: "system" | "dark" = "system";
+export const THEME_DEFAULT: "system" | "dark" = "dark";
+/** Page background per theme; also used for the browser-chrome theme-color. Keep in sync with globals.css. */
+export const THEME_COLORS = { dark: "#0b0f14", light: "#f8fafc" } as const;
 
 export const site = {
-  url: "https://arshedahmed.com",
+  url: SITE_URL,
   name: "Arshed Ahmed",
   firstName: "Arshed",
   lastName: "Ahmed",
@@ -22,7 +30,7 @@ export const site = {
   positioning:
     "Full-stack engineer building SaaS, payments and AI products with Next.js, TypeScript and Node.js.",
   description:
-    "Arshed Ahmed is a full-stack software engineer in the UAE building SaaS, Stripe payments and AI products with Next.js, TypeScript and Node.js. Available immediately.",
+    "Arshed Ahmed is a full-stack software engineer in the UAE building SaaS, Stripe payments and AI products with Next.js, TypeScript and Node.js. Available now.",
   status: "Available immediately · UAE",
   location: "United Arab Emirates",
   nationality: "Sri Lankan",
@@ -34,7 +42,7 @@ export const site = {
   githubHandle: "arshedgithub",
   linkedinUrl: LINKEDIN_URL,
   cvPath: "/Arshed-Ahmed-CV.pdf",
-  openTo: "Open to roles in Dubai and Abu Dhabi",
+  locationLine: LOCATION_LINE,
   products: {
     marketplace: "https://slmarket.lk",
     flow: "https://flow.slmarket.lk",
@@ -44,17 +52,17 @@ export const site = {
 export const nav = [
   { label: "Home", href: "/#top" },
   { label: "Work", href: "/#work" },
-  { label: "Skills", href: "/#skills" },
   { label: "Experience", href: "/#experience" },
+  { label: "Skills", href: "/#skills" },
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const proof = [
   { value: 4, suffix: "+", label: "Years experience" },
-  { value: 10, suffix: "+", label: "SaaS products" },
+  { value: 3, suffix: "", label: "SaaS products" },
   { text: "Stripe", label: "Billing in production" },
-  { value: 2, suffix: "", label: "Products launched solo" },
+  { value: 3, suffix: "", label: "Products launched solo" },
 ] as const;
 
 export const skillGroups = [
@@ -99,9 +107,9 @@ export const experience = [
   {
     company: "SLMarket",
     role: "Full-Stack Developer",
-    start: "Aug 2026",
+    start: SLMARKET_START.label,
     end: "Present",
-    startISO: "2026-08",
+    startISO: SLMARKET_START.iso,
     bullets: [
       "Designed, built and launched two products solo: a multilingual marketplace (slmarket.lk) and SLMarket Flow, a real-time POS/ERP.",
       "Automated releases with GitHub Actions CI/CD, applied TDD with unit and integration tests, and added role-based authorisation and Redis caching.",
@@ -130,7 +138,7 @@ export const experience = [
     ],
   },
   {
-    company: "Freelance",
+    company: "Self-employed",
     role: "Freelance Software Developer",
     start: "Jul 2022",
     end: "Aug 2024",
@@ -172,9 +180,25 @@ export const teaching = [
 ] as const;
 
 export const education = [
-  { degree: "Bachelor of Information Technology (BIT)", school: "University of Colombo School of Computing", period: "2021 - 2024" },
+  { degree: "Bachelor of Information Technology (BIT)", school: "University of Colombo School of Computing (UCSC)", period: "2021 - 2024" },
   { degree: "BSc in Physical Science", school: "University of Colombo", period: "2022 - 2025" },
 ] as const;
+
+export const certifications = [
+  { name: "Ethical Hacker", issuer: "Cisco", year: "2026" },
+  { name: "Security Fundamentals", issuer: "Palo Alto Networks", year: "2026" },
+  { name: "Jenkins and Docker", year: "2026" },
+] as const;
+
+export const languages = [
+  { name: "English", level: "Professional" },
+  { name: "Sinhala", level: "Native" },
+  { name: "Tamil", level: "Native" },
+  { name: "Arabic", level: "Basic" },
+] as const;
+
+/** Hero tech row. */
+export const heroStack = ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Stripe"] as const;
 
 export const knowsAbout = [
   "Full-stack web development",
@@ -212,14 +236,25 @@ export type Project = {
   titleAccent?: string;
   subtitle: string;
   summary: string;
+  /** <title> before the " | Arshed Ahmed" suffix: what was built and the outcome. Keep the full title 50-60 chars. */
+  seoTitle: string;
+  /** Meta description, 140-160 chars, restating only what the case study says. */
+  seoDescription: string;
+  /** One-line outcome, shown on cards and on the no-screenshot fallback. */
+  outcome: string;
   tag: string;
+  /** Only claims that are true: "Live" needs a public link, "Solo-built" means built alone. */
+  badges: ("Live" | "Solo-built")[];
   period?: string;
   role: string;
   stack: { label: string; items: string[] }[];
   links: { label: string; href: string; kind: "live" | "github" }[];
-  /** TODO: replace each placeholder in /public/images/projects with a real screenshot (same path, or update here). */
-  cover: string;
-  screenshots: { src: string; alt: string; device: "browser" | "phone" }[];
+  /**
+   * Image files expected in /public/images/projects/<slug>/. Missing files are skipped at build time and
+   * the page renders a designed fallback card instead (see README for the list to supply).
+   */
+  cover: { file: string; alt: string };
+  screenshots: { file: string; alt: string; device: "browser" | "phone" }[];
   architecture: Architecture;
 };
 
@@ -231,7 +266,12 @@ export const projects: Project[] = [
     subtitle: "Marketplace + SLMarket Flow POS/ERP",
     summary:
       "A multilingual marketplace connecting buyers and sellers across Sri Lanka, plus SLMarket Flow, a real-time POS with ERP features. Designed, built and launched solo.",
+    seoTitle: "SLMarket: Marketplace and POS/ERP Built Solo",
+    seoDescription:
+      "How Arshed Ahmed designed, built and launched SLMarket solo: a multilingual Sri Lankan marketplace on Next.js and SLMarket Flow, a real-time Laravel POS/ERP.",
+    outcome: "Two products designed, built and launched solo: a marketplace and a real-time POS/ERP.",
     tag: "E-commerce",
+    badges: ["Live", "Solo-built"],
     role: "Solo: product, architecture, full-stack development and deployment",
     stack: [
       {
@@ -247,11 +287,11 @@ export const projects: Project[] = [
       { label: "slmarket.lk", href: "https://slmarket.lk", kind: "live" },
       { label: "flow.slmarket.lk", href: "https://flow.slmarket.lk", kind: "live" },
     ],
-    cover: "/images/projects/slmarket/TODO-cover.webp",
+    cover: { file: "cover.webp", alt: "SLMarket marketplace home page with product listings" },
     screenshots: [
-      { src: "/images/projects/slmarket/TODO-marketplace-home.webp", alt: "SLMarket marketplace home page (placeholder)", device: "browser" },
-      { src: "/images/projects/slmarket/TODO-flow-pos.webp", alt: "SLMarket Flow point-of-sale screen (placeholder)", device: "browser" },
-      { src: "/images/projects/slmarket/TODO-marketplace-mobile.webp", alt: "SLMarket marketplace on a phone (placeholder)", device: "phone" },
+      { file: "marketplace-home.webp", alt: "SLMarket marketplace home page with categories and product listings", device: "browser" },
+      { file: "flow-pos.webp", alt: "SLMarket Flow point-of-sale screen with a cart and product grid", device: "browser" },
+      { file: "marketplace-mobile.webp", alt: "SLMarket marketplace on a phone", device: "phone" },
     ],
     architecture: {
       rows: [
@@ -308,17 +348,22 @@ export const projects: Project[] = [
     subtitle: "Stripe payments layer and live payments dashboard",
     summary:
       "A production SaaS platform of AI chatbots that guide businesses on grants and funding. I owned the Stripe payments layer end-to-end and built a real-time payments dashboard.",
+    seoTitle: "Stripe Payments for an AI Business SaaS",
+    seoDescription:
+      "Arshed Ahmed owned the Stripe payments layer of a production AI SaaS that guides businesses on grants and funding, and built a real-time payments dashboard.",
+    outcome: "Owned the Stripe payments layer end-to-end and built a real-time payments dashboard.",
     tag: "SaaS · Payments",
+    badges: [],
     period: "Softsora (Pvt) Ltd",
     role: "Full-stack engineer; owner of the Stripe payments layer",
     stack: [
       { label: "Platform", items: ["Next.js", "TypeScript", "Express.js", "Node.js", "Stripe", "Jest"] },
     ],
     links: [], // TODO: confirm whether a public link can be shared.
-    cover: "/images/projects/ai-business-support-saas/TODO-cover.webp",
+    cover: { file: "cover.webp", alt: "AI Business Support SaaS payments dashboard" },
     screenshots: [
-      { src: "/images/projects/ai-business-support-saas/TODO-payments-dashboard.webp", alt: "Stripe payments dashboard (placeholder)", device: "browser" },
-      { src: "/images/projects/ai-business-support-saas/TODO-chatbot.webp", alt: "AI chatbot conversation screen (placeholder)", device: "browser" },
+      { file: "payments-dashboard.webp", alt: "Real-time Stripe payments dashboard with transaction list", device: "browser" },
+      { file: "chatbot.webp", alt: "AI chatbot conversation guiding a business on grants and funding", device: "browser" },
     ],
     architecture: {
       rows: [
@@ -357,16 +402,21 @@ export const projects: Project[] = [
     subtitle: "ATS resume generation + voice mock interview",
     summary:
       "ATS-friendly resume generation, parsing and job-description optimisation, plus a voice-based AI mock interview that gives candidates instant feedback.",
+    seoTitle: "AI CV Builder with Voice Mock Interviews",
+    seoDescription:
+      "An AI CV builder by Arshed Ahmed: ATS-friendly resumes tailored to a job description, plus voice mock interviews with instant AI feedback, on Next.js and Groq.",
+    outcome: "ATS-friendly resumes and voice mock interviews with instant AI feedback.",
     tag: "AI / LLM",
+    badges: [],
     role: "Full-stack development",
     stack: [
       { label: "Platform", items: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Groq LLM", "Whisper"] },
     ],
     links: [], // TODO: add live link and/or GitHub repo if public.
-    cover: "/images/projects/ai-cv-builder/TODO-cover.webp",
+    cover: { file: "cover.webp", alt: "AI CV Builder resume editor" },
     screenshots: [
-      { src: "/images/projects/ai-cv-builder/TODO-resume-editor.webp", alt: "Resume builder editor (placeholder)", device: "browser" },
-      { src: "/images/projects/ai-cv-builder/TODO-mock-interview.webp", alt: "Voice mock interview screen (placeholder)", device: "phone" },
+      { file: "resume-editor.webp", alt: "Resume editor with an ATS-optimised CV preview", device: "browser" },
+      { file: "mock-interview.webp", alt: "Voice mock interview screen with AI feedback", device: "phone" },
     ],
     architecture: {
       rows: [
@@ -396,15 +446,20 @@ export const projects: Project[] = [
     subtitle: "Conversational ordering and support on WhatsApp",
     summary:
       "A WhatsApp AI chatbot built with Python, LLM APIs and Twilio that automates customer conversations.",
+    seoTitle: "WhatsApp AI Bot That Automates Customer Chats",
+    seoDescription:
+      "A WhatsApp AI chatbot Arshed Ahmed built and deployed at Softsora with Python, LLM APIs and Twilio, automating customer conversations on WhatsApp.",
+    outcome: "Automated customer conversations on WhatsApp with an LLM-powered bot.",
     tag: "Automation",
+    badges: [],
     period: "Softsora (Pvt) Ltd",
     role: "Developer: built and deployed the bot",
     stack: [{ label: "Bot", items: ["Python", "LLM APIs", "Twilio", "WhatsApp"] }],
     links: [], // TODO: add GitHub repo if public.
-    cover: "/images/projects/whatsapp-ai-order-bot/TODO-cover.webp",
+    cover: { file: "cover.webp", alt: "WhatsApp AI order bot conversation" },
     screenshots: [
-      { src: "/images/projects/whatsapp-ai-order-bot/TODO-chat-1.webp", alt: "WhatsApp conversation with the order bot (placeholder)", device: "phone" },
-      { src: "/images/projects/whatsapp-ai-order-bot/TODO-chat-2.webp", alt: "Order confirmation in WhatsApp (placeholder)", device: "phone" },
+      { file: "chat-1.webp", alt: "WhatsApp conversation in which the bot answers a customer question", device: "phone" },
+      { file: "chat-2.webp", alt: "Order confirmation message sent by the bot in WhatsApp", device: "phone" },
     ],
     architecture: {
       rows: [

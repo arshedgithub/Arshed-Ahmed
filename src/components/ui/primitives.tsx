@@ -5,7 +5,7 @@ export function Chip({ children, className }: { children: ReactNode; className?:
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md border border-line bg-canvas/60 px-2.5 py-1 font-mono text-xs text-fg/90",
+        "inline-flex items-center rounded-md border border-line bg-canvas/60 px-2.5 py-1 text-xs font-medium text-fg/90",
         className,
       )}
     >
@@ -14,12 +14,11 @@ export function Chip({ children, className }: { children: ReactNode; className?:
   );
 }
 
+/** Availability badge. Colours live in globals.css (--avail-*), 7:1+ text contrast in both themes. */
 export function StatusChip({ children }: { children: ReactNode }) {
   return (
-    <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 font-mono text-xs text-fg/90">
-      <span className="relative flex size-2" aria-hidden="true">
-        <span className="relative inline-flex size-2 rounded-full bg-success" />
-      </span>
+    <p className="inline-flex items-center gap-2.5 rounded-full border border-[var(--avail-border)] bg-[var(--avail-bg)] px-3.5 py-2 text-[13px] leading-5 font-semibold text-[var(--avail-fg)] min-[340px]:text-sm">
+      <span className="avail-dot relative size-2 shrink-0 rounded-full bg-[var(--avail-dot)]" aria-hidden="true" />
       {children}
     </p>
   );
@@ -64,7 +63,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cn("py-16 md:py-24", className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cn("py-16 md:py-24 lg:py-28", className)}>
       <div className="container-page">{children}</div>
     </section>
   );

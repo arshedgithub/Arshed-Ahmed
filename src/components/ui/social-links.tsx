@@ -21,7 +21,8 @@ export function SocialLinks({ className }: { className?: string }) {
               href={href}
               aria-label={`${label} (${label === "Email" ? site.email : "opens in a new tab"})`}
               title={label}
-              {...(external ? { target: "_blank", rel: "noopener noreferrer me" } : {})}
+              // rel="me" only on profiles that identify the same person (they are also in the Person sameAs).
+              {...(external ? { target: "_blank", rel: label === "WhatsApp" ? "noopener noreferrer" : "noopener noreferrer me" } : {})}
               className="inline-flex size-11 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent"
             >
               <Icon size={18} />

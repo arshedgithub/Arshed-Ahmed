@@ -13,6 +13,18 @@ const tabs = [
   { id: "contact", label: "Contact", href: "/#contact", Icon: Mail },
 ] as const;
 
+// Sections without their own tab light up the nearest tab above them on the page.
+const sectionTab: Record<string, string> = {
+  top: "top",
+  work: "work",
+  experience: "work",
+  skills: "skills",
+  teaching: "skills",
+  about: "skills",
+  contact: "contact",
+  "site-footer": "contact",
+};
+
 /** Mobile-only tab bar. Highlights the section currently in view on the home page. */
 export function BottomNav() {
   const pathname = usePathname();
@@ -21,12 +33,12 @@ export function BottomNav() {
 
   useEffect(() => {
     if (!onHome) return;
-    const sections = tabs
-      .map((t) => document.getElementById(t.id))
+    const sections = Object.keys(sectionTab)
+      .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+        for (const e of entries) if (e.isIntersecting) setActive(sectionTab[e.target.id]);
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
@@ -39,7 +51,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Sections"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-canvas/95 pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line-strong bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="mx-auto grid h-16 max-w-md grid-cols-4">
         {tabs.map(({ id, label, href, Icon }) => {

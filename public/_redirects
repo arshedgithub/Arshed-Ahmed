@@ -1,0 +1,3 @@
+# Netlify (static export): serve one canonical host. Cloudflare Pages ignores domain rules here;
+# use a Cloudflare Bulk Redirect instead (see README).
+https://www.arshedahmed.com/* https://arshedahmed.com/:splat 301!

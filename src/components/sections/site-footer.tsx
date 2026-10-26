@@ -6,14 +6,14 @@ import { nav, site } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line">
+    <footer id="site-footer" className="border-t border-line">
       <div className="container-page grid gap-8 py-10 md:grid-cols-[1fr_auto] md:items-start">
         <div>
           <Logo />
           <p className="mt-1 max-w-xs text-sm text-muted">{site.positioning}</p>
           <p className="mt-4 inline-flex items-center gap-2 text-sm text-fg">
             <MapPin size={16} className="text-accent" aria-hidden="true" />
-            {site.openTo}
+            {site.locationLine}
           </p>
         </div>
         <div className="grid gap-4 md:justify-items-end">
