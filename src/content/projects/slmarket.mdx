@@ -1,0 +1,36 @@
+## The problem
+
+Buyers and sellers across Sri Lanka needed one place to trade online, in the language they are most comfortable with. Sellers also needed a simple way to run the shop floor: taking sales, tracking stock and keeping records, without stitching together separate tools. {/* TODO: confirm: add a sentence on what sellers used before, if you can share it. */}
+
+## My role
+
+I designed, built and launched both products solo: product scope, architecture, database design, frontend, backend, testing, CI/CD and deployment.
+
+## Stack
+
+<Stack />
+
+## Architecture
+
+The ecosystem is two independent applications. The marketplace is a Next.js and TypeScript app on PostgreSQL (through Prisma), with Redis for caching and Cloudinary for media, deployed on Vercel. SLMarket Flow is a Laravel, Vue.js and Inertia.js app on MySQL, deployed on cPanel. Both ship through GitHub Actions. {/* TODO: confirm: do the two products share accounts or data? If so, add that link to the diagram in site.ts. */}
+
+<Architecture />
+
+## Key technical decisions
+
+{/* TODO: confirm: the decisions come from the CV; the reasons given for them are my draft. */}
+
+- **Two stacks, one job each.** The marketplace is a public, SEO-sensitive Next.js app on Vercel; Flow is an authenticated back-office tool where Laravel and Inertia.js keep forms and CRUD screens fast to build.
+- **TypeScript and Prisma** on the marketplace for type safety from the database schema to the UI.
+- **PostgreSQL with an optimised relational schema** for listings, sellers and orders, and **Redis caching** on hot paths.
+- **Authentication and role-based authorisation** on both products, with end-to-end order workflows.
+- **Locale-based routing and content translation** for a multi-language audience.
+- **Unit and integration tests** on core marketplace flows, run by **GitHub Actions** before every release.
+
+## Result
+
+Both products are live: a multilingual marketplace at [slmarket.lk](https://slmarket.lk) and SLMarket Flow, a real-time POS with ERP features, at [flow.slmarket.lk](https://flow.slmarket.lk). Releases for both are automated through CI/CD. {/* TODO: confirm: add usage numbers (sellers, listings, orders) only if you can verify them. */}
+
+## Links
+
+<ProjectLinks />

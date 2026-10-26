@@ -1,0 +1,33 @@
+## The problem
+
+Customers already use WhatsApp every day, but answering every message by hand does not scale. The goal was to automate customer conversations on WhatsApp so people get answers quickly without waiting for a person. {/* TODO: confirm: describe the ordering flow (what customers can order and how orders are confirmed). */}
+
+## My role
+
+I developed and deployed the WhatsApp AI chatbot at Softsora using Python, LLM APIs and Twilio.
+
+## Stack
+
+<Stack />
+
+## Architecture
+
+Customers message a WhatsApp number connected through Twilio. Twilio forwards each message to a Python webhook service, which uses an LLM API to understand the message and write a reply, then sends the reply back through Twilio. {/* TODO: confirm: where orders and conversation state are stored. */}
+
+<Architecture />
+
+## Key technical decisions
+
+{/* TODO: confirm: the decisions come from the CV; the reasons given for them are my draft. */}
+
+- **WhatsApp through Twilio**, so the bot works in an app customers already use, with no new app to install.
+- **A Python webhook service** that keeps business logic separate from the messaging channel.
+- **LLM APIs** for understanding free-text messages instead of rigid menu trees.
+
+## Result
+
+The bot was deployed and automated customer interactions on WhatsApp. {/* TODO: confirm: add measurable results only if you can verify them. */}
+
+## Links
+
+<ProjectLinks />

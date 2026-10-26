@@ -1,0 +1,35 @@
+## The problem
+
+Businesses looking for grants and funding need clear guidance, and the platform delivers it through multiple AI chatbots. To run as a SaaS, it needed reliable billing: one-time payments, subscriptions, plan changes with fair proration, and refunds. The team also needed to see what was happening with payments without digging through the Stripe dashboard.
+
+## My role
+
+I worked as a full-stack engineer at Softsora across the Express.js backend and the Next.js frontend, and I owned the Stripe payments layer end-to-end. {/* TODO: confirm team size and timeline if you want to add them. */}
+
+## Stack
+
+<Stack />
+
+## Architecture
+
+The Next.js frontend talks to an Express.js API that holds the payment and business logic. The API calls the AI chatbot workflows, creates and updates Stripe objects, and receives Stripe webhooks to keep payment records in sync. {/* TODO: confirm the database used here (Softsora services used MongoDB). */}
+
+<Architecture />
+
+## Key technical decisions
+
+{/* TODO: confirm: the decisions come from the CV; the reasons given for them are my draft. */}
+
+- **Webhooks as the source of truth.** Subscription and payment state is updated from Stripe webhook events rather than trusting the client.
+- **Automated proration** when customers change plans, so charges stay correct without manual work.
+- **Refunds handled in the same payments layer**, so one-time and subscription payments follow the same flow.
+- **Jest unit and integration tests** covering payment and API logic to reduce release regressions.
+- **A real-time payments dashboard** giving the team live visibility into transactions, subscriptions and refunds.
+
+## Result
+
+The payments layer runs in production. Across the 10+ products I worked on at Softsora, the Stripe billing I implemented processed 200+ transactions. {/* TODO: confirm: split out figures for this platform only if you can verify them. */}
+
+## Links
+
+<ProjectLinks />

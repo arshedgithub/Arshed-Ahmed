@@ -46,7 +46,7 @@
 }
 
 @theme inline {
-  --color-base: var(--base);
+  --color-canvas: var(--base);
   --color-surface: var(--surface);
   --color-raised: var(--raised);
   --color-line: var(--line);
@@ -162,16 +162,16 @@
 }
 .prose-case p + p { margin-top: 1rem; }
 .prose-case strong { color: var(--fg); font-weight: 600; }
-.prose-case ul {
+.prose-case ul:not([class]) {
   display: grid;
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
-.prose-case ul > li {
+.prose-case ul:not([class]) > li {
   position: relative;
   padding-left: 1.5rem;
 }
-.prose-case ul > li::before {
+.prose-case ul:not([class]) > li::before {
   content: "";
   position: absolute;
   left: 0.25rem;
@@ -181,7 +181,7 @@
   border-radius: 999px;
   background: var(--accent);
 }
-.prose-case a {
+.prose-case a:not([class]) {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;

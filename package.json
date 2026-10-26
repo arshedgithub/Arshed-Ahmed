@@ -5,8 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "cross-env DEPLOY_TARGET=static next build",
     "start": "next start",
-    "lint": "eslint"
+    "preview:static": "npx serve@14 out",
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "check": "eslint && next typegen && tsc --noEmit",
+    "images:photo": "node scripts/process-photo.mjs",
+    "images:placeholders": "node scripts/make-placeholders.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.0",
