@@ -11,6 +11,7 @@ import {
   Field,
   FormTitle,
   HoneypotWrapper,
+  emailInputClass,
   formClass,
   inputClass,
   submitClass,
@@ -96,7 +97,7 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
       </Field>
 
       <Field id="email" label={t("email")} error={errorText(errors.email?.message)}>
-        <input id="email" type="email" inputMode="email" autoComplete="email" className={inputClass} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} {...register("email")} />
+        <input id="email" type="email" dir="ltr" inputMode="email" autoComplete="email" className={emailInputClass} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} {...register("email")} />
       </Field>
 
       <Field id="message" label={t("message")} error={errorText(errors.message?.message)}>
@@ -114,7 +115,7 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
             {t.rich("failed", {
               email: () => (
                 <a href={`mailto:${email}`} className="font-medium text-accent underline underline-offset-2">
-                  {email}
+                  <bdi dir="ltr">{email}</bdi>
                 </a>
               ),
             })}
@@ -126,7 +127,7 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
         {isSubmitting ? (
           <LoaderCircle size={16} className="animate-spin" aria-hidden="true" />
         ) : (
-          <Send size={16} aria-hidden="true" />
+          <Send size={16} className="rtl:-scale-x-100" aria-hidden="true" />
         )}
         {isSubmitting ? t("sending") : t("send")}
       </button>

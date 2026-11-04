@@ -38,7 +38,7 @@ export function CountUp({ value, suffix = "" }: { value: number; suffix?: string
   }, [value, suffix]);
 
   return (
-    <span ref={ref} className="tabular-nums">
+    <span ref={ref} dir="ltr" className="tabular-nums">
       {value}
       {suffix}
     </span>

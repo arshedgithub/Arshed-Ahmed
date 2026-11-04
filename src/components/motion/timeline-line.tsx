@@ -11,11 +11,11 @@ export function TimelineRail({ children }: { children: ReactNode }) {
 
   return (
     <div ref={ref} className="relative">
-      <div aria-hidden="true" className="absolute top-2 bottom-2 left-[7px] w-px bg-line" />
+      <div aria-hidden="true" className="absolute top-2 bottom-2 start-[7px] w-px bg-line" />
       <m.div
         aria-hidden="true"
         style={{ scaleY }}
-        className="absolute top-2 bottom-2 left-[7px] w-px origin-top bg-accent motion-reduce:hidden"
+        className="absolute top-2 bottom-2 start-[7px] w-px origin-top bg-accent motion-reduce:hidden"
       />
       {children}
     </div>

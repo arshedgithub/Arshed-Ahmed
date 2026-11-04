@@ -9,7 +9,8 @@ export function Chip({ children, className }: { children: ReactNode; className?:
         className,
       )}
     >
-      {children}
+      {/* Isolates tech names ("Softsora (Pvt) Ltd") so their punctuation stays put inside Arabic text. */}
+      <bdi>{children}</bdi>
     </span>
   );
 }

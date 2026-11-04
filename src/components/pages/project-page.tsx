@@ -80,12 +80,12 @@ export async function ProjectPage({ slug, locale }: { slug: string; locale: Loca
             <nav aria-label={t("breadcrumbAria")}>
               <ol className="flex flex-wrap items-center gap-1 text-sm text-muted">
                 <li>
-                  <LocaleLink href="/" className="-ml-2 inline-flex min-h-11 items-center rounded-lg px-2 hover:text-fg">
+                  <LocaleLink href="/" className="-ms-2 inline-flex min-h-11 items-center rounded-lg px-2 hover:text-fg">
                     {t("home")}
                   </LocaleLink>
                 </li>
                 <li aria-hidden="true">
-                  <ChevronRight size={14} />
+                  <ChevronRight size={14} className="rtl:-scale-x-100" />
                 </li>
                 <li>
                   <span aria-current="page" className="inline-flex min-h-11 items-center px-2 text-fg/90">
@@ -108,14 +108,14 @@ export async function ProjectPage({ slug, locale }: { slug: string; locale: Loca
             </div>
           </div>
           {heroShot ? (
-            <div className={heroPhone ? "relative pr-10 pb-6" : undefined}>
+            <div className={heroPhone ? "relative pe-10 pb-6" : undefined}>
               <BrowserFrame src={heroShot.src} alt={heroShot.alt} sizes="(min-width: 1024px) 480px, calc(100vw - 32px)" preload />
               {heroPhone && (
                 <PhoneFrame
                   src={heroPhone.src}
                   alt=""
                   sizes="110px"
-                  className="absolute right-0 bottom-0 w-[22%] min-w-20 shadow-card"
+                  className="absolute end-0 bottom-0 w-[22%] min-w-20 shadow-card"
                 />
               )}
             </div>
@@ -165,7 +165,7 @@ export async function ProjectPage({ slug, locale }: { slug: string; locale: Loca
 
         <nav aria-label={t("moreProjectsAria")} className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
           <LocaleLink href="/#work" className="inline-flex min-h-11 items-center gap-2 text-sm text-muted hover:text-fg">
-            <ArrowLeft size={16} aria-hidden="true" />
+            <ArrowLeft size={16} className="rtl:-scale-x-100" aria-hidden="true" />
             {t("allProjects")}
           </LocaleLink>
           <LocaleLink
@@ -173,7 +173,7 @@ export async function ProjectPage({ slug, locale }: { slug: string; locale: Loca
             className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-accent"
           >
             {t("next", { title: `${next.title} ${next.titleAccent}` })}
-            <ArrowRight size={16} aria-hidden="true" />
+            <ArrowRight size={16} className="rtl:-scale-x-100" aria-hidden="true" />
           </LocaleLink>
         </nav>
       </div>
@@ -187,7 +187,7 @@ function StackList({ project }: { project: Project }) {
     <div className="mt-4 grid gap-4">
       {project.stack.map((group) => (
         <div key={group.label}>
-          {project.stack.length > 1 && <p className="mb-2 font-mono text-xs uppercase tracking-wider text-muted">{group.label}</p>}
+          {project.stack.length > 1 && <p className="mb-2 font-mono text-xs uppercase tracking-wider text-muted"><bdi>{group.label}</bdi></p>}
           <ul className="flex flex-wrap gap-2" aria-label={t("stackAria", { label: group.label })}>
             {group.items.map((item) => (
               <li key={item}>
@@ -219,7 +219,7 @@ function ProjectLinks({ project }: { project: Project }) {
         >
           {link.kind === "github" && <GitHubIcon size={16} />}
           {link.label}
-          <ArrowUpRight size={16} aria-hidden="true" />
+          <ArrowUpRight size={16} className="rtl:-scale-x-100" aria-hidden="true" />
           <span className="sr-only">{t("opensNewTab")}</span>
         </a>
       ))}

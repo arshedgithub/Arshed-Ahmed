@@ -17,7 +17,7 @@ export function Hero() {
         {/* Dark: transparent cutout over a soft glow. Light: the photo on a pale blue tile (full width on phones).
             Height is capped on phones (see hero-photo-size) so everything down to the social icons clears the tab bar. */}
         <div className="photo-tile hero-photo-size relative mx-auto md:order-last md:justify-self-end">
-          <div aria-hidden="true" className="photo-glow absolute top-[-6%] left-1/2 hidden aspect-square w-[150%] -translate-x-1/2 dark:block" />
+          <div aria-hidden="true" className="photo-glow absolute inset-x-[-25%] top-[-6%] hidden aspect-square dark:block" />
           <Image
             src="/images/hero-1x1.webp"
             alt={t("imageAlt")}
@@ -53,7 +53,7 @@ export function Hero() {
           <div className="mt-5 grid w-full gap-3 min-[360px]:flex min-[360px]:w-auto min-[360px]:flex-wrap md:mt-8">
             <ButtonLink href="/#work">
               {t("viewWork")}
-              <ArrowRight size={16} aria-hidden="true" />
+              <ArrowRight size={16} className="rtl:-scale-x-100" aria-hidden="true" />
             </ButtonLink>
             <ButtonLink href={cv.href} hrefLang={cv.lang} variant="secondary" download>
               <Download size={16} aria-hidden="true" />

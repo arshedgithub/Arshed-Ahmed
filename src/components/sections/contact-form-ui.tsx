@@ -11,6 +11,9 @@ export const formClass = "card relative grid gap-4 p-5 md:p-6";
 export const inputClass =
   "w-full rounded-lg border border-line-strong bg-canvas px-3 py-2.5 text-base text-fg placeholder:text-muted/70 transition-colors focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 aria-[invalid=true]:border-danger md:text-sm";
 
+// Addresses are always left-to-right, even on the Arabic form.
+export const emailInputClass = cn(inputClass, "text-start");
+
 export const textareaClass = cn(inputClass, "resize-y");
 
 export function FormTitle() {
@@ -41,7 +44,7 @@ export function Field({ id, label, error, children }: { id: string; label: strin
 /** Spam honeypot: off-screen, hidden from screen readers, out of the tab order, no visible text. */
 export function HoneypotWrapper({ children }: { children: ReactNode }) {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute -left-[9999px] h-px w-px overflow-hidden opacity-0">
+    <div aria-hidden="true" className="pointer-events-none absolute -start-[9999px] h-px w-px overflow-hidden opacity-0">
       {children}
     </div>
   );
@@ -70,7 +73,7 @@ export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFor
         <input id="name" name="name" type="text" autoComplete="name" className={inputClass} />
       </Field>
       <Field id="email" label={t("email")}>
-        <input id="email" name="email" type="email" inputMode="email" autoComplete="email" className={inputClass} />
+        <input id="email" name="email" type="email" dir="ltr" inputMode="email" autoComplete="email" className={emailInputClass} />
       </Field>
       <Field id="message" label={t("message")}>
         <textarea id="message" name="message" rows={5} className={textareaClass} placeholder={t("messagePlaceholder")} />
@@ -79,7 +82,7 @@ export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFor
         <input id="_gotcha" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
       </HoneypotWrapper>
       <button type="submit" className={submitClass}>
-        <Send size={16} aria-hidden="true" />
+        <Send size={16} className="rtl:-scale-x-100" aria-hidden="true" />
         {t("send")}
       </button>
     </form>

@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 
 // 2x2 grid on mobile, one row of four from md.
 const cellBorders = [
-  "border-r border-b md:border-b-0",
-  "border-b md:border-b-0 md:border-r",
-  "border-r",
+  "border-e border-b md:border-b-0",
+  "border-b md:border-b-0 md:border-e",
+  "border-e",
   "",
 ];
 

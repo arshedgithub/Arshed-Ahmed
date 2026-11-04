@@ -50,7 +50,7 @@ export function SiteDocument({
       <body className="flex min-h-dvh flex-col pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
         <a
           href="#main"
-          className="sr-only z-50 rounded-lg bg-accent-solid px-4 py-3 font-semibold text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="sr-only z-50 rounded-lg bg-accent-solid px-4 py-3 font-semibold text-white focus:not-sr-only focus:fixed focus:start-3 focus:top-3"
         >
           {t("skipToContent")}
         </a>

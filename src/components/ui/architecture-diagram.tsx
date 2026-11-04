@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { Architecture } from "@/lib/content";
 
 const W = 360;
@@ -18,6 +18,7 @@ type Box = { x: number; y: number; w: number };
  */
 export function ArchitectureDiagram({ id, title, architecture }: { id: string; title: string; architecture: Architecture }) {
   const t = useTranslations("caseStudy");
+  const rtl = useLocale() === "ar";
   const boxes = new Map<string, Box>();
   architecture.rows.forEach((row, r) => {
     const n = row.nodes.length;
@@ -69,7 +70,7 @@ export function ArchitectureDiagram({ id, title, architecture }: { id: string; t
 
         {architecture.rows.map((row, r) => (
           <g key={row.label}>
-            <text x={PAD} y={r * ROW_H + 11} className="fill-muted font-mono" fontSize={9} letterSpacing="0.08em">
+            <text x={rtl ? W - PAD : PAD} y={r * ROW_H + 11} className="fill-muted font-mono" fontSize={9} letterSpacing="0.08em">
               {row.label.toUpperCase()}
             </text>
             {row.nodes.map((node) => {

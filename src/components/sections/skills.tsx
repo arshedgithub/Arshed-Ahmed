@@ -22,7 +22,7 @@ export function Skills() {
                     key={typeof item === "string" ? item : item.key}
                     className="max-w-full rounded-md border border-line-strong bg-canvas/60 px-2.5 py-1 text-[13px] leading-5 text-fg/90 md:text-sm"
                   >
-                    {typeof item === "string" ? item : t(`items.${item.key}`)}
+                    <bdi>{typeof item === "string" ? item : t(`items.${item.key}`)}</bdi>
                   </li>
                 ))}
               </ul>

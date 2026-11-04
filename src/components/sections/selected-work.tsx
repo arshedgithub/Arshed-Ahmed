@@ -61,7 +61,7 @@ export function SelectedWork() {
                     </ul>
                     <p className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium text-accent" aria-hidden="true">
                       {t("readCaseStudy")}
-                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
                     </p>
                   </div>
                 </article>
