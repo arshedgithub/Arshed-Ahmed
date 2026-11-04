@@ -1,5 +1,7 @@
 import { renderOg } from "@/components/seo/og";
-import { getProject, projects } from "@/lib/site";
+import { catalog } from "@/i18n/messages";
+import { getProject } from "@/lib/content";
+import { projects } from "@/lib/site";
 
 // Served at /projects/<slug>/og-image.png and declared in the page's generateMetadata, so each case
 // study gets its own alt text. (opengraph-image with generateImageMetadata does not prerender with
@@ -13,10 +15,10 @@ export function generateStaticParams() {
 
 export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = getProject(slug, "en");
   if (!project) return new Response("Not found", { status: 404 });
   return renderOg({
-    eyebrow: "Case study",
+    eyebrow: catalog("en").caseStudy.ogEyebrow,
     title: project.title,
     accent: project.titleAccent,
     subtitle: project.subtitle,

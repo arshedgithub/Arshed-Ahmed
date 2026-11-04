@@ -33,7 +33,7 @@ export function SiteDocument({
   children: ReactNode;
 }) {
   const t = useTranslations("common");
-  const { common } = catalog(locale);
+  const { common, nav, contact } = catalog(locale);
   return (
     <html
       lang={locale}
@@ -42,6 +42,7 @@ export function SiteDocument({
       suppressHydrationWarning
       className={`${fontClassName} antialiased`}
     >
+      {/* eslint-disable-next-line @next/next/no-head-element -- this renders the root layouts' document. */}
       <head>
         <ThemeScript />
         {redirectToSavedLocale && <LocaleScript locale={locale} />}
@@ -53,7 +54,7 @@ export function SiteDocument({
         >
           {t("skipToContent")}
         </a>
-        <NextIntlClientProvider locale={locale} messages={{ common }} timeZone="UTC">
+        <NextIntlClientProvider locale={locale} messages={{ common, nav, contact }} timeZone="UTC">
           <MotionProvider>
             <SiteHeader />
             <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">

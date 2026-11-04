@@ -1,20 +1,23 @@
 import { ArrowRight } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { ProjectFallback } from "@/components/ui/project-fallback";
 import { Chip, Section, SectionHeading } from "@/components/ui/primitives";
+import { LocaleLink } from "@/i18n/link";
+import { getProjects } from "@/lib/content";
 import { projectCover } from "@/lib/project-images";
-import { projects } from "@/lib/site";
 
 export function SelectedWork() {
+  const t = useTranslations("work");
+  const projects = getProjects(useLocale());
   return (
     <Section id="work" labelledBy="work-title">
       <SectionHeading
         id="work-title"
-        eyebrow="Selected work"
-        title="Products I have built and shipped"
-        description="Featured projects across marketplaces, payments and AI."
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        description={t("description")}
       />
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {projects.map((p, i) => {
@@ -38,26 +41,26 @@ export function SelectedWork() {
                   )}
                   <div className="flex flex-1 flex-col px-1 pt-4 pb-1">
                     <h3 className="font-semibold">
-                      <Link
+                      <LocaleLink
                         href={`/projects/${p.slug}`}
                         className="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-accent"
                       >
                         {p.title} {p.titleAccent}
-                      </Link>
+                      </LocaleLink>
                     </h3>
                     <p className="mt-1 text-sm text-muted">{p.outcome}</p>
-                    <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Tags">
+                    <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={t("tagsAria")}>
                       <li>
                         <Chip>{p.tag}</Chip>
                       </li>
                       {p.badges.map((b) => (
                         <li key={b}>
-                          <Chip className="border-accent/40 bg-accent-soft text-fg">{b}</Chip>
+                          <Chip className="border-accent/40 bg-accent-soft text-fg">{t(`badges.${b}`)}</Chip>
                         </li>
                       ))}
                     </ul>
                     <p className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-medium text-accent" aria-hidden="true">
-                      Read case study
+                      {t("readCaseStudy")}
                       <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
                     </p>
                   </div>

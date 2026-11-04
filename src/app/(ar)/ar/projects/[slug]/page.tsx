@@ -6,10 +6,10 @@ export const dynamicParams = false;
 export const generateStaticParams = projectStaticParams;
 
 export async function generateMetadata({ params }: PageProps<"/ar/projects/[slug]">) {
-  return projectPageMetadata((await params).slug);
+  return projectPageMetadata((await params).slug, "ar");
 }
 
 export default async function Page({ params }: PageProps<"/ar/projects/[slug]">) {
   setRequestLocale("ar");
-  return <ProjectPage slug={(await params).slug} />;
+  return <ProjectPage slug={(await params).slug} locale="ar" />;
 }

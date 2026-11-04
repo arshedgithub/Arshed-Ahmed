@@ -1,4 +1,5 @@
-import type { Architecture } from "@/lib/site";
+import { useTranslations } from "next-intl";
+import type { Architecture } from "@/lib/content";
 
 const W = 360;
 const PAD = 8;
@@ -16,6 +17,7 @@ type Box = { x: number; y: number; w: number };
  * The 360-unit width matches a phone screen so text stays legible without zooming.
  */
 export function ArchitectureDiagram({ id, title, architecture }: { id: string; title: string; architecture: Architecture }) {
+  const t = useTranslations("caseStudy");
   const boxes = new Map<string, Box>();
   architecture.rows.forEach((row, r) => {
     const n = row.nodes.length;
@@ -26,7 +28,7 @@ export function ArchitectureDiagram({ id, title, architecture }: { id: string; t
   });
   const height = architecture.rows.length * ROW_H - ROW_GAP + PAD;
   const titleOf = new Map(architecture.rows.flatMap((r) => r.nodes.map((n) => [n.id, n.title] as const)));
-  const desc = architecture.edges.map(([a, b]) => `${titleOf.get(a)} connects to ${titleOf.get(b)}`).join(". ");
+  const desc = architecture.edges.map(([a, b]) => t("architectureEdge", { from: titleOf.get(a) ?? a, to: titleOf.get(b) ?? b })).join(". ");
   const marker = `arrow-${id}`;
 
   return (

@@ -1,4 +1,5 @@
-import type { Project } from "@/lib/site";
+import { useTranslations } from "next-intl";
+import type { Project } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { Chip } from "./primitives";
 
@@ -15,6 +16,7 @@ export function ProjectFallback({
   variant: "card" | "hero";
   className?: string;
 }) {
+  const t = useTranslations("caseStudy");
   const stack = project.stack.flatMap((g) => g.items);
   const shown = variant === "card" ? stack.slice(0, 3) : stack.slice(0, 6);
   return (
@@ -31,7 +33,7 @@ export function ProjectFallback({
       {variant === "hero" && (
         <p className="mt-2 max-w-md text-lg leading-snug font-semibold md:text-xl">{project.outcome}</p>
       )}
-      <ul className={cn("flex flex-wrap gap-1.5", variant === "card" ? "mt-3" : "mt-4")} aria-label={`${project.title} stack`}>
+      <ul className={cn("flex flex-wrap gap-1.5", variant === "card" ? "mt-3" : "mt-4")} aria-label={t("stackAria", { label: project.title })}>
         {shown.map((item) => (
           <li key={item}>
             <Chip>{item}</Chip>

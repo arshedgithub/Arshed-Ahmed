@@ -1,10 +1,12 @@
 "use client";
 
 import { Check, Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export function CopyButton({ value, label, className }: { value: string; label: string; className?: string }) {
+  const t = useTranslations("common");
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export function CopyButton({ value, label, className }: { value: string; label: 
       {copied ? <Check size={18} className="text-success" aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
       <span className="sr-only">{label}</span>
       <span role="status" className="sr-only">
-        {copied ? "Copied to clipboard" : ""}
+        {copied ? t("copied") : ""}
       </span>
     </button>
   );

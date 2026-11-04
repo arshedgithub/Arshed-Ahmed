@@ -1,24 +1,30 @@
 import { GraduationCap } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Reveal } from "@/components/motion/reveal";
 import { Section, SectionHeading } from "@/components/ui/primitives";
+import { formatMonth } from "@/lib/content";
 import { teaching } from "@/lib/site";
 
 export function Teaching() {
+  const t = useTranslations("teaching");
+  const locale = useLocale();
   return (
     <Section id="teaching" labelledBy="teaching-title" className="pt-0 md:pt-0 lg:pt-0">
-      <SectionHeading id="teaching-title" eyebrow="Teaching" title="Teaching and mentoring" />
+      <SectionHeading id="teaching-title" eyebrow={t("eyebrow")} title={t("title")} />
       <div className="grid gap-4 md:grid-cols-2">
-        {teaching.map((t, i) => (
-          <Reveal key={t.role} delay={i * 0.06} className="h-full">
+        {teaching.map((item, i) => (
+          <Reveal key={item.key} delay={i * 0.06} className="h-full">
             <article className="card flex h-full gap-4 p-5">
               <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
                 <GraduationCap size={20} aria-hidden="true" />
               </span>
               <div>
-                <h3 className="font-semibold">{t.role}</h3>
-                <p className="text-sm text-fg/90">{t.org}</p>
-                <p className="mt-0.5 font-mono text-xs text-muted">{t.period}</p>
-                <p className="mt-3 text-sm text-muted">{t.detail}</p>
+                <h3 className="font-semibold">{t(`items.${item.key}.role`)}</h3>
+                <p className="text-sm text-fg/90">{item.org}</p>
+                <p className="mt-0.5 font-mono text-xs text-muted">
+                  {formatMonth(item.startISO, locale)} - {item.endISO ? formatMonth(item.endISO, locale) : t("present")}
+                </p>
+                <p className="mt-3 text-sm text-muted">{t(`items.${item.key}.detail`)}</p>
               </div>
             </article>
           </Reveal>

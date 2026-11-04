@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { SiteDocument, siteViewport } from "@/components/site-document";
+import { catalog } from "@/i18n/messages";
 import { latinFontClassName } from "@/lib/fonts-en";
 import { site } from "@/lib/site";
 import "../globals.css";
 
+const { meta } = catalog("en");
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Full-Stack Software Engineer in the UAE`,
+    default: meta.title,
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description: meta.description,
   applicationName: site.name,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
@@ -21,13 +24,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "/",
     siteName: site.name,
-    title: `${site.name} | Full-Stack Software Engineer in the UAE`,
-    description: site.description,
+    title: meta.title,
+    description: meta.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | Full-Stack Software Engineer in the UAE`,
-    description: site.description,
+    title: meta.title,
+    description: meta.description,
   },
   robots: { index: true, follow: true },
   formatDetection: { telephone: false },

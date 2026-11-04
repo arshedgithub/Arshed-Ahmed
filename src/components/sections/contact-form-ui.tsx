@@ -1,4 +1,5 @@
 import { Send } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { ReactNode, Ref } from "react";
 import { buttonClasses } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -12,12 +13,11 @@ export const inputClass =
 
 export const textareaClass = cn(inputClass, "resize-y");
 
-export const messagePlaceholder = "A role, a project or a question";
-
 export function FormTitle() {
+  const t = useTranslations("contact.form");
   return (
     <h3 id="contact-form-title" className="font-semibold">
-      Send a message
+      {t("title")}
     </h3>
   );
 }
@@ -54,6 +54,7 @@ export const submitClass = buttonClasses("primary", "w-full disabled:opacity-70"
  * so swapping it out causes no layout shift.
  */
 export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFormElement>; onActivate: () => void }) {
+  const t = useTranslations("contact.form");
   return (
     <form
       ref={formRef}
@@ -65,21 +66,21 @@ export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFor
       onSubmit={(e) => e.preventDefault()}
     >
       <FormTitle />
-      <Field id="name" label="Name">
+      <Field id="name" label={t("name")}>
         <input id="name" name="name" type="text" autoComplete="name" className={inputClass} />
       </Field>
-      <Field id="email" label="Email">
+      <Field id="email" label={t("email")}>
         <input id="email" name="email" type="email" inputMode="email" autoComplete="email" className={inputClass} />
       </Field>
-      <Field id="message" label="Message">
-        <textarea id="message" name="message" rows={5} className={textareaClass} placeholder={messagePlaceholder} />
+      <Field id="message" label={t("message")}>
+        <textarea id="message" name="message" rows={5} className={textareaClass} placeholder={t("messagePlaceholder")} />
       </Field>
       <HoneypotWrapper>
         <input id="_gotcha" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
       </HoneypotWrapper>
       <button type="submit" className={submitClass}>
         <Send size={16} aria-hidden="true" />
-        Send message
+        {t("send")}
       </button>
     </form>
   );
