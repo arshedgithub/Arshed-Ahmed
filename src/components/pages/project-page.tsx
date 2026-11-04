@@ -61,7 +61,9 @@ export async function ProjectPage({ slug, locale }: { slug: string; locale: Loca
   if (!project) notFound();
 
   const t = await getTranslations("caseStudy");
-  const { default: Content } = await import(`@/content/projects/${project.slug}.mdx`);
+  const { default: Content } = await (locale === "ar"
+    ? import(`@/content/projects/ar/${project.slug}.mdx`)
+    : import(`@/content/projects/${project.slug}.mdx`));
   const all = getProjects(locale);
   const index = all.findIndex((p) => p.slug === project.slug);
   const next = all[(index + 1) % all.length];
