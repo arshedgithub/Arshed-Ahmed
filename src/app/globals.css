@@ -69,8 +69,19 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
   --shadow-card: var(--shadow-card);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
+}
+
+/* Per-locale font faces. English keeps Inter and JetBrains Mono; Arabic has no mono, so both use Plex. */
+:root {
+  --font-body: var(--font-inter);
+  --font-code: var(--font-jetbrains);
+}
+
+:root:lang(ar) {
+  --font-body: var(--font-plex-arabic);
+  --font-code: var(--font-plex-arabic);
 }
 
 /* ---------- Base ---------- */

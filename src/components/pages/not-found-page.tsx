@@ -1,12 +1,6 @@
-import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Page not found",
-  robots: { index: false },
-};
-
-export default function NotFound() {
+export function NotFoundPage() {
   return (
     <section className="container-page flex min-h-[60vh] flex-col items-start justify-center py-16">
       <p className="font-mono text-sm text-accent">404</p>
