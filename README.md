@@ -1,14 +1,16 @@
 # arshedahmed.com
 
 Personal portfolio for Arshed Ahmed, full-stack software engineer. Built with Next.js 16 (App Router),
-TypeScript, Tailwind CSS v4, MDX case studies and `motion` for animation. Every page is static.
+TypeScript, Tailwind CSS v4, MDX case studies, `next-intl` and `motion` for animation. Every page is static.
+English lives at `/` and Arabic (RTL) at `/ar`.
 
 ## Commands
 
 ```bash
 npm install
 npm run dev              # http://localhost:3000
-npm run check            # eslint + route types + tsc
+npm run check            # i18n key check + eslint + route types + tsc
+npm run i18n:check       # fail if messages/en.json and ar.json differ in keys or placeholders
 npm run build            # Vercel / Node build (.next)
 npm run start            # serve the Vercel build locally
 npm run build:static     # fully static export to ./out (Cloudflare Pages, Netlify)
@@ -64,27 +66,32 @@ Cloudflare Pages, add a Bulk Redirect from `www.arshedahmed.com` to `arshedahmed
 
 | What | Where |
 | --- | --- |
-| All content (bio, links, skills, experience, projects, diagrams) | `src/lib/site.ts` |
-| Case-study text | `src/content/projects/<slug>.mdx` |
+| Shared facts (links, dates, tech names, project structure) | `src/lib/site.ts` |
+| All wording, per locale | `messages/en.json`, `messages/ar.json` |
+| Case-study text | `src/content/projects/<slug>.mdx`, Arabic in `src/content/projects/ar/<slug>.mdx` |
+| Arabic copy awaiting native review | `messages/ar.REVIEW.md` |
 | Design tokens (colours, light/dark) | `src/app/globals.css` |
 | Home sections | `src/components/sections/` |
-| Client-only code | `src/components/motion/*`, `ui/theme-toggle`, `ui/mobile-menu`, `ui/bottom-nav`, `sections/*contact-form*` |
-| SEO (metadata, JSON-LD, OG images, sitemap, robots) | `src/app/layout.tsx`, `src/components/seo/`, `src/app/opengraph-image.tsx` (home), `src/app/projects/[slug]/og-image.png/route.tsx` (case studies), `src/app/sitemap.ts`, `src/app/robots.ts` |
+| Locale routing | `src/i18n/`, `src/app/(en)` and `src/app/(ar)/ar` |
+| Client-only code | `src/components/motion/*`, `ui/theme-toggle`, `ui/mobile-menu`, `ui/bottom-nav`, `ui/language-switcher`, `sections/*contact-form*` |
+| SEO (metadata, JSON-LD, OG images, sitemap, robots) | `src/lib/metadata.ts`, `src/components/seo/`, `opengraph-image.tsx` in each locale's route tree (home), `src/app/projects/[slug]/og-image.png/route.tsx` (case studies), `src/app/sitemap.ts`, `src/app/robots.ts` |
 | Icons and manifest | `src/app/icon.svg`, `src/app/favicon.ico`, `src/app/apple-icon.png`, `public/icons/`, `src/app/manifest.ts` |
-| Page titles and descriptions | `site.description` (home) and `seoTitle` / `seoDescription` per project in `src/lib/site.ts` |
+| Page titles and descriptions | `meta` (home) and `seoTitle` / `seoDescription` per project in `messages/<locale>.json` |
 | Sitemap `lastmod` | last git commit touching each page's sources (`src/lib/last-modified.ts`); omitted if git is unavailable |
 
 ### Adding a case study
 
 1. Add an entry to `projects` in `src/lib/site.ts` (slug, stack, links, screenshots, architecture rows and edges).
-2. Create `src/content/projects/<slug>.mdx`. Use `<Stack />`, `<Architecture />` and `<ProjectLinks />`
-   where those sections belong; the page, sitemap, OG image and JSON-LD pick it up automatically.
+2. Add its wording under `projects.<slug>` in both `messages/en.json` and `messages/ar.json`.
+3. Create `src/content/projects/<slug>.mdx` and `src/content/projects/ar/<slug>.mdx`. Use `<Stack />`,
+   `<Architecture />` and `<ProjectLinks />` where those sections belong; the page, sitemap, OG image and JSON-LD
+   pick it up automatically.
 
 ### Project screenshots
 
 Projects render a designed fallback card (name, outcome, stack chips) until real images exist. Drop WebP files
 with these exact names into `public/images/projects/<slug>/` and rebuild; they are picked up automatically
-(`src/lib/project-images.ts`), and their alt text is already written in `site.ts`.
+(`src/lib/project-images.ts`), and their alt text is already written in `messages/<locale>.json`.
 Browser shots at 1280x800 (16:10), phone shots at 390x845.
 
 | Folder | Files |
@@ -103,6 +110,18 @@ leftover haze beside the jacket was cleaned up; face, hair and beard untouched).
 with another transparent PNG and run `npm run images:photo`, which writes `hero-1x1.webp` (1200x1200),
 `about-1x1.webp` (800x800), `og-portrait.png` and the inlined `src/components/seo/og-portrait.ts`.
 
+### Languages
+
+`/` is English and `/ar` is Arabic. There is no middleware, because the static export cannot run one: each locale is
+its own route tree with its own root layout, which is also what makes `<html lang dir>` correct in prerendered HTML.
+Visitors are never redirected by browser language. The language switcher saves an explicit choice in `localStorage`
+and an inline script (`src/components/seo/locale-script.tsx`) honours it on later visits.
+
+Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` and rebuild; `/ar` links to it automatically
+(`src/lib/cv.ts`). Until then it links to the English PDF.
+
+OG images are English on both locales: the renderer does not shape Arabic text correctly.
+
 ### Theme
 
 Dark is the default: `THEME_DEFAULT` in `src/lib/site.ts` is `"dark"`, so first-time visitors always see dark.
@@ -114,15 +133,18 @@ light it sits in a square pale-blue tile.
 
 - [ ] Flip the canonical host in Vercel's domain settings (see "Canonical host").
 - [ ] Add real project screenshots (see "Project screenshots" for the exact filenames).
-- [ ] Confirm `ACADEMY_NAME` and `SLMARKET_START` ("Jul 2026") in `src/lib/site.ts`.
-- [ ] Fill in `VISA_STATUS` in `src/lib/site.ts`. It renders under "Notice period" only once it is set.
-- [ ] Confirm the "Live" / "Solo-built" badges in `site.ts` (only SLMarket has them; add "Live" to others if
+- [ ] Have a native Arabic speaker review the copy (`messages/ar.REVIEW.md`).
+- [ ] Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` (see "Languages").
+- [ ] Check the hreflang pairs in Google Search Console after deploying.
+- [ ] Confirm `ACADEMY_NAME` and `SLMARKET_START_ISO` ("2026-07") in `src/lib/site.ts`.
+- [ ] Fill in `contact.visaValue` in both `messages/*.json`. It renders under "Notice period" only once it is set.
+- [ ] Confirm the "live" / "soloBuilt" badges in `site.ts` (only SLMarket has them; add "live" to others if
       they are publicly live).
 - [ ] Optional: the light theme shows a faint grey fringe around the hair at 2x zoom (dark is clean). A re-cut
       with edge colour decontamination would remove it; replace `me-cutout.png` and run `npm run images:photo`.
 - [ ] Review every `{/* TODO: confirm */}` in `src/content/projects/*.mdx` (run `grep -rn "TODO" src`).
 - [ ] Add live/GitHub links for the three projects that have none (`links: []` in `site.ts`).
-- [ ] Elzian Agro second bullet in `site.ts` is a restatement of the CV line. Confirm or replace it.
+- [ ] Elzian Agro second bullet in `messages/*.json` is a restatement of the CV line. Confirm or replace it.
 - [ ] Contact form: set `RESEND_API_KEY` and `CONTACT_FROM_EMAIL` (Vercel) or `NEXT_PUBLIC_CONTACT_ENDPOINT` (static).
 - [ ] Re-run Lighthouse on the deployed site (see notes below).
 

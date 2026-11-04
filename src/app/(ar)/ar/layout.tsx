@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import { SiteDocument, siteViewport } from "@/components/site-document";
-import { site } from "@/lib/site";
+import { rootMetadata } from "@/lib/metadata";
 import "../../globals.css";
 
 const plexArabic = IBM_Plex_Sans_Arabic({
@@ -13,11 +12,7 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  robots: { index: true, follow: true },
-  formatDetection: { telephone: false },
-};
+export const metadata = rootMetadata("ar");
 
 export const viewport = siteViewport;
 
