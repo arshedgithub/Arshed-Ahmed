@@ -23,7 +23,7 @@ export function SiteHeader() {
               <li key={item.key}>
                 <LocaleLink
                   href={item.href}
-                  className="inline-flex min-h-11 items-center rounded-lg px-3 text-sm text-muted transition-colors hover:text-fg"
+                  className="inline-flex min-h-11 items-center rounded-lg px-3 text-sm whitespace-nowrap text-muted transition-colors hover:text-fg"
                 >
                   {t(item.key)}
                 </LocaleLink>

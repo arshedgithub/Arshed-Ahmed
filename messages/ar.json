@@ -19,8 +19,8 @@
     "toggleThemeTitle": "تغيير المظهر",
     "copied": "تم النسخ",
     "downloadCv": "تحميل السيرة الذاتية",
-    "cvShort": "السيرة الذاتية",
-    "cvShortSuffix": " (تحميل ملف PDF)",
+    "cvShort": "CV",
+    "cvShortSuffix": " (تحميل السيرة الذاتية بصيغة PDF)",
     "externalLabel": "{label} (يفتح في علامة تبويب جديدة)",
     "emailLabel": "{label} ({email})",
     "channels": {

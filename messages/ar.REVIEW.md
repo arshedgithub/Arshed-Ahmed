@@ -185,8 +185,7 @@ to fit their boxes.
 | `common.toggleThemeTitle` | Toggle theme | تغيير المظهر |
 | `common.copied` | Copied to clipboard | تم النسخ |
 | `common.downloadCv` | Download CV | تحميل السيرة الذاتية |
-| `common.cvShort` | CV | السيرة الذاتية |
-| `common.cvShortSuffix` |  (download PDF) |  (تحميل ملف PDF) |
+| `common.cvShortSuffix` |  (download PDF) |  (تحميل السيرة الذاتية بصيغة PDF) |
 | `common.externalLabel` | {label} (opens in a new tab) | {label} (يفتح في علامة تبويب جديدة) |
 | `common.channels.email` | Email | البريد الإلكتروني |
 | `nav.home` | Home | الرئيسية |

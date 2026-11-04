@@ -76,7 +76,7 @@ export function Contact() {
                   </span>
                   <span className="min-w-0">
                     <span className="block text-sm text-muted">{common(`channels.${key}`)}</span>
-                    <span className="block truncate font-medium group-hover:text-accent"><bdi dir="ltr">{value}</bdi></span>
+                    <span className="block truncate font-medium group-hover:text-accent rtl:text-sm rtl:whitespace-normal rtl:[overflow-wrap:anywhere]"><bdi dir="ltr">{value}</bdi></span>
                   </span>
                 </a>
                 {key === "email" && <CopyButton value={site.email} label={t("copyEmail")} />}
