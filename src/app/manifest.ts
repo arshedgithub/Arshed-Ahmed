@@ -1,13 +1,16 @@
 import type { MetadataRoute } from "next";
+import { catalog } from "@/i18n/messages";
 import { THEME_COLORS, site } from "@/lib/site";
+
+const { meta } = catalog("en");
 
 export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${site.name} | ${site.jobTitle}`,
+    name: meta.profileName,
     short_name: site.name,
-    description: site.description,
+    description: meta.description,
     start_url: "/",
     display: "browser",
     background_color: THEME_COLORS.dark,

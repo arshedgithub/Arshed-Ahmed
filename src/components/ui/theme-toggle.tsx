@@ -1,10 +1,13 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { THEME_COLORS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function ThemeToggle({ className }: { className?: string }) {
+  const t = useTranslations("common");
+
   function toggle() {
     const root = document.documentElement;
     const next = root.dataset.theme === "light" ? "dark" : "light";
@@ -22,8 +25,8 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
-      aria-label="Toggle light and dark theme"
-      title="Toggle theme"
+      aria-label={t("toggleThemeLabel")}
+      title={t("toggleThemeTitle")}
       className={cn(
         "inline-flex size-11 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-fg",
         className,

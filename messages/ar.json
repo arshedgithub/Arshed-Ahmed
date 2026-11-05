@@ -1,0 +1,360 @@
+{
+  "meta": {
+    "title": "أرشد أحمد | مهندس برمجيات Full-Stack في دبي وأبوظبي وعجمان",
+    "description": "مهندس ومطور برمجيات Full-Stack في الإمارات، متاح للعمل فوراً في دبي وأبوظبي وعجمان. أبني تطبيقات ويب ومنتجات SaaS وأنظمة دفع باستخدام Next.js وNode.js.",
+    "ogImageAlt": "أرشد أحمد، مهندس برمجيات Full-Stack في الإمارات",
+    "profileName": "أرشد أحمد، مهندس برمجيات Full-Stack"
+  },
+  "common": {
+    "name": "أرشد أحمد",
+    "firstName": "أرشد",
+    "lastName": "أحمد",
+    "jobTitle": "مهندس برمجيات Full-Stack",
+    "positioning": "أبني منتجات SaaS وأنظمة دفع وحلول ذكاء اصطناعي باستخدام Next.js وTypeScript وNode.js.",
+    "status": "متاح للانضمام فوراً · الإمارات",
+    "locationLine": "مقيم في الإمارات · أبحث عن فرص في دبي وأبوظبي وعجمان",
+    "skipToContent": "الانتقال إلى المحتوى",
+    "logoHome": "{name}، الصفحة الرئيسية",
+    "toggleThemeLabel": "التبديل بين الوضعين الفاتح والداكن",
+    "toggleThemeTitle": "تغيير المظهر",
+    "copied": "تم النسخ",
+    "downloadCv": "تحميل السيرة الذاتية",
+    "cvShort": "CV",
+    "cvShortSuffix": " (تحميل السيرة الذاتية بصيغة PDF)",
+    "externalLabel": "{label} (يفتح في علامة تبويب جديدة)",
+    "emailLabel": "{label} ({email})",
+    "channels": {
+      "email": "البريد الإلكتروني",
+      "whatsapp": "WhatsApp",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "work": "أعمالي",
+    "experience": "الخبرات",
+    "skills": "المهارات",
+    "about": "نبذة عني",
+    "contact": "تواصل معي",
+    "primaryAria": "القائمة الرئيسية",
+    "footerAria": "روابط أسفل الصفحة",
+    "mobileAria": "قائمة الهاتف",
+    "sectionsAria": "أقسام الصفحة",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "switchLabel": "EN",
+    "switchName": "English"
+  },
+  "hero": {
+    "imageAlt": "أرشد أحمد، مهندس برمجيات Full-Stack، يرتدي سترة خضراء فاتحة وقميصاً أبيض",
+    "coreStackAria": "التقنيات الأساسية",
+    "viewWork": "عرض الأعمال"
+  },
+  "stats": {
+    "aria": "أبرز الأرقام",
+    "years": "سنوات من الخبرة",
+    "saas": "منتجات SaaS",
+    "stripe": "نظام دفع يعمل فعلياً",
+    "solo": "منتجات أطلقتها بمفردي"
+  },
+  "work": {
+    "eyebrow": "أبرز الأعمال",
+    "title": "منتجات بنيتها وأطلقتها",
+    "description": "مشاريع مختارة في الأسواق الإلكترونية وأنظمة الدفع والذكاء الاصطناعي.",
+    "tagsAria": "التصنيفات",
+    "readCaseStudy": "قراءة دراسة الحالة",
+    "badges": {
+      "live": "يعمل الآن",
+      "soloBuilt": "بنيته بمفردي"
+    }
+  },
+  "projects": {
+    "slmarket": {
+      "title": "SLMarket",
+      "titleAccent": "منظومة متكاملة",
+      "subtitle": "سوق إلكتروني ونظام SLMarket Flow لنقاط البيع وإدارة الموارد",
+      "summary": "سوق إلكتروني متعدد اللغات يربط المشترين والبائعين في أنحاء سريلانكا، إلى جانب SLMarket Flow، وهو نظام نقاط بيع يعمل في الوقت الفعلي مع مزايا ERP. صممته وبنيته وأطلقته بمفردي.",
+      "seoTitle": "SLMarket: سوق إلكتروني ونظام POS/ERP متكامل",
+      "seoDescription": "كيف صمم أرشد أحمد SLMarket وبناه وأطلقه بمفرده: سوق إلكتروني سريلانكي متعدد اللغات على Next.js، ونظام SLMarket Flow لنقاط البيع على Laravel.",
+      "outcome": "منتجان صممتهما وبنيتهما وأطلقتهما بمفردي: سوق إلكتروني ونظام POS/ERP يعمل في الوقت الفعلي.",
+      "tag": "التجارة الإلكترونية",
+      "role": "بمفردي: المنتج والبنية التقنية والتطوير الكامل والنشر",
+      "coverAlt": "الصفحة الرئيسية لسوق SLMarket الإلكتروني مع قوائم المنتجات",
+      "screenshotAlts": {
+        "marketplace-home": "الصفحة الرئيسية لسوق SLMarket مع الفئات وقوائم المنتجات",
+        "flow-pos": "شاشة نقطة البيع في SLMarket Flow مع سلة وشبكة منتجات",
+        "marketplace-mobile": "سوق SLMarket على الهاتف"
+      },
+      "stackLabels": {
+        "marketplace": "السوق الإلكتروني",
+        "flow": "SLMarket Flow (POS/ERP)"
+      },
+      "architecture": {
+        "rows": { "users": "المستخدمون", "apps": "التطبيقات", "data": "البيانات", "delivery": "النشر" },
+        "nodes": {
+          "buyers": { "title": "المشترون", "sub": "الويب، عدة لغات" },
+          "sellers": { "title": "البائعون", "sub": "الويب" },
+          "staff": { "title": "موظفو المتجر", "sub": "نقطة البيع" },
+          "market": { "title": "السوق الإلكتروني", "sub": "Next.js · TypeScript" },
+          "flow": { "title": "SLMarket Flow", "sub": "Laravel · Vue · Inertia" },
+          "pg": { "title": "PostgreSQL", "sub": "Prisma" },
+          "redis": { "title": "Redis", "sub": "التخزين المؤقت" },
+          "cdn": { "title": "Cloudinary", "sub": "الوسائط" },
+          "mysql": { "title": "MySQL", "sub": "بيانات البيع" },
+          "vercel": { "title": "Vercel", "sub": "GitHub Actions" },
+          "cpanel": { "title": "cPanel", "sub": "GitHub Actions" }
+        }
+      }
+    },
+    "ai-business-support-saas": {
+      "title": "منصة دعم الأعمال",
+      "titleAccent": "بالذكاء الاصطناعي",
+      "subtitle": "طبقة مدفوعات Stripe ولوحة مدفوعات مباشرة",
+      "summary": "منصة SaaS تعمل فعلياً، وتضم روبوتات دردشة بالذكاء الاصطناعي ترشد الشركات إلى المنح والتمويل. توليت طبقة مدفوعات Stripe بالكامل، وبنيت لوحة مدفوعات تعمل في الوقت الفعلي.",
+      "seoTitle": "مدفوعات Stripe لمنصة SaaS بالذكاء الاصطناعي",
+      "seoDescription": "تولى أرشد أحمد طبقة مدفوعات Stripe في منصة SaaS بالذكاء الاصطناعي ترشد الشركات إلى المنح والتمويل، وبنى لوحة مدفوعات تعمل في الوقت الفعلي.",
+      "outcome": "توليت طبقة مدفوعات Stripe بالكامل وبنيت لوحة مدفوعات تعمل في الوقت الفعلي.",
+      "tag": "SaaS · المدفوعات",
+      "role": "مهندس Full-Stack ومسؤول عن طبقة مدفوعات Stripe",
+      "coverAlt": "لوحة المدفوعات في منصة دعم الأعمال بالذكاء الاصطناعي",
+      "screenshotAlts": {
+        "payments-dashboard": "لوحة مدفوعات Stripe في الوقت الفعلي مع قائمة بالمعاملات",
+        "chatbot": "محادثة مع روبوت دردشة يرشد شركة إلى المنح والتمويل"
+      },
+      "stackLabels": {
+        "platform": "المنصة"
+      },
+      "architecture": {
+        "rows": { "users": "المستخدمون", "frontend": "الواجهة الأمامية", "backend": "الواجهة الخلفية", "services": "الخدمات" },
+        "nodes": {
+          "biz": { "title": "الشركات", "sub": "الدردشة والفوترة" },
+          "team": { "title": "الفريق الداخلي", "sub": "لوحة التحكم" },
+          "web": { "title": "تطبيق Next.js", "sub": "TypeScript" },
+          "api": { "title": "Express.js API", "sub": "المدفوعات ومنطق العمل" },
+          "ai": { "title": "روبوتات الدردشة", "sub": "مسارات LLM" },
+          "stripe": { "title": "Stripe", "sub": "الفوترة وWebhooks" },
+          "db": { "title": "قاعدة البيانات", "sub": "سجلات الدفع" }
+        }
+      }
+    },
+    "ai-cv-builder": {
+      "title": "منشئ السيرة الذاتية",
+      "titleAccent": "والتدريب على المقابلات",
+      "subtitle": "سير ذاتية متوافقة مع ATS ومقابلات تجريبية صوتية",
+      "summary": "إنشاء سير ذاتية متوافقة مع أنظمة ATS وتحليلها وتحسينها وفق الوصف الوظيفي، إلى جانب مقابلة تجريبية صوتية بالذكاء الاصطناعي تقدم للمرشحين ملاحظات فورية.",
+      "seoTitle": "منشئ سير ذاتية بالذكاء الاصطناعي ومقابلات صوتية",
+      "seoDescription": "منشئ سير ذاتية بالذكاء الاصطناعي من أرشد أحمد: سير متوافقة مع ATS ومكيّفة حسب الوصف الوظيفي، ومقابلات تجريبية صوتية بملاحظات فورية، على Next.js وGroq.",
+      "outcome": "سير ذاتية متوافقة مع ATS ومقابلات تجريبية صوتية بملاحظات فورية من الذكاء الاصطناعي.",
+      "tag": "الذكاء الاصطناعي / LLM",
+      "role": "تطوير Full-Stack",
+      "coverAlt": "محرر السيرة الذاتية في منشئ السير الذاتية",
+      "screenshotAlts": {
+        "resume-editor": "محرر السيرة الذاتية مع معاينة لسيرة محسّنة لأنظمة ATS",
+        "mock-interview": "شاشة المقابلة التجريبية الصوتية مع ملاحظات الذكاء الاصطناعي"
+      },
+      "stackLabels": {
+        "platform": "المنصة"
+      },
+      "architecture": {
+        "rows": { "users": "المستخدمون", "app": "التطبيق", "aiData": "الذكاء الاصطناعي والبيانات" },
+        "nodes": {
+          "cand": { "title": "المرشحون", "sub": "الويب والميكروفون" },
+          "next": { "title": "تطبيق Next.js", "sub": "TypeScript · API routes" },
+          "groq": { "title": "Groq LLM", "sub": "السيرة والملاحظات" },
+          "whisper": { "title": "Whisper", "sub": "تحويل الكلام إلى نص" },
+          "pg": { "title": "PostgreSQL", "sub": "Prisma" }
+        }
+      }
+    },
+    "whatsapp-ai-order-bot": {
+      "title": "بوت WhatsApp",
+      "titleAccent": "للطلبات بالذكاء الاصطناعي",
+      "subtitle": "طلبات ودعم عبر المحادثة على WhatsApp",
+      "summary": "روبوت دردشة على WhatsApp يعمل بالذكاء الاصطناعي، بنيته باستخدام Python وLLM APIs وTwilio، ويؤتمت محادثات العملاء.",
+      "seoTitle": "بوت WhatsApp بالذكاء الاصطناعي لمحادثات العملاء",
+      "seoDescription": "روبوت دردشة على WhatsApp بناه أرشد أحمد وأطلقه في Softsora باستخدام Python وLLM APIs وTwilio، ويؤتمت محادثات العملاء على WhatsApp.",
+      "outcome": "أتمتة محادثات العملاء على WhatsApp عبر بوت يعمل بنماذج LLM.",
+      "tag": "الأتمتة",
+      "role": "مطور: بناء البوت وإطلاقه",
+      "coverAlt": "محادثة مع بوت الطلبات على WhatsApp",
+      "screenshotAlts": {
+        "chat-1": "محادثة على WhatsApp يجيب فيها البوت عن سؤال أحد العملاء",
+        "chat-2": "رسالة تأكيد طلب أرسلها البوت على WhatsApp"
+      },
+      "stackLabels": {
+        "bot": "البوت"
+      },
+      "architecture": {
+        "rows": { "users": "المستخدمون", "channel": "القناة", "service": "الخدمة", "ai": "الذكاء الاصطناعي" },
+        "nodes": {
+          "cust": { "title": "العملاء", "sub": "WhatsApp" },
+          "twilio": { "title": "Twilio", "sub": "WhatsApp API" },
+          "py": { "title": "خدمة Python", "sub": "Webhook ومنطق العمل" },
+          "llm": { "title": "LLM API", "sub": "فهم الرسائل والردود" }
+        }
+      }
+    }
+  },
+  "caseStudy": {
+    "breadcrumbAria": "مسار التنقل",
+    "home": "الرئيسية",
+    "breadcrumbHome": "الرئيسية",
+    "screenshots": "لقطات الشاشة",
+    "moreProjectsAria": "مشاريع أخرى",
+    "allProjects": "كل المشاريع",
+    "next": "التالي: {title}",
+    "stackAria": "تقنيات {label}",
+    "architectureTitle": "البنية التقنية: {title}",
+    "architectureEdge": "{from} يتصل بـ {to}",
+    "noPublicLink": "لا يتوفر رابط عام لهذا المشروع. يسعدني أن أشرحه لكم بالتفصيل في المقابلة.",
+    "opensNewTab": " (يفتح في علامة تبويب جديدة)",
+    "ogImageAlt": "دراسة حالة {title} من {name}: {subtitle}",
+    "ogEyebrow": "دراسة حالة"
+  },
+  "experience": {
+    "eyebrow": "الخبرات",
+    "title": "أين عملت",
+    "present": "حتى الآن",
+    "selfEmployed": "عمل حر",
+    "items": {
+      "slmarket": {
+        "role": "مطور Full-Stack",
+        "bullets": [
+          "صممت وبنيت وأطلقت منتجين بمفردي: سوق إلكتروني متعدد اللغات (slmarket.lk) ونظام SLMarket Flow لنقاط البيع وإدارة الموارد في الوقت الفعلي.",
+          "أتمتت عمليات الإطلاق عبر GitHub Actions CI/CD، وطبقت منهج TDD باختبارات الوحدة والتكامل، وأضفت صلاحيات قائمة على الأدوار وتخزيناً مؤقتاً عبر Redis."
+        ]
+      },
+      "softsora": {
+        "role": "مهندس برمجيات",
+        "bullets": [
+          "نفذت نظام فوترة عبر Stripe يشمل الاشتراكات والدفعات لمرة واحدة والاحتساب التناسبي التلقائي وWebhooks واسترداد المبالغ. عالج النظام أكثر من 200 معاملة عبر أكثر من 10 منتجات.",
+          "بنيت وأطلقت خدمات Node.js وExpress.js وMongoDB لواجهات Next.js وTypeScript، مع اختبارات وحدة وتكامل عبر Jest تغطي منطق الدفع وواجهات API."
+        ]
+      },
+      "softsoraAssociate": {
+        "role": "مهندس برمجيات مساعد",
+        "bullets": [
+          "أطلقت حلول روبوتات دردشة بالذكاء الاصطناعي لشركة رائدة في صناعة الأفران، عبر ربط مسارات DIFY.ai بواجهات Next.js مخصصة.",
+          "أتمتت التواصل مع العملاء عبر روبوت دردشة على WhatsApp بنيته باستخدام Python وLLM APIs وTwilio."
+        ]
+      },
+      "freelance": {
+        "role": "مطور برمجيات مستقل",
+        "bullets": [
+          "نفذت تطبيقات ويب للعملاء من تحديد المتطلبات حتى النشر، باستخدام React وNode.js وExpress.js وSpring Boot.",
+          "بنيت أداة لإحصاء المبيعات وتحليلها حلت محل عملية يدوية لدى أحد العملاء."
+        ]
+      },
+      "elzian": {
+        "role": "متدرب هندسة برمجيات",
+        "bullets": [
+          "بنيت ميزات Full-Stack باستخدام MERN stack لتطبيقات المؤسسات.",
+          "نفذت REST APIs وعمليات قواعد البيانات عبر مراحل SDLC، من المتطلبات حتى الاختبار."
+        ]
+      }
+    }
+  },
+  "skills": {
+    "eyebrow": "المهارات",
+    "title": "التقنيات التي أعمل بها",
+    "groups": {
+      "frontend": "الواجهة الأمامية",
+      "backend": "الواجهة الخلفية والبيانات",
+      "ai": "الذكاء الاصطناعي والتكاملات",
+      "devops": "DevOps والاختبارات"
+    },
+    "items": {
+      "restApi": "تصميم REST API",
+      "stripe": "الدفع عبر Stripe (الاشتراكات، الاحتساب التناسبي، Webhooks، الاسترداد)"
+    }
+  },
+  "teaching": {
+    "eyebrow": "التدريس",
+    "title": "التدريس والإرشاد",
+    "present": "حتى الآن",
+    "items": {
+      "solitrium": {
+        "role": "مدرّب ومؤسس",
+        "detail": "أدرّس تطوير Full-Stack وOOP وتصميم الأنظمة وSDLC وGit. أرشدت أكثر من 20 مشروع تخرج في برنامج BIT عبر مراجعة الكود."
+      },
+      "earth": {
+        "role": "محاضر مساعد ومشرف مختبرات (دوام جزئي)",
+        "detail": "درّست تطوير الويب وتصميم تجربة المستخدم والبرمجة وOOP وتصميم الأنظمة وSDLC والرياضيات، وقدت جلسات مختبر في Java والويب."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "نبذة عني",
+    "title": "من الفكرة إلى نظام يعمل",
+    "portraitAlt": "صورة شخصية لأرشد أحمد",
+    "paragraph1": "أحب أن أتولى المنتج من أول رسم حتى يصبح نظاماً يستخدمه الناس كل يوم: أصمم نموذج البيانات وواجهة API، وأبني الواجهة، وأربط المدفوعات، وأطلقه عبر CI/CD.",
+    "paragraph2": "في Softsora بنيت منصات SaaS وأنظمة فوترة عبر Stripe وميزات تعتمد على LLM. وبمفردي صممت وبنيت وأطلقت SLMarket وSLMarket Flow. وأعمل أيضاً في التدريس: أسست {academy} وأرشدت أكثر من 20 مشروع تخرج عبر مراجعة الكود.",
+    "paragraph3": "أستخدم Claude Code وGitHub Copilot وCursor لأعمل بسرعة أكبر، لكن البنية التقنية تبقى مسؤوليتي، وأراجع كل تغيير بنفسي.",
+    "quickFactsAria": "معلومات سريعة",
+    "nationality": "سريلانكي الجنسية",
+    "basedIn": "مقيم في الإمارات",
+    "availableNow": "متاح الآن",
+    "credentialsTitle": "التعليم والشهادات",
+    "education": "التعليم",
+    "certifications": "الشهادات",
+    "degrees": {
+      "bit": {
+        "degree": "بكالوريوس تقنية المعلومات (BIT)",
+        "school": "كلية الحاسوب بجامعة كولومبو (UCSC)"
+      },
+      "bsc": {
+        "degree": "بكالوريوس العلوم الفيزيائية",
+        "school": "جامعة كولومبو"
+      }
+    },
+    "certs": {
+      "ethicalHacker": "Ethical Hacker من Cisco",
+      "securityFundamentals": "Security Fundamentals من Palo Alto Networks",
+      "jenkinsDocker": "Jenkins وDocker"
+    },
+    "languagesLabel": "اللغات:",
+    "languagesList": "الإنجليزية (مستوى مهني)، السنهالية (اللغة الأم)، التاميلية (اللغة الأم)، العربية (مستوى أساسي)"
+  },
+  "contact": {
+    "eyebrow": "التواصل",
+    "title": "تواصل معي",
+    "description": "تبحث عن مطور ويب أو مهندس Full-Stack، أو لديك منتج تريد بناءه؟ أرسل لي رسالة أو تواصل معي مباشرة.",
+    "noticeLabel": "فترة الإشعار:",
+    "noticeValue": "فوراً",
+    "visaLabel": "حالة التأشيرة:",
+    "visaValue": "",
+    "replyNote": "لغتي العربية في مستوى أساسي، لذلك يكون ردي أسرع بالإنجليزية.",
+    "copyEmail": "نسخ البريد الإلكتروني",
+    "form": {
+      "title": "أرسل رسالة",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "message": "الرسالة",
+      "messagePlaceholder": "فرصة عمل أو مشروع أو سؤال",
+      "send": "إرسال الرسالة",
+      "sending": "جارٍ الإرسال…",
+      "successTitle": "شكراً لك، رسالتك في طريقها إلي.",
+      "successBody": "سأرد عليك على البريد الإلكتروني الذي أدخلته.",
+      "sendAnother": "إرسال رسالة أخرى",
+      "failed": "لم تُرسل رسالتك. حاول مرة أخرى، أو راسلني مباشرة على <email></email>.",
+      "errors": {
+        "nameMin": "أدخل اسمك (حرفان على الأقل).",
+        "nameMax": "يجب ألا يتجاوز الاسم 80 حرفاً.",
+        "emailInvalid": "أدخل بريداً إلكترونياً صحيحاً، مثل name@company.com.",
+        "messageMin": "أضف مزيداً من التفاصيل (10 أحرف على الأقل).",
+        "messageMax": "يجب ألا تتجاوز الرسالة 2000 حرف."
+      }
+    }
+  },
+  "footer": {
+    "rights": "© {year} {name}. جميع الحقوق محفوظة."
+  },
+  "notFound": {
+    "metaTitle": "الصفحة غير موجودة",
+    "title": "هذه الصفحة غير موجودة",
+    "description": "قد يكون الرابط قديماً. ستجد المشاريع وبيانات التواصل كلها في الصفحة الرئيسية.",
+    "goHome": "العودة إلى الصفحة الرئيسية",
+    "viewProjects": "عرض المشاريع"
+  }
+}

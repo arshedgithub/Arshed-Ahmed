@@ -1,6 +1,10 @@
+import { useLocale } from "next-intl";
+import { catalog } from "@/i18n/messages";
+import { localePath, type Locale } from "@/i18n/routing";
+import type { Project } from "@/lib/content";
 import { homeSources, lastModified } from "@/lib/last-modified";
 import { absoluteUrl } from "@/lib/utils";
-import { experience, knowsAbout, languages, site, type Project } from "@/lib/site";
+import { experience, knowsAbout, knowsLanguage, site } from "@/lib/site";
 
 function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -12,23 +16,26 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
   );
 }
 
-// Stable @ids: the Person is described once (home page) and referenced everywhere else,
-// so search engines see one entity across the site.
+// Stable @ids: the Person and WebSite are one entity across languages, so search engines don't see two people.
 const ids = {
   person: `${site.url}/#person`,
   website: `${site.url}/#website`,
-  profile: `${site.url}/#profilepage`,
 };
 
 // Reference to the Person from other pages: @id ties it to the full node on the home page,
 // name/url keep each page valid on its own.
 const personRef = { "@type": "Person", "@id": ids.person, name: site.name, url: site.url };
 
-const current = experience.find((job) => job.end === "Present");
+const current = experience.find((job) => job.endISO === null);
+
+const localeUrl = (locale: Locale, path: string) => absoluteUrl(localePath(locale, path));
 
 /** Home page: Person + WebSite + ProfilePage (mainEntity is the Person). */
 export function HomeJsonLd() {
+  const locale = useLocale();
+  const { common, meta } = catalog(locale);
   const modified = lastModified(...homeSources);
+  const url = locale === "en" ? site.url : localeUrl(locale, "/");
   return (
     <JsonLd
       data={{
@@ -37,18 +44,19 @@ export function HomeJsonLd() {
           {
             "@type": "Person",
             "@id": ids.person,
-            name: site.name,
-            url: site.url,
+            name: common.name,
+            alternateName: locale === "en" ? catalog("ar").common.name : site.name,
+            url,
             image: absoluteUrl("/images/about-1x1.webp"),
-            jobTitle: site.jobTitle,
-            description: site.description,
+            jobTitle: common.jobTitle,
+            description: meta.description,
             email: `mailto:${site.email}`,
             telephone: site.phoneE164,
             nationality: { "@type": "Country", name: "Sri Lanka" },
             address: { "@type": "PostalAddress", addressCountry: "AE" },
             sameAs: [site.linkedinUrl, site.githubUrl],
             knowsAbout: [...knowsAbout],
-            knowsLanguage: languages.map((l) => l.name),
+            knowsLanguage: [...knowsLanguage],
             alumniOf: [
               { "@type": "CollegeOrUniversity", name: "University of Colombo School of Computing" },
               { "@type": "CollegeOrUniversity", name: "University of Colombo" },
@@ -62,18 +70,18 @@ export function HomeJsonLd() {
             "@id": ids.website,
             url: site.url,
             name: site.name,
-            description: site.description,
-            inLanguage: "en",
+            description: catalog("en").meta.description,
+            inLanguage: ["en", "ar"],
             publisher: { "@id": ids.person },
           },
           {
             "@type": "ProfilePage",
-            "@id": ids.profile,
-            url: site.url,
-            name: `${site.name} | ${site.jobTitle}`,
+            "@id": `${url}/#profilepage`.replace(/^(https:\/\/[^/]+)\/\//, "$1/"),
+            url,
+            name: meta.profileName,
             isPartOf: { "@id": ids.website },
             mainEntity: { "@id": ids.person },
-            inLanguage: "en",
+            inLanguage: locale,
             ...(modified ? { dateModified: modified } : {}),
           },
         ],
@@ -84,8 +92,10 @@ export function HomeJsonLd() {
 
 /** Case study: CreativeWork authored by the Person, plus the visible breadcrumb trail. */
 export function ProjectJsonLd({ project, image }: { project: Project; image: string }) {
-  const url = absoluteUrl(`/projects/${project.slug}`);
-  const name = `${project.title} ${project.titleAccent ?? ""}`.trim();
+  const locale = useLocale();
+  const { caseStudy } = catalog(locale);
+  const url = localeUrl(locale, `/projects/${project.slug}`);
+  const name = `${project.title} ${project.titleAccent}`.trim();
   return (
     <JsonLd
       data={{
@@ -106,7 +116,7 @@ export function ProjectJsonLd({ project, image }: { project: Project; image: str
             author: personRef,
             creator: personRef,
             isPartOf: { "@id": ids.website },
-            inLanguage: "en",
+            inLanguage: locale,
             genre: project.tag,
             keywords: [...new Set(project.stack.flatMap((s) => s.items))].join(", "),
             // The case study describes these sites; it is not the same thing as them, so `about`, not `sameAs`.
@@ -118,7 +128,7 @@ export function ProjectJsonLd({ project, image }: { project: Project; image: str
             "@type": "BreadcrumbList",
             "@id": `${url}#breadcrumb`,
             itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+              { "@type": "ListItem", position: 1, name: caseStudy.breadcrumbHome, item: locale === "en" ? site.url : localeUrl(locale, "/") },
               { "@type": "ListItem", position: 2, name, item: url },
             ],
           },

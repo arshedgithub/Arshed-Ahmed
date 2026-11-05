@@ -8,7 +8,7 @@ import { Skills } from "@/components/sections/skills";
 import { Teaching } from "@/components/sections/teaching";
 import { HomeJsonLd } from "@/components/seo/json-ld";
 
-export default function HomePage() {
+export function HomePage() {
   return (
     <>
       <HomeJsonLd />

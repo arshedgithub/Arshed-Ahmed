@@ -1,12 +1,17 @@
 "use client";
 
 import { Download, Menu, X } from "lucide-react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
-import { nav, site } from "@/lib/site";
+import { LocaleLink } from "@/i18n/link";
+import type { Locale } from "@/i18n/routing";
+import { nav } from "@/lib/site";
 import { buttonClasses } from "./button";
+import { LanguageSwitcher } from "./language-switcher";
 
-export function MobileMenu() {
+export function MobileMenu({ cv }: { cv: { href: string; lang: Locale } }) {
+  const t = useTranslations("nav");
+  const common = useTranslations("common");
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -41,7 +46,7 @@ export function MobileMenu() {
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? t("closeMenu") : t("openMenu")}
         onClick={() => setOpen((v) => !v)}
         className="inline-flex size-11 items-center justify-center rounded-lg text-fg hover:bg-surface"
       >
@@ -54,24 +59,25 @@ export function MobileMenu() {
         hidden={!open}
         className="absolute inset-x-0 top-full border-b border-line bg-canvas px-4 pb-4 shadow-card"
       >
-        <nav aria-label="Mobile">
+        <nav aria-label={t("mobileAria")}>
           <ul className="grid gap-1 py-2">
             {nav.map((item) => (
-              <li key={item.href}>
-                <Link
+              <li key={item.key}>
+                <LocaleLink
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className="flex min-h-11 items-center rounded-lg px-3 text-base text-fg hover:bg-surface"
                 >
-                  {item.label}
-                </Link>
+                  {t(item.key)}
+                </LocaleLink>
               </li>
             ))}
           </ul>
         </nav>
-        <a href={site.cvPath} download className={buttonClasses("secondary", "w-full")}>
+        <LanguageSwitcher className="mb-2 flex min-h-11 items-center rounded-lg px-3 text-base text-fg hover:bg-surface" />
+        <a href={cv.href} hrefLang={cv.lang} download className={buttonClasses("secondary", "w-full")}>
           <Download size={16} aria-hidden="true" />
-          Download CV
+          {common("downloadCv")}
         </a>
       </div>
     </div>

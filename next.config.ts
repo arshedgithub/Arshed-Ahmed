@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
+import createNextIntlPlugin from "next-intl/plugin";
 
 // DEPLOY_TARGET=static builds a fully static site into /out (Cloudflare Pages, Netlify).
 // Anything else (default) builds for Vercel / a Node server.
@@ -25,6 +26,8 @@ const nextConfig: NextConfig = {
   env: {
     BUILD_YEAR: String(new Date().getFullYear()),
   },
+  // Two root layouts (English and Arabic) leave no single layout for a 404 of unmatched URLs.
+  experimental: { globalNotFound: true },
   turbopack: {
     // Pin the root: a stray lockfile higher up the tree would otherwise be picked up.
     root: process.cwd(),
@@ -38,5 +41,6 @@ const nextConfig: NextConfig = {
 };
 
 const withMDX = createMDX({});
+const withNextIntl = createNextIntlPlugin();
 
-export default withMDX(nextConfig);
+export default withNextIntl(withMDX(nextConfig));

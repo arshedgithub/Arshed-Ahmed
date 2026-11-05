@@ -1,16 +1,18 @@
 "use client";
 
 import { Briefcase, House, Layers, Mail } from "lucide-react";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LocaleLink } from "@/i18n/link";
+import { localePath } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { id: "top", label: "Home", href: "/#top", Icon: House },
-  { id: "work", label: "Work", href: "/#work", Icon: Briefcase },
-  { id: "skills", label: "Skills", href: "/#skills", Icon: Layers },
-  { id: "contact", label: "Contact", href: "/#contact", Icon: Mail },
+  { id: "top", key: "home", href: "/#top", Icon: House },
+  { id: "work", key: "work", href: "/#work", Icon: Briefcase },
+  { id: "skills", key: "skills", href: "/#skills", Icon: Layers },
+  { id: "contact", key: "contact", href: "/#contact", Icon: Mail },
 ] as const;
 
 // Sections without their own tab light up the nearest tab above them on the page.
@@ -27,8 +29,9 @@ const sectionTab: Record<string, string> = {
 
 /** Mobile-only tab bar. Highlights the section currently in view on the home page. */
 export function BottomNav() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
-  const onHome = pathname === "/";
+  const onHome = pathname === localePath(useLocale(), "/");
   const [active, setActive] = useState<string>("top");
 
   useEffect(() => {
@@ -50,15 +53,15 @@ export function BottomNav() {
 
   return (
     <nav
-      aria-label="Sections"
+      aria-label={t("sectionsAria")}
       className="fixed inset-x-0 bottom-0 z-40 border-t border-line-strong bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="mx-auto grid h-16 max-w-md grid-cols-4">
-        {tabs.map(({ id, label, href, Icon }) => {
+        {tabs.map(({ id, key, href, Icon }) => {
           const isActive = current === id;
           return (
             <li key={id}>
-              <Link
+              <LocaleLink
                 href={href}
                 aria-current={isActive ? "location" : undefined}
                 className={cn(
@@ -67,8 +70,8 @@ export function BottomNav() {
                 )}
               >
                 <Icon size={20} aria-hidden="true" />
-                {label}
-              </Link>
+                {t(key)}
+              </LocaleLink>
             </li>
           );
         })}

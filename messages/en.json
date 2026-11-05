@@ -1,0 +1,360 @@
+{
+  "meta": {
+    "title": "Arshed Ahmed | Full-Stack Software Engineer in the UAE",
+    "description": "Full-stack software engineer in the UAE, available now for roles in Dubai, Abu Dhabi and Ajman. I build SaaS, Stripe payments and AI products with Next.js.",
+    "ogImageAlt": "Arshed Ahmed, full-stack software engineer in the UAE",
+    "profileName": "Arshed Ahmed | Full-Stack Software Engineer"
+  },
+  "common": {
+    "name": "Arshed Ahmed",
+    "firstName": "Arshed",
+    "lastName": "Ahmed",
+    "jobTitle": "Full-Stack Software Engineer",
+    "positioning": "Full-stack engineer building SaaS, payments and AI products with Next.js, TypeScript and Node.js.",
+    "status": "Available immediately · UAE",
+    "locationLine": "Based in the UAE · Open to roles in Dubai, Abu Dhabi and Ajman",
+    "skipToContent": "Skip to content",
+    "logoHome": "{name}, home",
+    "toggleThemeLabel": "Toggle light and dark theme",
+    "toggleThemeTitle": "Toggle theme",
+    "copied": "Copied to clipboard",
+    "downloadCv": "Download CV",
+    "cvShort": "CV",
+    "cvShortSuffix": " (download PDF)",
+    "externalLabel": "{label} (opens in a new tab)",
+    "emailLabel": "{label} ({email})",
+    "channels": {
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "experience": "Experience",
+    "skills": "Skills",
+    "about": "About",
+    "contact": "Contact",
+    "primaryAria": "Primary",
+    "footerAria": "Footer",
+    "mobileAria": "Mobile",
+    "sectionsAria": "Sections",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLabel": "العربية",
+    "switchName": "العربية"
+  },
+  "hero": {
+    "imageAlt": "Arshed Ahmed, full-stack software engineer, in a sage suit jacket and white shirt",
+    "coreStackAria": "Core stack",
+    "viewWork": "View work"
+  },
+  "stats": {
+    "aria": "Highlights",
+    "years": "Years experience",
+    "saas": "SaaS products",
+    "stripe": "Billing in production",
+    "solo": "Products launched solo"
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "title": "Products I have built and shipped",
+    "description": "Featured projects across marketplaces, payments and AI.",
+    "tagsAria": "Tags",
+    "readCaseStudy": "Read case study",
+    "badges": {
+      "live": "Live",
+      "soloBuilt": "Solo-built"
+    }
+  },
+  "projects": {
+    "slmarket": {
+      "title": "SLMarket",
+      "titleAccent": "Ecosystem",
+      "subtitle": "Marketplace + SLMarket Flow POS/ERP",
+      "summary": "A multilingual marketplace connecting buyers and sellers across Sri Lanka, plus SLMarket Flow, a real-time POS with ERP features. Designed, built and launched solo.",
+      "seoTitle": "SLMarket: Marketplace and POS/ERP Built Solo",
+      "seoDescription": "How Arshed Ahmed designed, built and launched SLMarket solo: a multilingual Sri Lankan marketplace on Next.js and SLMarket Flow, a real-time Laravel POS/ERP.",
+      "outcome": "Two products designed, built and launched solo: a marketplace and a real-time POS/ERP.",
+      "tag": "E-commerce",
+      "role": "Solo: product, architecture, full-stack development and deployment",
+      "coverAlt": "SLMarket marketplace home page with product listings",
+      "screenshotAlts": {
+        "marketplace-home": "SLMarket marketplace home page with categories and product listings",
+        "flow-pos": "SLMarket Flow point-of-sale screen with a cart and product grid",
+        "marketplace-mobile": "SLMarket marketplace on a phone"
+      },
+      "stackLabels": {
+        "marketplace": "Marketplace",
+        "flow": "SLMarket Flow (POS/ERP)"
+      },
+      "architecture": {
+        "rows": { "users": "Users", "apps": "Apps", "data": "Data", "delivery": "Delivery" },
+        "nodes": {
+          "buyers": { "title": "Buyers", "sub": "Web, multilingual" },
+          "sellers": { "title": "Sellers", "sub": "Web" },
+          "staff": { "title": "Shop staff", "sub": "POS" },
+          "market": { "title": "Marketplace", "sub": "Next.js · TypeScript" },
+          "flow": { "title": "SLMarket Flow", "sub": "Laravel · Vue · Inertia" },
+          "pg": { "title": "PostgreSQL", "sub": "Prisma" },
+          "redis": { "title": "Redis", "sub": "Cache" },
+          "cdn": { "title": "Cloudinary", "sub": "Media" },
+          "mysql": { "title": "MySQL", "sub": "POS data" },
+          "vercel": { "title": "Vercel", "sub": "GitHub Actions" },
+          "cpanel": { "title": "cPanel", "sub": "GitHub Actions" }
+        }
+      }
+    },
+    "ai-business-support-saas": {
+      "title": "AI Business Support",
+      "titleAccent": "SaaS",
+      "subtitle": "Stripe payments layer and live payments dashboard",
+      "summary": "A production SaaS platform of AI chatbots that guide businesses on grants and funding. I owned the Stripe payments layer end-to-end and built a real-time payments dashboard.",
+      "seoTitle": "Stripe Payments for an AI Business SaaS",
+      "seoDescription": "Arshed Ahmed owned the Stripe payments layer of a production AI SaaS that guides businesses on grants and funding, and built a real-time payments dashboard.",
+      "outcome": "Owned the Stripe payments layer end-to-end and built a real-time payments dashboard.",
+      "tag": "SaaS · Payments",
+      "role": "Full-stack engineer; owner of the Stripe payments layer",
+      "coverAlt": "AI Business Support SaaS payments dashboard",
+      "screenshotAlts": {
+        "payments-dashboard": "Real-time Stripe payments dashboard with transaction list",
+        "chatbot": "AI chatbot conversation guiding a business on grants and funding"
+      },
+      "stackLabels": {
+        "platform": "Platform"
+      },
+      "architecture": {
+        "rows": { "users": "Users", "frontend": "Frontend", "backend": "Backend", "services": "Services" },
+        "nodes": {
+          "biz": { "title": "Businesses", "sub": "Chat + billing" },
+          "team": { "title": "Internal team", "sub": "Dashboard" },
+          "web": { "title": "Next.js app", "sub": "TypeScript" },
+          "api": { "title": "Express.js API", "sub": "Payments + business logic" },
+          "ai": { "title": "AI chatbots", "sub": "LLM workflows" },
+          "stripe": { "title": "Stripe", "sub": "Billing + webhooks" },
+          "db": { "title": "Database", "sub": "Payment records" }
+        }
+      }
+    },
+    "ai-cv-builder": {
+      "title": "AI CV Builder",
+      "titleAccent": "& Interview Prep",
+      "subtitle": "ATS resume generation + voice mock interview",
+      "summary": "ATS-friendly resume generation, parsing and job-description optimisation, plus a voice-based AI mock interview that gives candidates instant feedback.",
+      "seoTitle": "AI CV Builder with Voice Mock Interviews",
+      "seoDescription": "An AI CV builder by Arshed Ahmed: ATS-friendly resumes tailored to a job description, plus voice mock interviews with instant AI feedback, on Next.js and Groq.",
+      "outcome": "ATS-friendly resumes and voice mock interviews with instant AI feedback.",
+      "tag": "AI / LLM",
+      "role": "Full-stack development",
+      "coverAlt": "AI CV Builder resume editor",
+      "screenshotAlts": {
+        "resume-editor": "Resume editor with an ATS-optimised CV preview",
+        "mock-interview": "Voice mock interview screen with AI feedback"
+      },
+      "stackLabels": {
+        "platform": "Platform"
+      },
+      "architecture": {
+        "rows": { "users": "Users", "app": "App", "aiData": "AI + Data" },
+        "nodes": {
+          "cand": { "title": "Candidates", "sub": "Web + microphone" },
+          "next": { "title": "Next.js app", "sub": "TypeScript · API routes" },
+          "groq": { "title": "Groq LLM", "sub": "Resume + feedback" },
+          "whisper": { "title": "Whisper", "sub": "Speech-to-text" },
+          "pg": { "title": "PostgreSQL", "sub": "Prisma" }
+        }
+      }
+    },
+    "whatsapp-ai-order-bot": {
+      "title": "WhatsApp AI",
+      "titleAccent": "Order Bot",
+      "subtitle": "Conversational ordering and support on WhatsApp",
+      "summary": "A WhatsApp AI chatbot built with Python, LLM APIs and Twilio that automates customer conversations.",
+      "seoTitle": "WhatsApp AI Bot That Automates Customer Chats",
+      "seoDescription": "A WhatsApp AI chatbot Arshed Ahmed built and deployed at Softsora with Python, LLM APIs and Twilio, automating customer conversations on WhatsApp.",
+      "outcome": "Automated customer conversations on WhatsApp with an LLM-powered bot.",
+      "tag": "Automation",
+      "role": "Developer: built and deployed the bot",
+      "coverAlt": "WhatsApp AI order bot conversation",
+      "screenshotAlts": {
+        "chat-1": "WhatsApp conversation in which the bot answers a customer question",
+        "chat-2": "Order confirmation message sent by the bot in WhatsApp"
+      },
+      "stackLabels": {
+        "bot": "Bot"
+      },
+      "architecture": {
+        "rows": { "users": "Users", "channel": "Channel", "service": "Service", "ai": "AI" },
+        "nodes": {
+          "cust": { "title": "Customers", "sub": "WhatsApp" },
+          "twilio": { "title": "Twilio", "sub": "WhatsApp API" },
+          "py": { "title": "Python service", "sub": "Webhook + logic" },
+          "llm": { "title": "LLM API", "sub": "Intent + replies" }
+        }
+      }
+    }
+  },
+  "caseStudy": {
+    "breadcrumbAria": "Breadcrumb",
+    "home": "Home",
+    "breadcrumbHome": "Home",
+    "screenshots": "Screenshots",
+    "moreProjectsAria": "More projects",
+    "allProjects": "All projects",
+    "next": "Next: {title}",
+    "stackAria": "{label} stack",
+    "architectureTitle": "{title} system architecture",
+    "architectureEdge": "{from} connects to {to}",
+    "noPublicLink": "This project has no public link. I am happy to walk through it in an interview.",
+    "opensNewTab": " (opens in a new tab)",
+    "ogImageAlt": "{title} case study by {name}: {subtitle}",
+    "ogEyebrow": "Case study"
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Where I have worked",
+    "present": "Present",
+    "selfEmployed": "Self-employed",
+    "items": {
+      "slmarket": {
+        "role": "Full-Stack Developer",
+        "bullets": [
+          "Designed, built and launched two products solo: a multilingual marketplace (slmarket.lk) and SLMarket Flow, a real-time POS/ERP.",
+          "Automated releases with GitHub Actions CI/CD, applied TDD with unit and integration tests, and added role-based authorisation and Redis caching."
+        ]
+      },
+      "softsora": {
+        "role": "Software Engineer",
+        "bullets": [
+          "Implemented Stripe billing (subscriptions, one-time payments, automated proration, webhooks and refunds), processing 200+ transactions across 10+ products.",
+          "Built and deployed Node.js, Express.js and MongoDB services for Next.js and TypeScript frontends, with Jest unit and integration tests covering payment and API logic."
+        ]
+      },
+      "softsoraAssociate": {
+        "role": "Associate Software Engineer",
+        "bullets": [
+          "Launched AI chatbot solutions for a leading oven company by integrating DIFY.ai workflows with custom Next.js interfaces.",
+          "Automated customer interactions with a WhatsApp AI chatbot built with Python, LLM APIs and Twilio."
+        ]
+      },
+      "freelance": {
+        "role": "Freelance Software Developer",
+        "bullets": [
+          "Delivered client web applications end-to-end, from requirements to deployment, using React, Node.js, Express.js and Spring Boot.",
+          "Built a sales counting and analysis tool that replaced a client's manual process."
+        ]
+      },
+      "elzian": {
+        "role": "Software Engineer Intern",
+        "bullets": [
+          "Built full-stack features with the MERN stack for enterprise applications.",
+          "Implemented REST APIs and database operations across the SDLC, from requirements to testing."
+        ]
+      }
+    }
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "title": "Technologies I work with",
+    "groups": {
+      "frontend": "Frontend",
+      "backend": "Backend and Data",
+      "ai": "AI and Integrations",
+      "devops": "DevOps and Testing"
+    },
+    "items": {
+      "restApi": "REST API design",
+      "stripe": "Stripe (subscriptions, proration, webhooks, refunds)"
+    }
+  },
+  "teaching": {
+    "eyebrow": "Teaching",
+    "title": "Teaching and mentoring",
+    "present": "Present",
+    "items": {
+      "solitrium": {
+        "role": "Course Instructor & Founder",
+        "detail": "Teaching full-stack development, OOP, system design, SDLC and Git. Guided 20+ BIT final-year projects through code review."
+      },
+      "earth": {
+        "role": "Junior Lecturer / Demonstrator (Part-time)",
+        "detail": "Taught Web Development, UX Design, Programming, OOP, system design, SDLC and Mathematics, and led Java and web lab sessions."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "From idea to live system",
+    "portraitAlt": "Head-and-shoulders portrait of Arshed Ahmed",
+    "paragraph1": "I like owning a product from the first sketch to the system people use every day: shaping the data model, designing the API, building the interface, wiring payments and shipping it behind CI/CD.",
+    "paragraph2": "At Softsora I built SaaS platforms, Stripe billing and LLM-powered features. On my own I designed, built and launched SLMarket and SLMarket Flow. I also teach: I founded {academy} and have guided 20+ final-year projects through code review.",
+    "paragraph3": "I use Claude Code, GitHub Copilot and Cursor for speed, and I own the architecture and review every change myself.",
+    "quickFactsAria": "Quick facts",
+    "nationality": "Sri Lankan",
+    "basedIn": "Based in UAE",
+    "availableNow": "Available now",
+    "credentialsTitle": "Education and certifications",
+    "education": "Education",
+    "certifications": "Certifications",
+    "degrees": {
+      "bit": {
+        "degree": "Bachelor of Information Technology (BIT)",
+        "school": "University of Colombo School of Computing (UCSC)"
+      },
+      "bsc": {
+        "degree": "BSc in Physical Science",
+        "school": "University of Colombo"
+      }
+    },
+    "certs": {
+      "ethicalHacker": "Cisco Ethical Hacker",
+      "securityFundamentals": "Palo Alto Networks Security Fundamentals",
+      "jenkinsDocker": "Jenkins and Docker"
+    },
+    "languagesLabel": "Languages:",
+    "languagesList": "English (professional), Sinhala (native), Tamil (native), Arabic (basic)"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Get in touch",
+    "description": "Hiring for a full-stack role, or have a product to build? Send a message or reach me directly.",
+    "noticeLabel": "Notice period:",
+    "noticeValue": "Immediate",
+    "visaLabel": "Visa status:",
+    "visaValue": "",
+    "replyNote": "",
+    "copyEmail": "Copy email address",
+    "form": {
+      "title": "Send a message",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "messagePlaceholder": "A role, a project or a question",
+      "send": "Send message",
+      "sending": "Sending…",
+      "successTitle": "Thanks, your message is on its way.",
+      "successBody": "I'll get back to you at the email address you gave.",
+      "sendAnother": "Send another message",
+      "failed": "Your message didn't send. Please try again, or email me directly at <email></email>.",
+      "errors": {
+        "nameMin": "Enter your name (at least 2 characters).",
+        "nameMax": "Keep your name under 80 characters.",
+        "emailInvalid": "Enter a valid email address, like name@company.com.",
+        "messageMin": "Add a few more details (at least 10 characters).",
+        "messageMax": "Keep your message under 2000 characters."
+      }
+    }
+  },
+  "footer": {
+    "rights": "© {year} {name}. All rights reserved."
+  },
+  "notFound": {
+    "metaTitle": "Page not found",
+    "title": "This page doesn't exist",
+    "description": "The link may be out of date. The projects and contact details are all on the home page.",
+    "goHome": "Go to home page",
+    "viewProjects": "View projects"
+  }
+}

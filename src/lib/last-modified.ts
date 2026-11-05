@@ -17,9 +17,9 @@ export function lastModified(...paths: string[]): string | undefined {
 }
 
 /** Files whose content makes up the home page. */
-export const homeSources = ["src/lib/site.ts", "src/app/page.tsx", "src/components/sections"];
+export const homeSources = ["messages", "src/lib/site.ts", "src/components/pages/home-page.tsx", "src/components/sections"];
 
 /** Files whose content makes up a case study. */
 export function projectSources(slug: string) {
-  return [`src/content/projects/${slug}.mdx`, "src/lib/site.ts", "src/app/projects/[slug]/page.tsx"];
+  return [`src/content/projects/${slug}.mdx`, `src/content/projects/ar/${slug}.mdx`, "messages", "src/lib/site.ts", "src/components/pages/project-page.tsx"];
 }

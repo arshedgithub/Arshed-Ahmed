@@ -69,8 +69,19 @@
   --color-success: var(--success);
   --color-danger: var(--danger);
   --shadow-card: var(--shadow-card);
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, monospace;
+}
+
+/* Per-locale font faces. English keeps Inter and JetBrains Mono; Arabic has no mono, so both use Plex. */
+:root {
+  --font-body: var(--font-inter);
+  --font-code: var(--font-jetbrains);
+}
+
+:root:lang(ar) {
+  --font-body: var(--font-plex-arabic);
+  --font-code: var(--font-plex-arabic);
 }
 
 /* ---------- Base ---------- */
@@ -180,6 +191,13 @@
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: auto, 24px 24px, 24px 24px;
   background-position: 0 0, -1px -1px, -1px -1px;
+
+  [dir="rtl"] & {
+    background-image:
+      radial-gradient(90% 70% at 0% 0%, var(--accent-soft), transparent 70%),
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  }
 }
 
 /* ---------- Availability badge dot: slow pulse ---------- */
@@ -249,12 +267,12 @@
 }
 .prose-case ul:not([class]) > li {
   position: relative;
-  padding-left: 1.5rem;
+  padding-inline-start: 1.5rem;
 }
 .prose-case ul:not([class]) > li::before {
   content: "";
   position: absolute;
-  left: 0.25rem;
+  inset-inline-start: 0.25rem;
   top: 0.7em;
   width: 6px;
   height: 6px;
@@ -268,6 +286,35 @@
   text-decoration: underline;
   text-decoration-color: var(--accent);
   text-underline-offset: 3px;
+}
+
+/* ---------- Arabic typography ---------- */
+/* Unlayered on purpose: these have to win over Tailwind's layered utilities. Glyphs sit taller than Latin, so the
+   small sizes go up 1px and everything gets more leading. Letter-spacing and case would break letter joining. */
+:root:lang(ar) {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.75;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.75;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.75;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.75;
+}
+
+:root:lang(ar) body {
+  font-size: var(--text-base);
+  line-height: 1.75;
+}
+
+:root:lang(ar) * {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:root:lang(ar) :is(h1, h2, h3, h4),
+:root:lang(ar) :is(h1, h2, h3, h4) * {
+  line-height: 1.4;
 }
 
 @media (prefers-reduced-motion: reduce) {

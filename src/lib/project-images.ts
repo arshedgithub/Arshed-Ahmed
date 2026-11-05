@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import type { Project } from "./site";
+import type { Project } from "./content";
 
 // Runs at build time (every page is static), so a screenshot dropped into
 // /public/images/projects/<slug>/ shows up on the next build with no code change.

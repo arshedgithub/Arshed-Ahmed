@@ -1,10 +1,12 @@
 import { Award, GraduationCap, Languages } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { Chip, Section, SectionHeading } from "@/components/ui/primitives";
-import { ACADEMY_NAME, certifications, education, languages, site } from "@/lib/site";
+import { ACADEMY_NAME, certifications, education } from "@/lib/site";
 
 export function About() {
+  const t = useTranslations("about");
   return (
     <Section id="about" labelledBy="about-title">
       <Reveal>
@@ -13,7 +15,7 @@ export function About() {
             <div aria-hidden="true" className="photo-glow absolute inset-[-15%] hidden dark:block" />
             <Image
               src="/images/about-1x1.webp"
-              alt="Head-and-shoulders portrait of Arshed Ahmed"
+              alt={t("portraitAlt")}
               width={800}
               height={800}
               sizes="(min-width: 768px) 220px, 192px"
@@ -21,26 +23,16 @@ export function About() {
             />
           </div>
           <div>
-            <SectionHeading id="about-title" eyebrow="About" title="From idea to live system" />
+            <SectionHeading id="about-title" eyebrow={t("eyebrow")} title={t("title")} />
             <div className="-mt-4 grid max-w-2xl gap-4 text-muted md:-mt-6">
-              <p>
-                I like owning a product from the first sketch to the system people use every day: shaping the data
-                model, designing the API, building the interface, wiring payments and shipping it behind CI/CD.
-              </p>
-              <p>
-                At Softsora I built SaaS platforms, Stripe billing and LLM-powered features. On my own I designed, built
-                and launched SLMarket and SLMarket Flow. I also teach: I founded {ACADEMY_NAME} and have guided 20+
-                final-year projects through code review.
-              </p>
-              <p>
-                I use Claude Code, GitHub Copilot and Cursor for speed, and I own the architecture and review every
-                change myself.
-              </p>
+              <p>{t("paragraph1")}</p>
+              <p>{t("paragraph2", { academy: ACADEMY_NAME })}</p>
+              <p>{t("paragraph3")}</p>
             </div>
-            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Quick facts">
-              <li><Chip>{site.nationality}</Chip></li>
-              <li><Chip>Based in UAE</Chip></li>
-              <li><Chip>Available now</Chip></li>
+            <ul className="mt-5 flex flex-wrap gap-2" aria-label={t("quickFactsAria")}>
+              <li><Chip>{t("nationality")}</Chip></li>
+              <li><Chip>{t("basedIn")}</Chip></li>
+              <li><Chip>{t("availableNow")}</Chip></li>
             </ul>
           </div>
         </div>
@@ -49,19 +41,19 @@ export function About() {
       <Reveal delay={0.06}>
         <section aria-labelledby="credentials-title" className="card mt-4 grid gap-6 p-5 md:grid-cols-2 md:gap-10 md:p-8">
           <h3 id="credentials-title" className="font-semibold md:col-span-2">
-            Education and certifications
+            {t("credentialsTitle")}
           </h3>
           <div>
             <p className="flex items-center gap-2 text-sm font-medium text-fg">
               <GraduationCap size={18} className="text-accent" aria-hidden="true" />
-              Education
+              {t("education")}
             </p>
             <ul className="mt-3 grid gap-3 text-sm">
               {education.map((e) => (
-                <li key={e.degree}>
-                  <span className="block text-fg">{e.degree}</span>
+                <li key={e.key}>
+                  <span className="block text-fg">{t(`degrees.${e.key}.degree`)}</span>
                   <span className="block text-muted">
-                    {e.school} · {e.period}
+                    {t(`degrees.${e.key}.school`)} · {e.period}
                   </span>
                 </li>
               ))}
@@ -70,12 +62,12 @@ export function About() {
           <div>
             <p className="flex items-center gap-2 text-sm font-medium text-fg">
               <Award size={18} className="text-accent" aria-hidden="true" />
-              Certifications
+              {t("certifications")}
             </p>
             <ul className="mt-3 grid gap-3 text-sm">
               {certifications.map((c) => (
-                <li key={c.name}>
-                  <span className="block text-fg">{"issuer" in c ? `${c.issuer} ${c.name}` : c.name}</span>
+                <li key={c.key}>
+                  <span className="block text-fg">{t(`certs.${c.key}`)}</span>
                   <span className="block text-muted">{c.year}</span>
                 </li>
               ))}
@@ -83,8 +75,8 @@ export function About() {
           </div>
           <p className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-line pt-5 text-sm md:col-span-2">
             <Languages size={18} className="text-accent" aria-hidden="true" />
-            <span className="font-medium text-fg">Languages:</span>
-            <span className="text-muted">{languages.map((l) => `${l.name} (${l.level.toLowerCase()})`).join(", ")}</span>
+            <span className="font-medium text-fg">{t("languagesLabel")}</span>
+            <span className="text-muted">{t("languagesList")}</span>
           </p>
         </section>
       </Reveal>
