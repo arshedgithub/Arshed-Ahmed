@@ -12,7 +12,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "check": "node scripts/check-i18n.mjs && eslint && next typegen && tsc --noEmit",
     "images:photo": "node scripts/process-photo.mjs",
-    "i18n:check": "node scripts/check-i18n.mjs"
+    "i18n:check": "node scripts/check-i18n.mjs",
+    "og:ar": "node scripts/render-og-ar.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^6.0.0",

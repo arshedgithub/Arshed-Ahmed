@@ -45,7 +45,7 @@ export function HomeJsonLd() {
             "@type": "Person",
             "@id": ids.person,
             name: common.name,
-            ...(locale === "en" ? {} : { alternateName: site.name }),
+            alternateName: locale === "en" ? catalog("ar").common.name : site.name,
             url,
             image: absoluteUrl("/images/about-1x1.webp"),
             jobTitle: common.jobTitle,

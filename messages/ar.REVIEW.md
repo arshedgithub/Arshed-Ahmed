@@ -25,6 +25,8 @@ These are the choices I am least sure of.
 8. **University names.** "كلية الحاسوب بجامعة كولومبو (UCSC)" is my rendering, not an official Arabic name. Keep the English name if there is doubt.
 9. **Nationality: "سريلانكي الجنسية".** Does this suit a chip on a CV-style page, or is "سريلانكي" enough?
 10. **The reply-speed note** (`contact.replyNote`). It should be honest without undermining the page. Check the tone.
+11. **Search wording.** The home title lists "في دبي وأبوظبي وعجمان", and the description says "مهندس ومطور برمجيات". Are these the words a Gulf recruiter would type into Google? Suggest better ones if not.
+12. **Share images.** `public/images/og/ar/` has the Arabic cards shown on WhatsApp and LinkedIn. Check that the text reads well. Text changes need `npm run og:ar`.
 
 ## High risk: career claims and voice
 
@@ -32,7 +34,7 @@ Mistakes here change what Arshed is claiming about their own work, or make the f
 
 | Key | English | Arabic |
 | --- | --- | --- |
-| `meta.description` | Arshed Ahmed is a full-stack software engineer in the UAE building SaaS, Stripe payments and AI products with Next.js, TypeScript and Node.js. Available now. | أرشد أحمد مهندس برمجيات Full-Stack في الإمارات. يبني منتجات SaaS وأنظمة دفع عبر Stripe ومنتجات ذكاء اصطناعي باستخدام Next.js وTypeScript وNode.js. متاح للانضمام فوراً. |
+| `meta.description` | Full-stack software engineer in the UAE, available now for roles in Dubai, Abu Dhabi and Ajman. I build SaaS, Stripe payments and AI products with Next.js. | مهندس ومطور برمجيات Full-Stack في الإمارات، متاح للعمل فوراً في دبي وأبوظبي وعجمان. أبني تطبيقات ويب ومنتجات SaaS وأنظمة دفع باستخدام Next.js وNode.js. |
 | `common.positioning` | Full-stack engineer building SaaS, payments and AI products with Next.js, TypeScript and Node.js. | أبني منتجات SaaS وأنظمة دفع وحلول ذكاء اصطناعي باستخدام Next.js وTypeScript وNode.js. |
 | `experience.items.slmarket.role` | Full-Stack Developer | مطور Full-Stack |
 | `experience.items.slmarket.bullets.0` | Designed, built and launched two products solo: a multilingual marketplace (slmarket.lk) and SLMarket Flow, a real-time POS/ERP. | صممت وبنيت وأطلقت منتجين بمفردي: سوق إلكتروني متعدد اللغات (slmarket.lk) ونظام SLMarket Flow لنقاط البيع وإدارة الموارد في الوقت الفعلي. |
@@ -71,12 +73,12 @@ Visible and persuasive, but short and easy to fix.
 
 | Key | English | Arabic |
 | --- | --- | --- |
-| `meta.title` | Arshed Ahmed \| Full-Stack Software Engineer in the UAE | أرشد أحمد، مهندس برمجيات Full-Stack في الإمارات |
+| `meta.title` | Arshed Ahmed \| Full-Stack Software Engineer in the UAE | أرشد أحمد \| مهندس برمجيات Full-Stack في دبي وأبوظبي وعجمان |
 | `meta.ogImageAlt` | Arshed Ahmed, full-stack software engineer in the UAE | أرشد أحمد، مهندس برمجيات Full-Stack في الإمارات |
 | `meta.profileName` | Arshed Ahmed \| Full-Stack Software Engineer | أرشد أحمد، مهندس برمجيات Full-Stack |
 | `common.jobTitle` | Full-Stack Software Engineer | مهندس برمجيات Full-Stack |
 | `common.status` | Available immediately · UAE | متاح للانضمام فوراً · الإمارات |
-| `common.locationLine` | Based in the UAE · Open to roles in Dubai and Abu Dhabi | مقيم في الإمارات · أبحث عن فرص في دبي وأبوظبي |
+| `common.locationLine` | Based in the UAE · Open to roles in Dubai, Abu Dhabi and Ajman | مقيم في الإمارات · أبحث عن فرص في دبي وأبوظبي وعجمان |
 | `hero.imageAlt` | Arshed Ahmed, full-stack software engineer, in a sage suit jacket and white shirt | أرشد أحمد، مهندس برمجيات Full-Stack، يرتدي سترة خضراء فاتحة وقميصاً أبيض |
 | `hero.coreStackAria` | Core stack | التقنيات الأساسية |
 | `hero.viewWork` | View work | عرض الأعمال |
@@ -95,7 +97,7 @@ Visible and persuasive, but short and easy to fix.
 | `projects.slmarket.titleAccent` | Ecosystem | منظومة متكاملة |
 | `projects.slmarket.subtitle` | Marketplace + SLMarket Flow POS/ERP | سوق إلكتروني ونظام SLMarket Flow لنقاط البيع وإدارة الموارد |
 | `projects.slmarket.summary` | A multilingual marketplace connecting buyers and sellers across Sri Lanka, plus SLMarket Flow, a real-time POS with ERP features. Designed, built and launched solo. | سوق إلكتروني متعدد اللغات يربط المشترين والبائعين في أنحاء سريلانكا، إلى جانب SLMarket Flow، وهو نظام نقاط بيع يعمل في الوقت الفعلي مع مزايا ERP. صممته وبنيته وأطلقته بمفردي. |
-| `projects.slmarket.seoTitle` | SLMarket: Marketplace and POS/ERP Built Solo | SLMarket: سوق إلكتروني ونظام POS/ERP بنيتهما بمفردي |
+| `projects.slmarket.seoTitle` | SLMarket: Marketplace and POS/ERP Built Solo | SLMarket: سوق إلكتروني ونظام POS/ERP متكامل |
 | `projects.slmarket.seoDescription` | How Arshed Ahmed designed, built and launched SLMarket solo: a multilingual Sri Lankan marketplace on Next.js and SLMarket Flow, a real-time Laravel POS/ERP. | كيف صمم أرشد أحمد SLMarket وبناه وأطلقه بمفرده: سوق إلكتروني سريلانكي متعدد اللغات على Next.js، ونظام SLMarket Flow لنقاط البيع على Laravel. |
 | `projects.slmarket.outcome` | Two products designed, built and launched solo: a marketplace and a real-time POS/ERP. | منتجان صممتهما وبنيتهما وأطلقتهما بمفردي: سوق إلكتروني ونظام POS/ERP يعمل في الوقت الفعلي. |
 | `projects.slmarket.tag` | E-commerce | التجارة الإلكترونية |
@@ -113,7 +115,7 @@ Visible and persuasive, but short and easy to fix.
 | `projects.ai-cv-builder.titleAccent` | & Interview Prep | والتدريب على المقابلات |
 | `projects.ai-cv-builder.subtitle` | ATS resume generation + voice mock interview | سير ذاتية متوافقة مع ATS ومقابلات تجريبية صوتية |
 | `projects.ai-cv-builder.summary` | ATS-friendly resume generation, parsing and job-description optimisation, plus a voice-based AI mock interview that gives candidates instant feedback. | إنشاء سير ذاتية متوافقة مع أنظمة ATS وتحليلها وتحسينها وفق الوصف الوظيفي، إلى جانب مقابلة تجريبية صوتية بالذكاء الاصطناعي تقدم للمرشحين ملاحظات فورية. |
-| `projects.ai-cv-builder.seoTitle` | AI CV Builder with Voice Mock Interviews | منشئ سير ذاتية بالذكاء الاصطناعي ومقابلات تجريبية صوتية |
+| `projects.ai-cv-builder.seoTitle` | AI CV Builder with Voice Mock Interviews | منشئ سير ذاتية بالذكاء الاصطناعي ومقابلات صوتية |
 | `projects.ai-cv-builder.seoDescription` | An AI CV builder by Arshed Ahmed: ATS-friendly resumes tailored to a job description, plus voice mock interviews with instant AI feedback, on Next.js and Groq. | منشئ سير ذاتية بالذكاء الاصطناعي من أرشد أحمد: سير متوافقة مع ATS ومكيّفة حسب الوصف الوظيفي، ومقابلات تجريبية صوتية بملاحظات فورية، على Next.js وGroq. |
 | `projects.ai-cv-builder.outcome` | ATS-friendly resumes and voice mock interviews with instant AI feedback. | سير ذاتية متوافقة مع ATS ومقابلات تجريبية صوتية بملاحظات فورية من الذكاء الاصطناعي. |
 | `projects.ai-cv-builder.tag` | AI / LLM | الذكاء الاصطناعي / LLM |
@@ -122,7 +124,7 @@ Visible and persuasive, but short and easy to fix.
 | `projects.whatsapp-ai-order-bot.titleAccent` | Order Bot | للطلبات بالذكاء الاصطناعي |
 | `projects.whatsapp-ai-order-bot.subtitle` | Conversational ordering and support on WhatsApp | طلبات ودعم عبر المحادثة على WhatsApp |
 | `projects.whatsapp-ai-order-bot.summary` | A WhatsApp AI chatbot built with Python, LLM APIs and Twilio that automates customer conversations. | روبوت دردشة على WhatsApp يعمل بالذكاء الاصطناعي، بنيته باستخدام Python وLLM APIs وTwilio، ويؤتمت محادثات العملاء. |
-| `projects.whatsapp-ai-order-bot.seoTitle` | WhatsApp AI Bot That Automates Customer Chats | بوت WhatsApp بالذكاء الاصطناعي يؤتمت محادثات العملاء |
+| `projects.whatsapp-ai-order-bot.seoTitle` | WhatsApp AI Bot That Automates Customer Chats | بوت WhatsApp بالذكاء الاصطناعي لمحادثات العملاء |
 | `projects.whatsapp-ai-order-bot.seoDescription` | A WhatsApp AI chatbot Arshed Ahmed built and deployed at Softsora with Python, LLM APIs and Twilio, automating customer conversations on WhatsApp. | روبوت دردشة على WhatsApp بناه أرشد أحمد وأطلقه في Softsora باستخدام Python وLLM APIs وTwilio، ويؤتمت محادثات العملاء على WhatsApp. |
 | `projects.whatsapp-ai-order-bot.outcome` | Automated customer conversations on WhatsApp with an LLM-powered bot. | أتمتة محادثات العملاء على WhatsApp عبر بوت يعمل بنماذج LLM. |
 | `projects.whatsapp-ai-order-bot.tag` | Automation | الأتمتة |
@@ -165,7 +167,7 @@ Visible and persuasive, but short and easy to fix.
 | `about.languagesList` | English (professional), Sinhala (native), Tamil (native), Arabic (basic) | الإنجليزية (مستوى مهني)، السنهالية (اللغة الأم)، التاميلية (اللغة الأم)، العربية (مستوى أساسي) |
 | `contact.eyebrow` | Contact | التواصل |
 | `contact.title` | Get in touch | تواصل معي |
-| `contact.description` | Hiring for a full-stack role, or have a product to build? Send a message or reach me directly. | تبحث عن مطور Full-Stack، أو لديك منتج تريد بناءه؟ أرسل لي رسالة أو تواصل معي مباشرة. |
+| `contact.description` | Hiring for a full-stack role, or have a product to build? Send a message or reach me directly. | تبحث عن مطور ويب أو مهندس Full-Stack، أو لديك منتج تريد بناءه؟ أرسل لي رسالة أو تواصل معي مباشرة. |
 | `contact.noticeLabel` | Notice period: | فترة الإشعار: |
 | `contact.noticeValue` | Immediate | فوراً |
 

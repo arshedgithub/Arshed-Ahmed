@@ -11,6 +11,7 @@ npm install
 npm run dev              # http://localhost:3000
 npm run check            # i18n key check + eslint + route types + tsc
 npm run i18n:check       # fail if messages/en.json and ar.json differ in keys or placeholders
+npm run og:ar            # re-render the Arabic share images after changing Arabic titles
 npm run build            # Vercel / Node build (.next)
 npm run start            # serve the Vercel build locally
 npm run build:static     # fully static export to ./out (Cloudflare Pages, Netlify)
@@ -58,7 +59,7 @@ Cloudflare Pages, add a Bulk Redirect from `www.arshedahmed.com` to `arshedahmed
 - Node 20+.
 - Set `NEXT_PUBLIC_CONTACT_ENDPOINT` to your Formspree form URL (e.g. `https://formspree.io/f/xxxxxxx`).
   It is a public endpoint by design, not a secret. Without it, the form shows an "email me directly" message on submit.
-- `public/_headers` sets the OG image content type, caching and security headers (both hosts read it).
+- `public/_headers` sets caching and security headers (both hosts read it).
 - In this mode `images.unoptimized` is on and the pre-compressed WebP files in `public/images` are served as-is.
   The `/api/contact` route (`route.server.ts`) is excluded from the build.
 
@@ -74,7 +75,7 @@ Cloudflare Pages, add a Bulk Redirect from `www.arshedahmed.com` to `arshedahmed
 | Home sections | `src/components/sections/` |
 | Locale routing | `src/i18n/`, `src/app/(en)` and `src/app/(ar)/ar` |
 | Client-only code | `src/components/motion/*`, `ui/theme-toggle`, `ui/mobile-menu`, `ui/bottom-nav`, `ui/language-switcher`, `sections/*contact-form*` |
-| SEO (metadata, JSON-LD, OG images, sitemap, robots) | `src/lib/metadata.ts`, `src/components/seo/`, `opengraph-image.tsx` in each locale's route tree (home), `src/app/projects/[slug]/og-image.png/route.tsx` (case studies), `src/app/sitemap.ts`, `src/app/robots.ts` |
+| SEO (metadata, JSON-LD, OG images, sitemap, robots) | `src/lib/metadata.ts`, `src/components/seo/`, `src/app/og-image.png/route.tsx` (home), `public/images/og/ar/` (Arabic), `src/app/projects/[slug]/og-image.png/route.tsx` (case studies), `src/app/sitemap.ts`, `src/app/robots.ts` |
 | Icons and manifest | `src/app/icon.svg`, `src/app/favicon.ico`, `src/app/apple-icon.png`, `public/icons/`, `src/app/manifest.ts` |
 | Page titles and descriptions | `meta` (home) and `seoTitle` / `seoDescription` per project in `messages/<locale>.json` |
 | Sitemap `lastmod` | last git commit touching each page's sources (`src/lib/last-modified.ts`); omitted if git is unavailable |
@@ -120,7 +121,8 @@ and an inline script (`src/components/seo/locale-script.tsx`) honours it on late
 Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` and rebuild; `/ar` links to it automatically
 (`src/lib/cv.ts`). Until then it links to the English PDF.
 
-OG images are English on both locales: the renderer does not shape Arabic text correctly.
+Arabic OG images are committed PNGs in `public/images/og/ar/`, because `next/og` cannot shape Arabic or lay out RTL
+text. After changing an Arabic title or subtitle, run `npm run og:ar` (needs Chrome and Node 22.18+).
 
 ### Theme
 
