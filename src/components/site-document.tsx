@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/sections/site-footer";
 import { LocaleScript } from "@/components/seo/locale-script";
 import { ThemeScript } from "@/components/seo/theme-script";
 import { BottomNav } from "@/components/ui/bottom-nav";
+import { LanguagePrompt } from "@/components/ui/language-prompt";
 import { SiteHeader } from "@/components/ui/site-header";
 import { catalog } from "@/i18n/messages";
 import { localeDirection, type Locale } from "@/i18n/routing";
@@ -28,7 +29,7 @@ export function SiteDocument({
 }: {
   locale: Locale;
   fontClassName: string;
-  /** Off on the global 404: it has no locale of its own, so it can't be "the wrong one". */
+  /** Off on the global 404: it has no locale of its own, so it can't be "the wrong one" or need the language prompt. */
   redirectToSavedLocale?: boolean;
   children: ReactNode;
 }) {
@@ -62,6 +63,9 @@ export function SiteDocument({
             </main>
             <SiteFooter />
             <BottomNav />
+            {redirectToSavedLocale && (
+              <LanguagePrompt copy={{ en: catalog("en").languagePrompt, ar: catalog("ar").languagePrompt }} />
+            )}
           </MotionProvider>
         </NextIntlClientProvider>
       </body>

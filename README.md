@@ -116,7 +116,8 @@ with another transparent PNG and run `npm run images:photo`, which writes `hero-
 `/` is English and `/ar` is Arabic. There is no middleware, because the static export cannot run one: each locale is
 its own route tree with its own root layout, which is also what makes `<html lang dir>` correct in prerendered HTML.
 Visitors are never redirected by browser language. The language switcher saves an explicit choice in `localStorage`
-and an inline script (`src/components/seo/locale-script.tsx`) honours it on later visits.
+and an inline script (`src/components/seo/locale-script.tsx`) honours it on later visits. First-time visitors get a
+language dialog (`src/components/ui/language-prompt.tsx`), shown once. Closing it saves no language preference.
 
 Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` and rebuild; `/ar` links to it automatically
 (`src/lib/cv.ts`). Until then it links to the English PDF.

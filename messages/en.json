@@ -347,6 +347,13 @@
       }
     }
   },
+  "languagePrompt": {
+    "title": "Choose your language",
+    "name": "English",
+    "action": "Continue in English",
+    "note": "You can change this any time from the top menu.",
+    "close": "Close"
+  },
   "footer": {
     "rights": "© {year} {name}. All rights reserved."
   },

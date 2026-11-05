@@ -6,7 +6,7 @@ import type { MouseEvent } from "react";
 import { LOCALE_STORAGE_KEY, localePath, stripLocale } from "@/i18n/routing";
 
 /** The section under the middle of the viewport, or the URL's hash where the page has no sections. */
-function currentHash() {
+export function currentHash() {
   const middle = window.innerHeight / 2;
   const section = [...document.querySelectorAll<HTMLElement>("main section[id]")].find((el) => {
     const { top, bottom } = el.getBoundingClientRect();

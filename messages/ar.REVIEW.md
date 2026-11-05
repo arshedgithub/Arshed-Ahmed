@@ -296,6 +296,11 @@ to fit their boxes.
 | `contact.form.errors.emailInvalid` | Enter a valid email address, like name@company.com. | أدخل بريداً إلكترونياً صحيحاً، مثل name@company.com. |
 | `contact.form.errors.messageMin` | Add a few more details (at least 10 characters). | أضف مزيداً من التفاصيل (10 أحرف على الأقل). |
 | `contact.form.errors.messageMax` | Keep your message under 2000 characters. | يجب ألا تتجاوز الرسالة 2000 حرف. |
+| `languagePrompt.title` | Choose your language | اختر لغتك |
+| `languagePrompt.name` | English | العربية |
+| `languagePrompt.action` | Continue in English | المتابعة بالعربية |
+| `languagePrompt.note` | You can change this any time from the top menu. | يمكنك تغيير اللغة في أي وقت من القائمة العلوية. |
+| `languagePrompt.close` | Close | إغلاق |
 | `footer.rights` | © {year} {name}. All rights reserved. | © {year} {name}. جميع الحقوق محفوظة. |
 | `notFound.metaTitle` | Page not found | الصفحة غير موجودة |
 | `notFound.title` | This page doesn't exist | هذه الصفحة غير موجودة |
