@@ -1,33 +1,44 @@
 import { useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/reveal";
 import { Section, SectionHeading } from "@/components/ui/primitives";
-import { skillGroups } from "@/lib/site";
+import { skillTiers } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
-// Layout follows the draft (draft/draft-design.png): one bordered card per group, chips stacked one per line.
+/** Three tiers by depth of use (Core / Working / Familiar). No bars or percentages: they claim false precision. */
 export function Skills() {
   const t = useTranslations("skills");
   return (
     <Section id="skills" labelledBy="skills-title">
-      <SectionHeading id="skills-title" eyebrow={t("eyebrow")} title={t("title")} />
-      <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
-        {skillGroups.map((group, i) => (
-          <Reveal key={group.key} delay={i * 0.06} className="h-full">
-            <section aria-labelledby={`skills-${i}`} className="card h-full p-4 md:p-5">
-              <h3 id={`skills-${i}`} className="text-sm font-semibold md:text-base">
-                {t(`groups.${group.key}`)}
+      <SectionHeading id="skills-title" kicker={t("kicker")} title={t("title")} description={t("description")} />
+      <div className="grid">
+        {skillTiers.map((tier, i) => (
+          <section
+            key={tier.key}
+            aria-labelledby={`skills-${tier.key}`}
+            className="grid gap-x-10 gap-y-3 border-t border-line py-6 first:border-t-0 first:pt-0 md:grid-cols-[11rem_minmax(0,1fr)]"
+          >
+            <div>
+              <h3 id={`skills-${tier.key}`} className="font-semibold">
+                {t(`tiers.${tier.key}.title`)}
               </h3>
-              <ul className="mt-3 flex flex-col items-start gap-2 md:mt-4">
-                {group.items.map((item) => (
-                  <li
-                    key={typeof item === "string" ? item : item.key}
-                    className="max-w-full rounded-md border border-line-strong bg-canvas/60 px-2.5 py-1 text-[13px] leading-5 text-fg/90 md:text-sm"
-                  >
-                    <bdi>{typeof item === "string" ? item : t(`items.${item.key}`)}</bdi>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          </Reveal>
+              <p className="mt-0.5 text-sm text-muted">{t(`tiers.${tier.key}.note`)}</p>
+            </div>
+            <ul className="flex flex-wrap content-start items-start gap-2">
+              {tier.items.map((item) => (
+                <li
+                  key={typeof item === "string" ? item : item.key}
+                  className={cn(
+                    "rounded-chip border px-2.5 py-1 text-sm leading-5",
+                    // Visual weight follows depth: core is strongest, familiar is quietest.
+                    i === 0 && "border-line-strong bg-surface font-medium text-fg",
+                    i === 1 && "border-line text-fg-2",
+                    i === 2 && "border-dashed border-line text-muted",
+                  )}
+                >
+                  <bdi>{typeof item === "string" ? item : t(`items.${item.key}`)}</bdi>
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
       </div>
     </Section>

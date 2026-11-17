@@ -1,35 +1,27 @@
-import { GraduationCap } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { Reveal } from "@/components/motion/reveal";
 import { Section, SectionHeading } from "@/components/ui/primitives";
-import { formatMonth } from "@/lib/content";
+import { formatRange } from "@/lib/content";
 import { teaching } from "@/lib/site";
 
+/** Short leadership signal: founding a teaching practice and reviewing 20+ final-year projects. */
 export function Teaching() {
   const t = useTranslations("teaching");
   const locale = useLocale();
   return (
-    <Section id="teaching" labelledBy="teaching-title" className="pt-0 md:pt-0 lg:pt-0">
-      <SectionHeading id="teaching-title" eyebrow={t("eyebrow")} title={t("title")} />
-      <div className="grid gap-4 md:grid-cols-2">
-        {teaching.map((item, i) => (
-          <Reveal key={item.key} delay={i * 0.06} className="h-full">
-            <article className="card flex h-full gap-4 p-5">
-              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent">
-                <GraduationCap size={20} aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className="font-semibold">{t(`items.${item.key}.role`)}</h3>
-                <p className="text-sm text-fg/90">{item.org}</p>
-                <p className="mt-0.5 font-mono text-xs text-muted">
-                  {formatMonth(item.startISO, locale)} - {item.endISO ? formatMonth(item.endISO, locale) : t("present")}
-                </p>
-                <p className="mt-3 text-sm text-muted">{t(`items.${item.key}.detail`)}</p>
-              </div>
-            </article>
-          </Reveal>
+    <Section id="teaching" labelledBy="teaching-title">
+      <SectionHeading id="teaching-title" kicker={t("kicker")} title={t("title")} description={t("description")} />
+      <ul className="grid gap-5 md:grid-cols-2">
+        {teaching.map((item) => (
+          <li key={item.key} className="card p-5 md:p-6">
+            <p className="font-mono text-xs text-muted">{formatRange(item.startISO, item.endISO, locale, t("present"))}</p>
+            <h3 className="mt-2 font-semibold">{t(`items.${item.key}.role`)}</h3>
+            <p className="text-sm text-muted">
+              <bdi>{item.org}</bdi>
+            </p>
+            <p className="mt-3 text-[0.9375rem] text-fg-2">{t(`items.${item.key}.detail`)}</p>
+          </li>
         ))}
-      </div>
+      </ul>
     </Section>
   );
 }
