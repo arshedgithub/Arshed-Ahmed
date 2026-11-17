@@ -1,17 +1,18 @@
 "use client";
 
-import { Download, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
 import { LocaleLink } from "@/i18n/link";
-import type { Locale } from "@/i18n/routing";
 import { nav } from "@/lib/site";
-import { buttonClasses } from "./button";
-import { LanguageSwitcher } from "./language-switcher";
+import { ThemeToggle } from "./theme-toggle";
 
-export function MobileMenu({ cv }: { cv: { href: string; lang: Locale } }) {
+/**
+ * Phone and tablet menu: an opaque sheet under the header (nothing shows through), page scroll locked,
+ * focus kept inside while open and returned to the button on close.
+ */
+export function MobileMenu() {
   const t = useTranslations("nav");
-  const common = useTranslations("common");
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -19,28 +20,40 @@ export function MobileMenu({ cv }: { cv: { href: string; lang: Locale } }) {
 
   useEffect(() => {
     if (!open) return;
-    panelRef.current?.querySelector<HTMLElement>("a")?.focus();
+    panelRef.current?.querySelector<HTMLElement>("a, button")?.focus();
 
+    function close(returnFocus: boolean) {
+      setOpen(false);
+      if (returnFocus) buttonRef.current?.focus();
+    }
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") {
-        setOpen(false);
-        buttonRef.current?.focus();
+      if (e.key === "Escape") return close(true);
+      if (e.key !== "Tab" || !panelRef.current) return;
+      // Trap: cycle between the menu button and the sheet's controls.
+      const items = [buttonRef.current!, ...panelRef.current.querySelectorAll<HTMLElement>("a, button")];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     }
-    function onPointer(e: PointerEvent) {
-      const t = e.target as Node;
-      if (!panelRef.current?.contains(t) && !buttonRef.current?.contains(t)) setOpen(false);
+    function onResize() {
+      if (window.matchMedia("(min-width: 64rem)").matches) close(false);
     }
     document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onPointer);
+    window.addEventListener("resize", onResize);
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onPointer);
+      window.removeEventListener("resize", onResize);
     };
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={buttonRef}
         type="button"
@@ -48,7 +61,7 @@ export function MobileMenu({ cv }: { cv: { href: string; lang: Locale } }) {
         aria-controls={panelId}
         aria-label={open ? t("closeMenu") : t("openMenu")}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex size-11 items-center justify-center rounded-lg text-fg hover:bg-surface"
+        className="inline-flex size-11 items-center justify-center rounded-control text-fg hover:bg-surface"
       >
         {open ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
       </button>
@@ -57,28 +70,29 @@ export function MobileMenu({ cv }: { cv: { href: string; lang: Locale } }) {
         ref={panelRef}
         id={panelId}
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-line bg-canvas px-4 pb-4 shadow-card"
+        className="menu-sheet fixed inset-x-0 top-14 bottom-0 z-40 overflow-y-auto border-t border-line bg-canvas md:top-16"
       >
-        <nav aria-label={t("mobileAria")}>
-          <ul className="grid gap-1 py-2">
-            {nav.map((item) => (
-              <li key={item.key}>
-                <LocaleLink
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="flex min-h-11 items-center rounded-lg px-3 text-base text-fg hover:bg-surface"
-                >
-                  {t(item.key)}
-                </LocaleLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <LanguageSwitcher className="mb-2 flex min-h-11 items-center rounded-lg px-3 text-base text-fg hover:bg-surface" />
-        <a href={cv.href} hrefLang={cv.lang} download className={buttonClasses("secondary", "w-full")}>
-          <Download size={16} aria-hidden="true" />
-          {common("downloadCv")}
-        </a>
+        <div className="container-page flex min-h-full flex-col py-4">
+          <nav aria-label={t("mobileAria")}>
+            <ul className="grid">
+              {nav.map((item) => (
+                <li key={item.key} className="border-b border-line">
+                  <LocaleLink
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="flex min-h-14 items-center text-xl font-medium text-fg"
+                  >
+                    {t(item.key)}
+                  </LocaleLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="mt-6 flex items-center justify-between gap-4">
+            <span className="kicker">{t("appearance")}</span>
+            <ThemeToggle withLabel className="border border-line px-3 text-fg" />
+          </div>
+        </div>
       </div>
     </div>
   );

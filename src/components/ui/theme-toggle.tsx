@@ -5,7 +5,11 @@ import { useTranslations } from "next-intl";
 import { THEME_COLORS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-export function ThemeToggle({ className }: { className?: string }) {
+/**
+ * Light/dark toggle. Both icons and labels are rendered and CSS picks one from data-theme, so server and client
+ * markup always match. `withLabel` shows the target theme as text (mobile menu row).
+ */
+export function ThemeToggle({ className, withLabel = false }: { className?: string; withLabel?: boolean }) {
   const t = useTranslations("common");
 
   function toggle() {
@@ -20,20 +24,25 @@ export function ThemeToggle({ className }: { className?: string }) {
     } catch {}
   }
 
-  // Both icons are rendered; CSS picks one from data-theme, so server and client markup always match.
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={t("toggleThemeLabel")}
-      title={t("toggleThemeTitle")}
+      aria-label={withLabel ? undefined : t("toggleThemeLabel")}
+      title={withLabel ? undefined : t("toggleThemeLabel")}
       className={cn(
-        "inline-flex size-11 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-fg",
+        "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-[var(--radius-control)] text-muted transition-colors hover:bg-surface hover:text-fg",
         className,
       )}
     >
       <Sun size={18} aria-hidden="true" className="hidden dark:block" />
       <Moon size={18} aria-hidden="true" className="block dark:hidden" />
+      {withLabel && (
+        <>
+          <span className="hidden dark:inline">{t("themeLight")}</span>
+          <span className="inline dark:hidden">{t("themeDark")}</span>
+        </>
+      )}
     </button>
   );
 }

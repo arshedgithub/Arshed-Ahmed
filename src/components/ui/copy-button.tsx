@@ -7,20 +7,20 @@ import { cn } from "@/lib/utils";
 
 export function CopyButton({ value, label, className }: { value: string; label: string; className?: string }) {
   const t = useTranslations("common");
-  const [copied, setCopied] = useState(false);
+  const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
 
   useEffect(() => {
-    if (!copied) return;
-    const t = setTimeout(() => setCopied(false), 2000);
-    return () => clearTimeout(t);
-  }, [copied]);
+    if (state === "idle") return;
+    const timer = setTimeout(() => setState("idle"), 2500);
+    return () => clearTimeout(timer);
+  }, [state]);
 
   async function copy() {
     try {
       await navigator.clipboard.writeText(value);
-      setCopied(true);
+      setState("copied");
     } catch {
-      // Clipboard blocked (insecure context or permissions): the mailto link next to it still works.
+      setState("failed");
     }
   }
 
@@ -30,14 +30,14 @@ export function CopyButton({ value, label, className }: { value: string; label: 
       onClick={copy}
       title={label}
       className={cn(
-        "inline-flex size-11 shrink-0 items-center justify-center rounded-lg border border-line text-muted transition-colors hover:border-accent hover:text-accent",
+        "inline-flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-control)] border border-line text-muted transition-colors hover:border-line-strong hover:text-fg",
         className,
       )}
     >
-      {copied ? <Check size={18} className="text-success" aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
+      {state === "copied" ? <Check size={18} className="text-live" aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
       <span className="sr-only">{label}</span>
       <span role="status" className="sr-only">
-        {copied ? t("copied") : ""}
+        {state === "copied" ? t("copied") : state === "failed" ? t("copyFailed") : ""}
       </span>
     </button>
   );
