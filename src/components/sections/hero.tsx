@@ -1,66 +1,102 @@
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowDown, BadgeCheck, CalendarCheck, Download, MapPin, Plane } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
-import { Chip, StatusChip } from "@/components/ui/primitives";
 import { SocialLinks } from "@/components/ui/social-links";
 import { cvFor } from "@/lib/cv";
-import { heroStack } from "@/lib/site";
 
+/**
+ * 5-second test, in reading order: who (name, role) -> value (headline) -> proof (one number) -> availability
+ * (notice, visa, place) -> one primary action. The portrait is a small avatar on phones so the headline and proof
+ * sit above the fold at 375x667; from md it becomes the right-hand column (halo effect, first impression).
+ */
 export function Hero() {
   const t = useTranslations("hero");
   const common = useTranslations("common");
-  const cv = cvFor(useLocale());
-  return (
-    <section id="top" aria-labelledby="hero-title" className="overflow-x-clip pt-2 pb-12 md:py-20 lg:py-28">
-      <div className="container-page grid items-center md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] md:gap-10 lg:gap-12">
-        {/* Dark: transparent cutout over a soft glow. Light: the photo on a pale blue tile (full width on phones).
-            Height is capped on phones (see hero-photo-size) so everything down to the social icons clears the tab bar. */}
-        <div className="photo-tile hero-photo-size relative mx-auto md:order-last md:justify-self-end">
-          <div aria-hidden="true" className="photo-glow absolute inset-x-[-25%] top-[-6%] hidden aspect-square dark:block" />
-          <Image
-            src="/images/hero-1x1.webp"
-            alt={t("imageAlt")}
-            width={1200}
-            height={1200}
-            preload
-            fetchPriority="high"
-            sizes="(min-width: 1120px) 480px, (min-width: 768px) 42vw, min(calc(100vw - 32px), 40vh)"
-            className="photo-cutout relative block size-full object-cover object-top"
-          />
-        </div>
+  const locale = useLocale();
+  const cv = cvFor(locale);
+  const facts = [
+    { key: "notice", Icon: CalendarCheck },
+    { key: "visa", Icon: Plane },
+    { key: "location", Icon: MapPin },
+  ] as const;
 
-        <div className="hero-reveal relative mt-4 flex flex-col items-start md:mt-0">
-          <StatusChip>{common("status")}</StatusChip>
-          <h1 id="hero-title" className="mt-4 font-bold tracking-tight md:mt-6">
-            <span className="block text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05]">
-              {common("firstName")} <span className="text-accent">{common("lastName")}</span>
-            </span>
-            <span className="mt-2 block text-lg font-semibold tracking-normal text-fg/90 md:mt-3 md:text-2xl">
-              {common("jobTitle")}
-            </span>
+  return (
+    <section id="top" aria-labelledby="hero-title" className="overflow-x-clip">
+      <div className="container-page grid items-center gap-10 pt-6 pb-12 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:pt-16 md:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16 lg:pt-20 lg:pb-24">
+        <div className="flex flex-col items-start">
+          {/* Who: avatar (phones only) + name + availability. */}
+          <div className="flex items-center gap-3">
+            <div className="relative size-12 shrink-0 overflow-hidden rounded-full border border-line-strong bg-[var(--photo-tile)] md:hidden">
+              <Image
+                src="/images/about-1x1.webp"
+                alt=""
+                width={96}
+                height={96}
+                sizes="48px"
+                loading="eager"
+                className="size-full object-cover object-top"
+              />
+            </div>
+            <div>
+              <p className="text-base font-semibold text-fg">{common("name")}</p>
+              <p className="flex items-center gap-2 text-sm text-muted">
+                <span aria-hidden="true" className="pulse-dot relative size-1.5 shrink-0 rounded-full bg-live text-live" />
+                {common("status")}
+              </p>
+            </div>
+          </div>
+
+          <h1 id="hero-title" className="mt-6 max-w-[20ch] text-display font-semibold md:mt-8">
+            {t("headline")}
           </h1>
-          <p className="mt-3 max-w-xl text-base text-muted max-[359px]:hidden md:mt-5 md:text-lg lg:text-[1.375rem] lg:leading-relaxed">
-            {common("positioning")}
+
+          <p className="mt-4 max-w-[60ch] text-base text-fg-2 md:mt-6 md:text-lg">{t("lede")}</p>
+
+          {/* The single strongest number, anchored right under the value proposition. */}
+          <p className="mt-5 flex max-w-[60ch] items-start gap-2.5 border-s-2 border-accent ps-3 text-sm font-medium text-fg md:text-base">
+            <BadgeCheck size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-accent max-md:hidden" />
+            {t("proof")}
           </p>
-          <ul className="mt-5 hidden flex-wrap gap-2 md:flex" aria-label={t("coreStackAria")}>
-            {heroStack.map((item) => (
-              <li key={item}>
-                <Chip>{item}</Chip>
+
+          <ul aria-label={t("factsAria")} className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+            {facts.map(({ key, Icon }) => (
+              <li key={key} className="inline-flex items-center gap-1.5">
+                <Icon size={15} aria-hidden="true" className="shrink-0" />
+                {t(key)}
               </li>
             ))}
           </ul>
-          <div className="mt-5 grid w-full gap-3 min-[360px]:flex min-[360px]:w-auto min-[360px]:flex-wrap md:mt-8">
-            <ButtonLink href="/#work">
-              {t("viewWork")}
-              <ArrowRight size={16} className="rtl:-scale-x-100" aria-hidden="true" />
-            </ButtonLink>
-            <ButtonLink href={cv.href} hrefLang={cv.lang} variant="secondary" download>
+
+          <div className="mt-7 flex w-full flex-col gap-3 min-[400px]:w-auto min-[400px]:flex-row min-[400px]:flex-wrap md:mt-9">
+            <ButtonLink href={cv.href} hrefLang={cv.lang} download>
               <Download size={16} aria-hidden="true" />
-              {common("downloadCv")}
+              {cv.lang === locale ? common("downloadCv") : common("downloadCvEnglish")}
+            </ButtonLink>
+            <ButtonLink href="/#work" variant="secondary">
+              {t("viewWork")}
+              <ArrowDown size={16} aria-hidden="true" />
             </ButtonLink>
           </div>
-          <SocialLinks className="mt-4 md:mt-6" />
+
+          <SocialLinks className="mt-6" ariaLabel={t("contactAria")} />
+        </div>
+
+        {/* Portrait column from md. Explicit size + priority: it is the LCP image on desktop. */}
+        <div className="relative hidden md:block">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-card border border-line bg-[var(--photo-tile)]">
+            <Image
+              src="/images/hero-1x1.webp"
+              alt={t("imageAlt")}
+              width={1200}
+              height={1200}
+              preload
+              // Last entry: phones hide this column, so their preload resolves to the smallest candidate.
+              sizes="(min-width: 1024px) 416px, (min-width: 768px) 352px, 48px"
+              className="photo-cutout absolute inset-x-0 bottom-0 h-[92%] w-full object-cover object-top"
+            />
+          </div>
+          <p className="kicker mt-3">{common("jobTitle")}</p>
         </div>
       </div>
     </section>

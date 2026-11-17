@@ -1,11 +1,14 @@
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
+import type { ProjectStatus } from "@/lib/content";
+import { SHOW_TODO, isTodo } from "@/lib/todo";
 import { cn } from "@/lib/utils";
 
 export function Chip({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md border border-line bg-canvas/60 px-2.5 py-1 text-xs font-medium text-fg/90",
+        "inline-flex items-center rounded-[var(--radius-chip)] border border-line px-2 py-0.5 text-xs leading-5 font-medium text-fg-2",
         className,
       )}
     >
@@ -15,39 +18,93 @@ export function Chip({ children, className }: { children: ReactNode; className?:
   );
 }
 
-/** Availability badge. Colours live in globals.css (--avail-*), 7:1+ text contrast in both themes. */
-export function StatusChip({ children }: { children: ReactNode }) {
+/**
+ * A placeholder for a fact Arshed still has to supply (see lib/todo.ts). Visible as a dashed amber marker in
+ * development, absent from production builds.
+ */
+export function TodoMark({ children, className }: { children: ReactNode; className?: string }) {
+  if (!SHOW_TODO) return null;
   return (
-    <p className="inline-flex items-center gap-2.5 rounded-full border border-[var(--avail-border)] bg-[var(--avail-bg)] px-3.5 py-2 text-[13px] leading-5 font-semibold text-[var(--avail-fg)] min-[340px]:text-sm">
-      <span className="avail-dot relative size-2 shrink-0 rounded-full bg-[var(--avail-dot)]" aria-hidden="true" />
+    <span
+      className={cn(
+        "inline-flex items-center rounded-[var(--radius-chip)] border border-dashed border-dev px-1.5 font-mono text-xs leading-5 text-dev",
+        className,
+      )}
+      dir="ltr"
+    >
       {children}
-    </p>
+    </span>
   );
 }
 
+/** Renders text, or a TodoMark when the text is a placeholder. */
+export function Known({ value, children }: { value: string; children?: (v: string) => ReactNode }) {
+  if (isTodo(value)) return <TodoMark>{value}</TodoMark>;
+  return <>{children ? children(value) : value}</>;
+}
+
+const statusStyles = {
+  live: "text-live bg-live-soft",
+  dev: "text-dev bg-dev-soft",
+  client: "text-neutral bg-neutral-soft",
+  prototype: "text-neutral bg-neutral-soft",
+} as const;
+
+/**
+ * Honest status pill: green only for products confirmed live, amber for in development, grey otherwise.
+ * The dot pulses only for live products.
+ */
+export function StatusPill({ status }: { status: ProjectStatus }) {
+  const t = useTranslations("status");
+  if (status.kind === "TODO_STATUS") return <TodoMark>TODO_STATUS</TodoMark>;
+  const kindLabel =
+    status.kind === "dev" && status.date && !isTodo(status.date) ? t("devDate", { date: status.date }) : t(status.kind);
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 rounded-full px-2.5 py-1 text-xs leading-4 font-medium",
+        statusStyles[status.kind],
+      )}
+    >
+      <span
+        aria-hidden="true"
+        className={cn("relative size-1.5 shrink-0 rounded-full bg-current", status.kind === "live" && "pulse-dot")}
+      />
+      <span className="text-fg">
+        {status.label && (
+          <>
+            <bdi>{status.label}</bdi>
+            <span aria-hidden="true"> · </span>
+          </>
+        )}
+        <span className={status.kind === "live" ? "font-semibold" : undefined}>{kindLabel}</span>
+      </span>
+      {status.kind === "dev" && status.date && isTodo(status.date) && <TodoMark>{status.date}</TodoMark>}
+    </span>
+  );
+}
+
+/** Mono kicker + title (+ optional description). The heading is the section's accessible name. */
 export function SectionHeading({
   id,
-  eyebrow,
+  kicker,
   title,
   description,
-  action,
+  className,
 }: {
   id: string;
-  eyebrow?: string;
+  kicker?: string;
   title: string;
   description?: string;
-  action?: ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="mb-8 flex items-end justify-between gap-4 md:mb-10">
-      <div>
-        {eyebrow && <p className="mb-2 font-mono text-xs uppercase tracking-widest text-accent">{eyebrow}</p>}
-        <h2 id={id} className="text-2xl font-semibold tracking-tight md:text-3xl">
-          {title}
-        </h2>
-        {description && <p className="mt-2 max-w-prose text-muted">{description}</p>}
-      </div>
-      {action}
+    <div className={cn("mb-8 max-w-2xl md:mb-12", className)}>
+      {kicker && <p className="kicker mb-3">{kicker}</p>}
+      <h2 id={id} className="text-title font-semibold">
+        {title}
+      </h2>
+      {description && <p className="mt-3 text-muted md:text-lg">{description}</p>}
     </div>
   );
 }
@@ -64,7 +121,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cn("py-16 md:py-24 lg:py-28", className)}>
+    <section id={id} aria-labelledby={labelledBy} className={cn("border-t border-line py-16 md:py-24", className)}>
       <div className="container-page">{children}</div>
     </section>
   );
