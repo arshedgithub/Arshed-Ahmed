@@ -1,5 +1,5 @@
 // Fails when messages/ar.json and messages/en.json drift apart. Run with: npm run i18n:check
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 
 const read = (locale) => JSON.parse(readFileSync(`messages/${locale}.json`, "utf8"));
 
@@ -36,17 +36,17 @@ for (const key of Object.keys(ar)) {
   if (/[٠-٩۰-۹]/.test(ar[key])) problems.push(`Eastern Arabic digits at ${key} (use 0-9)`);
 }
 
-// Case studies are translated as whole files, so check them by file and by the components they place.
-const dir = "src/content/projects";
-const components = (file) => (readFileSync(file, "utf8").match(/<[A-Z]\w+ \/>/g) ?? []).join(" ");
-for (const name of readdirSync(dir).filter((f) => f.endsWith(".mdx"))) {
-  const translated = `${dir}/ar/${name}`;
-  if (!existsSync(translated)) problems.push(`missing case study: ${translated}`);
-  else if (components(translated) !== components(`${dir}/${name}`)) problems.push(`components differ: ${translated}`);
+// Placeholders must be placeholders in both languages, so neither page invents a value the other lacks.
+for (const key of Object.keys(en)) {
+  if (key in ar && /TODO_/.test(String(en[key])) !== /TODO_/.test(String(ar[key]))) {
+    problems.push(`placeholder in one language only: ${key}`);
+  }
 }
 
 if (problems.length > 0) {
   console.error(`i18n check failed:\n${problems.map((p) => `  - ${p}`).join("\n")}`);
   process.exit(1);
 }
+const todos = Object.entries(en).filter(([, v]) => /TODO_/.test(String(v))).map(([k]) => k);
 console.log(`i18n check passed: ${Object.keys(en).length} keys match in en.json and ar.json.`);
+if (todos.length) console.log(`Placeholders still to fill (see TODO_CONTENT.md): ${todos.join(", ")}`);

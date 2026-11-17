@@ -1,6 +1,7 @@
-import { catalog } from "@/i18n/messages";
+import { catalog, type Messages } from "@/i18n/messages";
 import type { Locale } from "@/i18n/routing";
-import { projects as projectFacts, type ProjectFacts } from "./site";
+import { projects as projectFacts, type ProjectFacts, type StatusKind } from "./site";
+import { isTodo } from "./todo";
 
 export type ArchitectureNode = { id: string; title: string; sub: string };
 export type Architecture = {
@@ -8,58 +9,85 @@ export type Architecture = {
   edges: [from: string, to: string][];
 };
 
-/** Per-locale wording of a project, shaped like messages: projects.<slug>. */
-type ProjectCopy = {
+type ProjectCopy = Messages["projects"]["slmarket"];
+export type CaseCopy = ProjectCopy["case"];
+
+export type ProjectStatus = { label: string; kind: StatusKind | "TODO_STATUS"; date?: string };
+
+/** A project with its shared facts and one locale's wording joined. */
+export type Project = {
+  slug: string;
   title: string;
-  /** Second half of the title, rendered in the accent colour on the case-study page. */
   titleAccent: string;
   subtitle: string;
   summary: string;
-  /** <title> before the " | Arshed Ahmed" suffix: what was built and the outcome. Keep the full title 50-60 chars. */
   seoTitle: string;
-  /** Meta description, 140-160 chars, restating only what the case study says. */
   seoDescription: string;
-  /** One-line outcome, shown on cards and on the no-screenshot fallback. */
   outcome: string;
+  /** The one-line result with a number; a TODO_ placeholder until Arshed supplies it. */
+  metric: string;
   tag: string;
   role: string;
-  coverAlt: string;
-  screenshotAlts: Record<string, string>;
-  stackLabels: Record<string, string>;
-  architecture: {
-    rows: Record<string, string>;
-    nodes: Record<string, { title: string; sub: string }>;
-  };
+  solo: boolean;
+  owner: ProjectFacts["owner"];
+  company: string | null;
+  timeline: ProjectFacts["timeline"];
+  statuses: ProjectStatus[];
+  proofChips: string[];
+  links: { label: string; href: string; kind: ProjectFacts["links"][number]["kind"] }[];
+  stack: { label: string; items: string[] }[];
+  cover: { file: string; alt: string };
+  screenshots: { file: string; alt: string; device: "browser" | "phone" }[];
+  schematic: ProjectFacts["schematic"];
+  architecture: Architecture;
+  case: CaseCopy;
 };
 
-/** A project with its shared facts and one locale's wording joined. */
-export type Project = Omit<ProjectCopy, "coverAlt" | "screenshotAlts" | "stackLabels" | "architecture"> &
-  Pick<ProjectFacts, "slug" | "badges" | "period" | "links"> & {
-    stack: { label: string; items: string[] }[];
-    cover: { file: string; alt: string };
-    screenshots: { file: string; alt: string; device: "browser" | "phone" }[];
-    architecture: Architecture;
-  };
-
 function localize(facts: ProjectFacts, locale: Locale): Project {
-  const copy = (catalog(locale).projects as Record<string, ProjectCopy>)[facts.slug];
-  const { coverAlt, screenshotAlts, stackLabels, architecture, ...text } = copy;
+  // Every project has the same keys; only the per-project maps (statuses, proof, links) differ in shape.
+  const copy = (catalog(locale).projects as unknown as Record<string, ProjectCopy>)[facts.slug];
+  const statusLabels = copy.statuses as Record<string, string>;
+  const proofLabels = copy.proof as Record<string, string>;
+  const linkLabels = copy.links as Record<string, string>;
+  const coverId = facts.screenshots.find((s) => s.device === "browser")?.id;
   return {
-    ...text,
     slug: facts.slug,
-    badges: facts.badges,
-    period: facts.period,
-    links: facts.links,
-    stack: facts.stack.map((group) => ({ label: stackLabels[group.key], items: group.items })),
-    cover: { file: "cover.webp", alt: coverAlt },
-    screenshots: facts.screenshots.map((s) => ({ file: `${s.id}.webp`, alt: screenshotAlts[s.id], device: s.device })),
+    title: copy.title,
+    titleAccent: copy.titleAccent,
+    subtitle: copy.subtitle,
+    summary: copy.summary,
+    seoTitle: copy.seoTitle,
+    seoDescription: copy.seoDescription,
+    outcome: copy.outcome,
+    metric: copy.metric,
+    tag: copy.tag,
+    role: copy.role,
+    solo: facts.solo,
+    owner: facts.owner,
+    company: facts.company,
+    timeline: facts.timeline,
+    statuses: facts.statuses.map((s) => ({ label: statusLabels[s.key] ?? "", kind: s.kind, date: s.date })),
+    proofChips: facts.proofChips.map((key) => proofLabels[key]),
+    links: facts.links.map((l) => ({ label: linkLabels[l.key] ?? l.href, href: l.href, kind: l.kind })),
+    stack: facts.stack.map((group) => ({ label: (copy.stackLabels as Record<string, string>)[group.key], items: group.items })),
+    cover: {
+      file: "cover.webp",
+      alt: coverId ? (copy.screenshotAlts as Record<string, string>)[coverId] : copy.coverAlt,
+    },
+    screenshots: facts.screenshots.map((s) => ({
+      file: `${s.id}.webp`,
+      alt: (copy.screenshotAlts as Record<string, string>)[s.id],
+      device: s.device,
+    })),
+    schematic: facts.schematic,
     architecture: {
       rows: facts.architecture.rows.map((row) => ({
-        label: architecture.rows[row.id],
-        nodes: row.nodes.map((id) => ({ id, ...architecture.nodes[id] })),
+        label: (copy.architecture.rows as Record<string, string>)[row.id],
+        nodes: row.nodes.map((id) => ({ id, ...(copy.architecture.nodes as Record<string, { title: string; sub: string }>)[id] })),
       })),
       edges: facts.architecture.edges,
     },
+    case: copy.case,
   };
 }
 
@@ -73,12 +101,18 @@ export function getProject(slug: string, locale: Locale) {
 }
 
 const monthFormatters: Record<Locale, Intl.DateTimeFormat> = {
-  en: new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }),
-  // nu-latn: Western digits in Arabic.
+  en: new Intl.DateTimeFormat("en-GB", { month: "short", year: "numeric", timeZone: "UTC" }),
+  // nu-latn: Western digits in Arabic, as everywhere else on the site.
   ar: new Intl.DateTimeFormat("ar-AE-u-nu-latn-ca-gregory", { month: "long", year: "numeric", timeZone: "UTC" }),
 };
 
-/** "2026-07" to "Jul 2026" / "يوليو 2026". A bare year stays as it is. */
+/** "2026-07" to "Jul 2026" / "يوليو 2026". A bare year stays as it is; placeholders pass through. */
 export function formatMonth(iso: string, locale: Locale) {
-  return iso.length === 4 ? iso : monthFormatters[locale].format(new Date(`${iso}-01T00:00:00Z`));
+  if (isTodo(iso) || iso.length === 4) return iso;
+  return monthFormatters[locale].format(new Date(`${iso}-01T00:00:00Z`));
+}
+
+/** Date range with an en dash, both locales: "Mar 2025 – Jul 2026", "2025 – Present". */
+export function formatRange(startISO: string, endISO: string | null, locale: Locale, presentLabel: string) {
+  return `${formatMonth(startISO, locale)} – ${endISO ? formatMonth(endISO, locale) : presentLabel}`;
 }

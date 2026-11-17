@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Arshed Ahmed | Full-Stack Software Engineer in the UAE",
-    "description": "Full-stack software engineer in the UAE, available now for roles in Dubai, Abu Dhabi and Ajman. I build SaaS, Stripe payments and AI products with Next.js.",
-    "ogImageAlt": "Arshed Ahmed, full-stack software engineer in the UAE",
+    "title": "Arshed Ahmed | Full-Stack Engineer for Payments and AI, UAE",
+    "description": "Full-stack engineer in Abu Dhabi, available now. I build payments and AI products with Next.js, TypeScript and Node.js. My Stripe billing processed 200+ transactions.",
+    "ogImageAlt": "Arshed Ahmed, full-stack engineer who builds payments and AI products",
     "profileName": "Arshed Ahmed | Full-Stack Software Engineer"
   },
   "common": {
@@ -10,28 +10,32 @@
     "firstName": "Arshed",
     "lastName": "Ahmed",
     "jobTitle": "Full-Stack Software Engineer",
-    "positioning": "Full-stack engineer building SaaS, payments and AI products with Next.js, TypeScript and Node.js.",
-    "status": "Available immediately · UAE",
-    "locationLine": "Based in the UAE · Open to roles in Dubai, Abu Dhabi and Ajman",
+    "positioning": "Full-stack engineer who builds payments and AI products with Next.js, TypeScript and Node.js.",
+    "status": "Available now · Abu Dhabi, UAE",
+    "locationLine": "Based in Abu Dhabi · open to roles across the UAE",
     "skipToContent": "Skip to content",
     "logoHome": "{name}, home",
-    "toggleThemeLabel": "Toggle light and dark theme",
-    "toggleThemeTitle": "Toggle theme",
-    "copied": "Copied to clipboard",
+    "toggleThemeLabel": "Switch between light and dark theme",
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme",
+    "copied": "Copied",
+    "copyFailed": "Couldn't copy. Select the address instead.",
     "downloadCv": "Download CV",
+    "downloadCvEnglish": "Download CV",
     "cvShort": "CV",
     "cvShortSuffix": " (download PDF)",
+    "cvShortSuffixEnglish": " (download PDF)",
     "externalLabel": "{label} (opens in a new tab)",
     "emailLabel": "{label} ({email})",
     "channels": {
       "email": "Email",
       "whatsapp": "WhatsApp",
       "linkedin": "LinkedIn",
-      "github": "GitHub"
+      "github": "GitHub",
+      "cv": "CV"
     }
   },
   "nav": {
-    "home": "Home",
     "work": "Work",
     "experience": "Experience",
     "skills": "Skills",
@@ -39,115 +43,246 @@
     "contact": "Contact",
     "primaryAria": "Primary",
     "footerAria": "Footer",
-    "mobileAria": "Mobile",
-    "sectionsAria": "Sections",
+    "mobileAria": "Site",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "switchLabel": "العربية",
-    "switchName": "العربية"
+    "menuTitle": "Menu",
+    "appearance": "Appearance",
+    "switchAria": "Read this page in Arabic",
+    "backToTop": "Back to top"
+  },
+  "localeHint": {
+    "text": "This page is also available in English.",
+    "action": "Switch to English",
+    "dismiss": "Dismiss"
   },
   "hero": {
-    "imageAlt": "Arshed Ahmed, full-stack software engineer, in a sage suit jacket and white shirt",
-    "coreStackAria": "Core stack",
-    "viewWork": "View work"
+    "imageAlt": "Arshed Ahmed in a sage suit jacket and white shirt",
+    "headline": "Full-stack engineer who builds payments and AI products",
+    "lede": "I take web products from data model to production: Next.js and TypeScript in front, Node.js and PostgreSQL behind, Stripe billing and LLM features wired in, shipped through CI/CD.",
+    "proof": "Stripe billing I built at Softsora processed 200+ transactions across 10+ products.",
+    "factsAria": "Availability",
+    "notice": "Notice: immediate",
+    "visa": "UAE visit visa",
+    "location": "Abu Dhabi · open across the UAE",
+    "viewWork": "View selected work",
+    "contactAria": "Contact links"
   },
-  "stats": {
+  "proof": {
     "aria": "Highlights",
-    "years": "Years experience",
-    "saas": "SaaS products",
-    "stripe": "Billing in production",
-    "solo": "Products launched solo"
+    "transactions": "Stripe transactions processed across 10+ products",
+    "live": "POS/ERP I built alone, live with real users",
+    "mentored": "Final-year projects mentored through code review",
+    "since": "Building software since my first internship"
   },
   "work": {
-    "eyebrow": "Selected work",
-    "title": "Products I have built and shipped",
-    "description": "Featured projects across marketplaces, payments and AI.",
-    "tagsAria": "Tags",
+    "kicker": "Selected work",
+    "title": "Four products, and where each one stands",
+    "description": "Two of my own and two built at Softsora. Green means live with real users; amber means still in development.",
     "readCaseStudy": "Read case study",
-    "badges": {
-      "live": "Live",
-      "soloBuilt": "Solo-built"
-    }
+    "readCaseStudyAria": "Read the {title} case study",
+    "linkLabels": {
+      "live": "Visit live product",
+      "demo": "Watch demo",
+      "staging": "Try demo (staging)",
+      "github": "View code"
+    },
+    "builtAt": "Built at {company}",
+    "ownProduct": "My own product",
+    "solo": "Built solo",
+    "proofAria": "What's in the build",
+    "schematic": "Illustration, not a screenshot"
+  },
+  "status": {
+    "aria": "Status",
+    "live": "Live",
+    "dev": "In development",
+    "devDate": "In development · launching {date}",
+    "client": "Company project",
+    "prototype": "Prototype"
   },
   "projects": {
     "slmarket": {
       "title": "SLMarket",
-      "titleAccent": "Ecosystem",
-      "subtitle": "Marketplace + SLMarket Flow POS/ERP",
-      "summary": "A multilingual marketplace connecting buyers and sellers across Sri Lanka, plus SLMarket Flow, a real-time POS with ERP features. Designed, built and launched solo.",
-      "seoTitle": "SLMarket: Marketplace and POS/ERP Built Solo",
-      "seoDescription": "How Arshed Ahmed designed, built and launched SLMarket solo: a multilingual Sri Lankan marketplace on Next.js and SLMarket Flow, a real-time Laravel POS/ERP.",
-      "outcome": "Two products designed, built and launched solo: a marketplace and a real-time POS/ERP.",
-      "tag": "E-commerce",
-      "role": "Solo: product, architecture, full-stack development and deployment",
-      "coverAlt": "SLMarket marketplace home page with product listings",
+      "titleAccent": "Flow and Marketplace",
+      "subtitle": "A real-time POS/ERP, live, and a multilingual marketplace in development",
+      "summary": "My own product, built alone. SLMarket Flow is a real-time point-of-sale system with ERP features, live with real users. The slmarket.lk marketplace, for buyers and sellers across Sri Lanka, is in development.",
+      "seoTitle": "SLMarket: a Live POS/ERP and a Marketplace, Built Solo",
+      "seoDescription": "How Arshed Ahmed built SLMarket alone: SLMarket Flow, a real-time Laravel POS/ERP that is live with real users, and a Next.js marketplace in development.",
+      "outcome": "Designed, built and shipped Flow alone; it runs live for real users.",
+      "metric": "TODO_METRIC (e.g. shops or daily sales running on Flow)",
+      "tag": "Retail · POS/ERP",
+      "role": "Founder and sole engineer: product, architecture, full-stack development, CI/CD and deployment",
+      "statuses": {
+        "flow": "Flow (POS/ERP)",
+        "marketplace": "Marketplace"
+      },
+      "proof": {
+        "ci": "CI/CD on GitHub Actions",
+        "tests": "Unit and integration tests",
+        "rbac": "Role-based access",
+        "cache": "Redis caching"
+      },
+      "links": {
+        "flow": "flow.slmarket.lk"
+      },
+      "coverAlt": "SLMarket Flow point-of-sale screen",
       "screenshotAlts": {
-        "marketplace-home": "SLMarket marketplace home page with categories and product listings",
         "flow-pos": "SLMarket Flow point-of-sale screen with a cart and product grid",
+        "marketplace-home": "SLMarket marketplace home page with categories and product listings",
         "marketplace-mobile": "SLMarket marketplace on a phone"
       },
       "stackLabels": {
-        "marketplace": "Marketplace",
-        "flow": "SLMarket Flow (POS/ERP)"
+        "flow": "SLMarket Flow (POS/ERP)",
+        "marketplace": "Marketplace"
+      },
+      "case": {
+        "problem": "Shops in Sri Lanka needed one simple system for the shop floor: taking sales, tracking stock and keeping records, without stitching separate tools together. Buyers and sellers also needed one place to trade online, in the language they are most comfortable with.",
+        "team": "Solo",
+        "context": [
+          "SLMarket is two products. SLMarket Flow is the back office: a real-time POS with ERP features that shop staff use while they sell. It is live with real users. The marketplace at slmarket.lk is the storefront for buyers, and it is in development.",
+          "I own both end to end: product scope, data model, frontend, backend, tests, CI/CD and hosting."
+        ],
+        "architecture": "Two independent applications. Flow is Laravel, Vue.js and Inertia.js on MySQL, deployed on cPanel. The marketplace is Next.js and TypeScript on PostgreSQL through Prisma, with Redis for caching and Cloudinary for media, deployed on Vercel. Both release through GitHub Actions.",
+        "decisions": [
+          {
+            "title": "Two stacks, one job each",
+            "why": "Flow is a signed-in back-office tool, so Laravel with Inertia.js makes forms and CRUD screens fast to build. The marketplace is public and search-sensitive, so it is a Next.js app on Vercel.",
+            "tradeoff": "Two codebases and two deploy targets for one engineer, in exchange for the right tool for each audience."
+          },
+          {
+            "title": "Relational data, cached reads",
+            "why": "Listings, sellers and orders are relational, so PostgreSQL with Prisma keeps types aligned from the schema to the UI. Redis caches the read-heavy paths.",
+            "tradeoff": "A cache means invalidation rules to get right whenever a listing or price changes."
+          },
+          {
+            "title": "Tests in CI before every release",
+            "why": "As the only engineer, unit and integration tests running in GitHub Actions act as my reviewer before code reaches the shop floor.",
+            "tradeoff": "Slower early iterations, in exchange for fewer regressions once real users depend on Flow."
+          }
+        ],
+        "challenges": [
+          "Running a live POS alone: every feature, fix and deploy goes through one person, so automation carries the review load.",
+          "Role-based access and end-to-end order flows that hold up for owners, staff and sellers with different permissions."
+        ],
+        "improve": [
+          "Add end-to-end browser tests on the POS sale and checkout flows.",
+          "Publish usage numbers from Flow once I can share them."
+        ]
       },
       "architecture": {
         "rows": { "users": "Users", "apps": "Apps", "data": "Data", "delivery": "Delivery" },
         "nodes": {
-          "buyers": { "title": "Buyers", "sub": "Web, multilingual" },
-          "sellers": { "title": "Sellers", "sub": "Web" },
           "staff": { "title": "Shop staff", "sub": "POS" },
-          "market": { "title": "Marketplace", "sub": "Next.js · TypeScript" },
+          "sellers": { "title": "Sellers", "sub": "Web" },
+          "buyers": { "title": "Buyers", "sub": "Web, multilingual" },
           "flow": { "title": "SLMarket Flow", "sub": "Laravel · Vue · Inertia" },
+          "market": { "title": "Marketplace", "sub": "Next.js · TypeScript" },
+          "mysql": { "title": "MySQL", "sub": "POS data" },
           "pg": { "title": "PostgreSQL", "sub": "Prisma" },
           "redis": { "title": "Redis", "sub": "Cache" },
           "cdn": { "title": "Cloudinary", "sub": "Media" },
-          "mysql": { "title": "MySQL", "sub": "POS data" },
-          "vercel": { "title": "Vercel", "sub": "GitHub Actions" },
-          "cpanel": { "title": "cPanel", "sub": "GitHub Actions" }
+          "cpanel": { "title": "cPanel", "sub": "GitHub Actions" },
+          "vercel": { "title": "Vercel", "sub": "GitHub Actions" }
         }
       }
     },
     "ai-business-support-saas": {
       "title": "AI Business Support",
       "titleAccent": "SaaS",
-      "subtitle": "Stripe payments layer and live payments dashboard",
-      "summary": "A production SaaS platform of AI chatbots that guide businesses on grants and funding. I owned the Stripe payments layer end-to-end and built a real-time payments dashboard.",
+      "subtitle": "The Stripe payments layer and a real-time payments dashboard",
+      "summary": "A production SaaS of AI chatbots that guide businesses on grants and funding, built at Softsora. I owned the Stripe payments layer end to end and built a real-time payments dashboard for the team.",
       "seoTitle": "Stripe Payments for an AI Business SaaS",
-      "seoDescription": "Arshed Ahmed owned the Stripe payments layer of a production AI SaaS that guides businesses on grants and funding, and built a real-time payments dashboard.",
-      "outcome": "Owned the Stripe payments layer end-to-end and built a real-time payments dashboard.",
+      "seoDescription": "Arshed Ahmed owned the Stripe payments layer of a production AI SaaS that guides businesses on grants and funding, and built its real-time payments dashboard.",
+      "outcome": "Owned the Stripe payments layer end to end, plus a real-time payments dashboard.",
+      "metric": "Part of the Stripe billing that processed 200+ transactions across 10+ Softsora products.",
       "tag": "SaaS · Payments",
       "role": "Full-stack engineer; owner of the Stripe payments layer",
+      "statuses": {
+        "main": ""
+      },
+      "proof": {
+        "webhooks": "Stripe webhooks",
+        "proration": "Proration and refunds",
+        "tests": "Jest unit and integration tests",
+        "dashboard": "Real-time payments dashboard"
+      },
+      "links": {},
       "coverAlt": "AI Business Support SaaS payments dashboard",
       "screenshotAlts": {
-        "payments-dashboard": "Real-time Stripe payments dashboard with transaction list",
+        "payments-dashboard": "Real-time Stripe payments dashboard with a transaction list",
         "chatbot": "AI chatbot conversation guiding a business on grants and funding"
       },
       "stackLabels": {
         "platform": "Platform"
       },
+      "case": {
+        "problem": "To run as a SaaS, the platform needed reliable billing: one-time payments, subscriptions, plan changes with fair proration, and refunds. The team also needed to see payments as they happened, without digging through the Stripe dashboard.",
+        "team": "TODO_TEAM (Softsora team size)",
+        "context": [
+          "The platform guides businesses on grants and funding through several AI chatbots. I worked across the Express.js backend and the Next.js frontend and owned billing from checkout to refunds.",
+          "Screens from this project are company work, so this page uses a redrawn schematic instead of real screenshots."
+        ],
+        "architecture": "The Next.js frontend talks to an Express.js API that holds the payment and business logic. The API calls the AI chatbot workflows, creates and updates Stripe objects, and receives Stripe webhooks that keep payment records in sync.",
+        "decisions": [
+          {
+            "title": "Webhooks as the source of truth",
+            "why": "Subscription and payment state is updated from Stripe webhook events, never from what the browser reports.",
+            "tradeoff": "Handlers must cope with events that arrive late, twice or out of order."
+          },
+          {
+            "title": "Stripe's proration instead of custom maths",
+            "why": "Plan changes use Stripe's automated proration, so charges stay correct without manual adjustments.",
+            "tradeoff": "Billing rules follow Stripe's model, so unusual pricing has to fit its API."
+          },
+          {
+            "title": "Tests around money",
+            "why": "Jest unit and integration tests cover the payment and API logic, where a regression costs real money.",
+            "tradeoff": "Mocked Stripe responses can drift from the real API over time."
+          }
+        ],
+        "challenges": [
+          "Keeping one payments flow for one-time charges, subscriptions and refunds instead of three separate paths.",
+          "Giving the team live payment visibility without handing everyone access to the Stripe dashboard."
+        ],
+        "improve": [
+          "Add an audit log of every webhook event and the state change it caused.",
+          "Run contract tests against Stripe's test mode in CI to catch API drift."
+        ]
+      },
       "architecture": {
         "rows": { "users": "Users", "frontend": "Frontend", "backend": "Backend", "services": "Services" },
         "nodes": {
-          "biz": { "title": "Businesses", "sub": "Chat + billing" },
+          "biz": { "title": "Businesses", "sub": "Chat and billing" },
           "team": { "title": "Internal team", "sub": "Dashboard" },
           "web": { "title": "Next.js app", "sub": "TypeScript" },
-          "api": { "title": "Express.js API", "sub": "Payments + business logic" },
+          "api": { "title": "Express.js API", "sub": "Payments and logic" },
           "ai": { "title": "AI chatbots", "sub": "LLM workflows" },
-          "stripe": { "title": "Stripe", "sub": "Billing + webhooks" },
+          "stripe": { "title": "Stripe", "sub": "Billing, webhooks" },
           "db": { "title": "Database", "sub": "Payment records" }
         }
       }
     },
     "ai-cv-builder": {
       "title": "AI CV Builder",
-      "titleAccent": "& Interview Prep",
-      "subtitle": "ATS resume generation + voice mock interview",
-      "summary": "ATS-friendly resume generation, parsing and job-description optimisation, plus a voice-based AI mock interview that gives candidates instant feedback.",
+      "titleAccent": "and Interview Prep",
+      "subtitle": "ATS-friendly CVs and voice mock interviews with instant AI feedback",
+      "summary": "Generates ATS-friendly CVs, parses existing ones and tailors them to a job description, then lets candidates rehearse in a voice mock interview with instant AI feedback.",
       "seoTitle": "AI CV Builder with Voice Mock Interviews",
-      "seoDescription": "An AI CV builder by Arshed Ahmed: ATS-friendly resumes tailored to a job description, plus voice mock interviews with instant AI feedback, on Next.js and Groq.",
-      "outcome": "ATS-friendly resumes and voice mock interviews with instant AI feedback.",
-      "tag": "AI / LLM",
+      "seoDescription": "An AI CV builder by Arshed Ahmed: ATS-friendly CVs tailored to a job description, plus voice mock interviews with instant AI feedback, on Next.js and Groq.",
+      "outcome": "ATS-friendly CVs and voice mock interviews with instant AI feedback.",
+      "metric": "TODO_METRIC (e.g. users, CVs generated or interviews run)",
+      "tag": "AI · LLM",
       "role": "Full-stack development",
+      "statuses": {
+        "main": ""
+      },
+      "proof": {
+        "voice": "Voice interview with Whisper",
+        "ats": "ATS-friendly output",
+        "typed": "Typed data access with Prisma"
+      },
+      "links": {},
       "coverAlt": "AI CV Builder resume editor",
       "screenshotAlts": {
         "resume-editor": "Resume editor with an ATS-optimised CV preview",
@@ -156,13 +291,46 @@
       "stackLabels": {
         "platform": "Platform"
       },
+      "case": {
+        "problem": "Job seekers often send CVs that applicant tracking systems parse badly, and they rarely get to practise interviews with useful feedback.",
+        "team": "TODO_TEAM (solo or team)",
+        "context": [
+          "The platform helps candidates build an ATS-friendly CV tailored to a job description, then rehearse out loud in a voice mock interview."
+        ],
+        "architecture": "A Next.js and TypeScript app handles the UI and server logic. CV generation, parsing and job-description matching call a Groq-hosted LLM. In the mock interview, Whisper turns spoken answers into text and the LLM writes feedback. Data lives in PostgreSQL through Prisma.",
+        "decisions": [
+          {
+            "title": "Groq for response time",
+            "why": "A fast-inference LLM host makes CV suggestions and interview feedback feel immediate.",
+            "tradeoff": "A narrower choice of models than the largest providers offer."
+          },
+          {
+            "title": "Speak, don't type",
+            "why": "Whisper speech-to-text lets candidates answer out loud, as they would in a real interview.",
+            "tradeoff": "Transcription adds a step, and time, to every answer."
+          },
+          {
+            "title": "Match before rewriting",
+            "why": "The CV is compared against the target job description before any changes are generated.",
+            "tradeoff": "An extra model call per tailoring request."
+          }
+        ],
+        "challenges": [
+          "Keeping the voice round trip short enough to feel like a conversation.",
+          "Producing CV layouts that applicant tracking systems parse reliably."
+        ],
+        "improve": [
+          "Stream feedback as it is generated instead of waiting for the full answer.",
+          "Build a small evaluation set to measure feedback quality between prompt changes."
+        ]
+      },
       "architecture": {
-        "rows": { "users": "Users", "app": "App", "aiData": "AI + Data" },
+        "rows": { "users": "Users", "app": "App", "aiData": "AI and data" },
         "nodes": {
-          "cand": { "title": "Candidates", "sub": "Web + microphone" },
+          "cand": { "title": "Candidates", "sub": "Web and microphone" },
           "next": { "title": "Next.js app", "sub": "TypeScript · API routes" },
-          "groq": { "title": "Groq LLM", "sub": "Resume + feedback" },
-          "whisper": { "title": "Whisper", "sub": "Speech-to-text" },
+          "groq": { "title": "Groq LLM", "sub": "CV and feedback" },
+          "whisper": { "title": "Whisper", "sub": "Speech to text" },
           "pg": { "title": "PostgreSQL", "sub": "Prisma" }
         }
       }
@@ -171,12 +339,22 @@
       "title": "WhatsApp AI",
       "titleAccent": "Order Bot",
       "subtitle": "Conversational ordering and support on WhatsApp",
-      "summary": "A WhatsApp AI chatbot built with Python, LLM APIs and Twilio that automates customer conversations.",
+      "summary": "A WhatsApp chatbot built at Softsora with Python, LLM APIs and Twilio that automates customer conversations in an app customers already use.",
       "seoTitle": "WhatsApp AI Bot That Automates Customer Chats",
       "seoDescription": "A WhatsApp AI chatbot Arshed Ahmed built and deployed at Softsora with Python, LLM APIs and Twilio, automating customer conversations on WhatsApp.",
       "outcome": "Automated customer conversations on WhatsApp with an LLM-powered bot.",
+      "metric": "TODO_METRIC (e.g. conversations handled or reply time)",
       "tag": "Automation",
       "role": "Developer: built and deployed the bot",
+      "statuses": {
+        "main": ""
+      },
+      "proof": {
+        "webhook": "Twilio webhook service",
+        "llm": "LLM message understanding",
+        "deployed": "Deployed to production"
+      },
+      "links": {},
       "coverAlt": "WhatsApp AI order bot conversation",
       "screenshotAlts": {
         "chat-1": "WhatsApp conversation in which the bot answers a customer question",
@@ -185,13 +363,46 @@
       "stackLabels": {
         "bot": "Bot"
       },
+      "case": {
+        "problem": "Customers already use WhatsApp every day, but answering every message by hand does not scale. The goal was to automate those conversations so people get answers without waiting for a person.",
+        "team": "TODO_TEAM (Softsora team size)",
+        "context": [
+          "I built and deployed the bot at Softsora. Conversations from this project are company data, so this page uses a redrawn schematic instead of real screenshots."
+        ],
+        "architecture": "Customers message a WhatsApp number connected through Twilio. Twilio forwards each message to a Python webhook service, which uses an LLM API to understand it and write a reply, then sends the reply back through Twilio.",
+        "decisions": [
+          {
+            "title": "Meet customers in WhatsApp",
+            "why": "Twilio's WhatsApp API puts the bot in an app customers already have, with nothing new to install.",
+            "tradeoff": "Per-message costs and WhatsApp's messaging rules shape what the bot can send and when."
+          },
+          {
+            "title": "A separate Python service",
+            "why": "A small webhook service keeps the business logic apart from the messaging channel.",
+            "tradeoff": "One more service to deploy and monitor."
+          },
+          {
+            "title": "Language model instead of menu trees",
+            "why": "An LLM understands free-text messages, so customers don't have to follow rigid numbered menus.",
+            "tradeoff": "Replies are less predictable than a fixed menu, so prompts need guardrails."
+          }
+        ],
+        "challenges": [
+          "Answering within the messaging webhook's time limits while waiting on a language model.",
+          "Keeping replies on-topic for free-text messages that do not follow a script."
+        ],
+        "improve": [
+          "Add a clean hand-off to a human agent for conversations the bot cannot resolve.",
+          "Log intents and outcomes so the team can see which questions the bot handles well."
+        ]
+      },
       "architecture": {
         "rows": { "users": "Users", "channel": "Channel", "service": "Service", "ai": "AI" },
         "nodes": {
           "cust": { "title": "Customers", "sub": "WhatsApp" },
           "twilio": { "title": "Twilio", "sub": "WhatsApp API" },
-          "py": { "title": "Python service", "sub": "Webhook + logic" },
-          "llm": { "title": "LLM API", "sub": "Intent + replies" }
+          "py": { "title": "Python service", "sub": "Webhook and logic" },
+          "llm": { "title": "LLM API", "sub": "Intent and replies" }
         }
       }
     }
@@ -200,104 +411,159 @@
     "breadcrumbAria": "Breadcrumb",
     "home": "Home",
     "breadcrumbHome": "Home",
+    "work": "Work",
+    "tldr": "At a glance",
+    "problem": "Problem",
+    "role": "My role and scope",
+    "outcome": "Outcome",
+    "timeline": "Timeline",
+    "team": "Team",
+    "stack": "Stack",
+    "context": "Context",
+    "architecture": "Architecture",
+    "decisions": "Hard decisions and trade-offs",
+    "tradeoff": "Trade-off:",
+    "challenges": "Challenges",
+    "improve": "What I'd improve next",
     "screenshots": "Screenshots",
+    "links": "Links",
+    "present": "present",
     "moreProjectsAria": "More projects",
     "allProjects": "All projects",
-    "next": "Next: {title}",
+    "nextProject": "Next project",
     "stackAria": "{label} stack",
     "architectureTitle": "{title} system architecture",
-    "architectureEdge": "{from} connects to {to}",
-    "noPublicLink": "This project has no public link. I am happy to walk through it in an interview.",
+    "architectureEdges": "Connections: {list}.",
+    "architectureEdge": "{from} to {to}",
+    "noPublicLink": "This project has no public link. I'm happy to walk through it in an interview.",
     "opensNewTab": " (opens in a new tab)",
     "ogImageAlt": "{title} case study by {name}: {subtitle}",
     "ogEyebrow": "Case study"
   },
   "experience": {
-    "eyebrow": "Experience",
-    "title": "Where I have worked",
+    "kicker": "Experience",
+    "title": "Where I've worked",
     "present": "Present",
     "selfEmployed": "Self-employed",
+    "types": {
+      "founder": "Own product",
+      "fullTime": "Full-time",
+      "freelance": "Freelance",
+      "internship": "Internship"
+    },
     "items": {
       "slmarket": {
-        "role": "Full-Stack Developer",
+        "role": "Founder & Full-Stack Developer",
+        "company": "SLMarket (pre-launch)",
+        "context": "My own product: a POS/ERP and a marketplace",
         "bullets": [
-          "Designed, built and launched two products solo: a multilingual marketplace (slmarket.lk) and SLMarket Flow, a real-time POS/ERP.",
-          "Automated releases with GitHub Actions CI/CD, applied TDD with unit and integration tests, and added role-based authorisation and Redis caching."
+          "Shipped SLMarket Flow, a real-time POS/ERP, alone; it is live with real users.",
+          "Building the slmarket.lk multilingual marketplace on Next.js, PostgreSQL and Redis, ahead of launch.",
+          "Release both through GitHub Actions CI/CD, with unit and integration tests, role-based access and Redis caching."
         ]
       },
       "softsora": {
         "role": "Software Engineer",
+        "company": "Softsora (Pvt) Ltd",
+        "context": "Software company building SaaS and AI products",
         "bullets": [
-          "Implemented Stripe billing (subscriptions, one-time payments, automated proration, webhooks and refunds), processing 200+ transactions across 10+ products.",
-          "Built and deployed Node.js, Express.js and MongoDB services for Next.js and TypeScript frontends, with Jest unit and integration tests covering payment and API logic."
+          "Built Stripe billing (subscriptions, one-time payments, proration, webhooks and refunds) that processed 200+ transactions across 10+ products.",
+          "Shipped Node.js, Express.js and MongoDB services for Next.js and TypeScript frontends, with Jest unit and integration tests on payment and API logic."
         ]
       },
       "softsoraAssociate": {
         "role": "Associate Software Engineer",
+        "company": "Softsora (Pvt) Ltd",
+        "context": "Promoted to Software Engineer in March 2025",
         "bullets": [
-          "Launched AI chatbot solutions for a leading oven company by integrating DIFY.ai workflows with custom Next.js interfaces.",
-          "Automated customer interactions with a WhatsApp AI chatbot built with Python, LLM APIs and Twilio."
+          "Launched AI chatbots for a leading oven manufacturer by connecting DIFY.ai workflows to custom Next.js interfaces.",
+          "Built and deployed a WhatsApp AI chatbot (Python, LLM APIs, Twilio) that automated customer conversations."
         ]
       },
       "freelance": {
         "role": "Freelance Software Developer",
+        "company": "",
+        "context": "Client web applications",
         "bullets": [
-          "Delivered client web applications end-to-end, from requirements to deployment, using React, Node.js, Express.js and Spring Boot.",
-          "Built a sales counting and analysis tool that replaced a client's manual process."
+          "Delivered client web apps end to end, from requirements to deployment, with React, Node.js, Express.js and Spring Boot.",
+          "Replaced a client's manual sales counting with a sales counting and analysis tool."
         ]
       },
       "elzian": {
         "role": "Software Engineer Intern",
+        "company": "Elzian Agro (Pvt) Ltd",
+        "context": "Enterprise applications",
         "bullets": [
           "Built full-stack features with the MERN stack for enterprise applications.",
-          "Implemented REST APIs and database operations across the SDLC, from requirements to testing."
+          "Implemented REST APIs and database operations from requirements through testing."
         ]
       }
     }
   },
   "skills": {
-    "eyebrow": "Skills",
-    "title": "Technologies I work with",
-    "groups": {
-      "frontend": "Frontend",
-      "backend": "Backend and Data",
-      "ai": "AI and Integrations",
-      "devops": "DevOps and Testing"
+    "kicker": "Skills",
+    "title": "My stack, by depth",
+    "description": "Grouped by how I've used each tool, not by self-rated percentages.",
+    "tiers": {
+      "core": { "title": "Core", "note": "Used in production, recently and in depth" },
+      "working": { "title": "Working", "note": "Shipped with it; comfortable picking it up again" },
+      "familiar": { "title": "Familiar", "note": "Used before; would need a short ramp-up" }
     },
     "items": {
       "restApi": "REST API design",
-      "stripe": "Stripe (subscriptions, proration, webhooks, refunds)"
+      "stripe": "Stripe billing"
     }
   },
+  "credibility": {
+    "kicker": "Credentials",
+    "title": "Education, certifications and code",
+    "education": "Education",
+    "certifications": "Certifications",
+    "verify": "Verify",
+    "verifyAria": "Verify the {name} credential (opens in a new tab)",
+    "github": "GitHub",
+    "githubBody": "Public repositories and contribution history.",
+    "githubCta": "View GitHub profile",
+    "repos": {},
+    "references": "References",
+    "referenceItems": {}
+  },
   "teaching": {
-    "eyebrow": "Teaching",
+    "kicker": "Mentoring",
     "title": "Teaching and mentoring",
+    "description": "Alongside engineering, I teach developers and review their code.",
     "present": "Present",
     "items": {
       "solitrium": {
-        "role": "Course Instructor & Founder",
-        "detail": "Teaching full-stack development, OOP, system design, SDLC and Git. Guided 20+ BIT final-year projects through code review."
+        "role": "Founder and Course Instructor",
+        "detail": "Teach full-stack development, OOP, system design, the SDLC and Git. Guided 20+ BIT final-year projects through code review."
       },
       "earth": {
-        "role": "Junior Lecturer / Demonstrator (Part-time)",
-        "detail": "Taught Web Development, UX Design, Programming, OOP, system design, SDLC and Mathematics, and led Java and web lab sessions."
+        "role": "Junior Lecturer and Demonstrator (part-time)",
+        "detail": "Taught web development, UX design, programming, OOP, system design, the SDLC and mathematics, and led Java and web lab sessions."
       }
     }
   },
   "about": {
-    "eyebrow": "About",
-    "title": "From idea to live system",
+    "kicker": "About",
+    "title": "From the first sketch to the system people use",
     "portraitAlt": "Head-and-shoulders portrait of Arshed Ahmed",
-    "paragraph1": "I like owning a product from the first sketch to the system people use every day: shaping the data model, designing the API, building the interface, wiring payments and shipping it behind CI/CD.",
-    "paragraph2": "At Softsora I built SaaS platforms, Stripe billing and LLM-powered features. On my own I designed, built and launched SLMarket and SLMarket Flow. I also teach: I founded {academy} and have guided 20+ final-year projects through code review.",
-    "paragraph3": "I use Claude Code, GitHub Copilot and Cursor for speed, and I own the architecture and review every change myself.",
-    "quickFactsAria": "Quick facts",
-    "nationality": "Sri Lankan",
-    "basedIn": "Based in UAE",
-    "availableNow": "Available now",
-    "credentialsTitle": "Education and certifications",
-    "education": "Education",
-    "certifications": "Certifications",
+    "paragraph1": "I like owning a product from the first sketch to the system people use every day: shaping the data model, designing the API, building the interface, wiring up payments and shipping it behind CI/CD.",
+    "paragraph2": "At Softsora I built SaaS platforms, Stripe billing and LLM features. On my own I built SLMarket Flow, a POS/ERP that is now live, and I'm building its marketplace. I also founded {academy}, where I've guided 20+ final-year projects through code review.",
+    "paragraph3": "I use Claude Code, GitHub Copilot and Cursor for speed. I own the architecture and review every change myself.",
+    "factsAria": "Quick facts",
+    "facts": {
+      "based": "Based in",
+      "basedValue": "Abu Dhabi, UAE · open across the UAE",
+      "visa": "Visa",
+      "visaValue": "UAE visit visa",
+      "notice": "Notice period",
+      "noticeValue": "Immediate",
+      "nationality": "Nationality",
+      "nationalityValue": "Sri Lankan",
+      "languages": "Languages",
+      "languagesValue": "English (professional), Sinhala and Tamil (native), Arabic (basic)"
+    },
     "degrees": {
       "bit": {
         "degree": "Bachelor of Information Technology (BIT)",
@@ -309,59 +575,62 @@
       }
     },
     "certs": {
-      "ethicalHacker": "Cisco Ethical Hacker",
-      "securityFundamentals": "Palo Alto Networks Security Fundamentals",
+      "ethicalHacker": "Ethical Hacker",
+      "securityFundamentals": "Security Fundamentals",
       "jenkinsDocker": "Jenkins and Docker"
-    },
-    "languagesLabel": "Languages:",
-    "languagesList": "English (professional), Sinhala (native), Tamil (native), Arabic (basic)"
+    }
   },
   "contact": {
-    "eyebrow": "Contact",
-    "title": "Get in touch",
-    "description": "Hiring for a full-stack role, or have a product to build? Send a message or reach me directly.",
-    "noticeLabel": "Notice period:",
+    "kicker": "Contact",
+    "title": "Hiring for a full-stack role? Let's talk.",
+    "description": "Email or WhatsApp reaches me fastest. I can start immediately.",
+    "factsAria": "Availability details",
+    "notice": "Notice period",
     "noticeValue": "Immediate",
-    "visaLabel": "Visa status:",
-    "visaValue": "",
+    "visa": "Visa status",
+    "visaValue": "UAE visit visa",
+    "location": "Location",
+    "locationValue": "Abu Dhabi · open across the UAE",
+    "reply": "Reply time",
+    "replyValue": "TODO_REPLY_TIME",
     "replyNote": "",
     "copyEmail": "Copy email address",
+    "cvValue": "PDF, English",
     "form": {
       "title": "Send a message",
       "name": "Name",
       "email": "Email",
       "message": "Message",
-      "messagePlaceholder": "A role, a project or a question",
+      "messageHint": "A role, a project or a question. 10 characters minimum.",
       "send": "Send message",
       "sending": "Sending…",
       "successTitle": "Thanks, your message is on its way.",
-      "successBody": "I'll get back to you at the email address you gave.",
+      "successBody": "I'll reply to the email address you gave.",
       "sendAnother": "Send another message",
       "failed": "Your message didn't send. Please try again, or email me directly at <email></email>.",
+      "rateLimited": "Several messages were just sent from this connection. Please email me directly at <email></email>.",
       "errors": {
         "nameMin": "Enter your name (at least 2 characters).",
         "nameMax": "Keep your name under 80 characters.",
-        "emailInvalid": "Enter a valid email address, like name@company.com.",
+        "emailInvalid": "Enter an email address like name@company.com.",
         "messageMin": "Add a few more details (at least 10 characters).",
-        "messageMax": "Keep your message under 2000 characters."
+        "messageMax": "Keep your message under 2,000 characters."
       }
     }
   },
-  "languagePrompt": {
-    "title": "Choose your language",
-    "name": "English",
-    "action": "Continue in English",
-    "note": "You can change this any time from the top menu.",
-    "close": "Close"
+  "closing": {
+    "proof": "Stripe billing behind 200+ transactions. A POS/ERP I built alone, live with real users.",
+    "cta": "Available now in the UAE. The CV has the details.",
+    "email": "Email me"
   },
   "footer": {
-    "rights": "© {year} {name}. All rights reserved."
+    "rights": "© {year} {name}"
   },
   "notFound": {
     "metaTitle": "Page not found",
     "title": "This page doesn't exist",
-    "description": "The link may be out of date. The projects and contact details are all on the home page.",
-    "goHome": "Go to home page",
-    "viewProjects": "View projects"
+    "description": "The link may be out of date. The projects, CV and contact details are all on the home page.",
+    "goHome": "Go to the home page",
+    "viewProjects": "View selected work"
   }
 }
