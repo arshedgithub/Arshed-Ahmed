@@ -6,10 +6,12 @@ import "../../globals.css";
 
 const plexArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-plex-arabic",
-  // Only the Arabic files are preloaded; the Latin face still loads on demand for tech names.
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
+  // Arabic and Latin subsets of the same face, so tech names inside Arabic text match it optically.
+  // Preload is off: next/font would preload every weight, and the regular weight is requested first anyway.
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
+  preload: false,
 });
 
 export const metadata = rootMetadata("ar");

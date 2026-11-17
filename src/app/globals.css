@@ -1,312 +1,266 @@
 @import "tailwindcss";
 
-/* Theme is driven by data-theme on <html>, set before first paint by the inline script in layout.tsx. */
+/* Theme is driven by data-theme on <html>, set before first paint by ThemeScript. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* ---------- Design tokens ---------- */
+/* =====================================================================================
+   Design tokens
+   Direction: editorial-technical. Warm-neutral ink/paper (60%), surfaces and hairlines (30%),
+   one cobalt accent (10%) reserved for the primary action, links and focus. Status colours
+   (live / dev / neutral) are used only for status, never decoration.
+   Contrast (checked with axe): fg and muted pass AA on bg, surface and raised in both themes;
+   white on --accent-solid is >= 4.5:1.
+   ===================================================================================== */
 :root,
 [data-theme="dark"] {
-  --base: #0b0f14;
-  --surface: #111827;
-  --raised: #152033; /* case-study cards: a step lighter than surface */
-  --line: #1f2a3a;
-  --line-strong: #2c3b52;
-  --fg: #f8fafc;
-  --muted: #94a3b8;
-  --accent: #3b82f6; /* text/borders/icons: 5.1:1 on base */
-  --accent-solid: #2563eb; /* filled buttons: white text 5.2:1 */
-  --accent-solid-hover: #1d4ed8;
-  --accent-soft: rgb(59 130 246 / 0.12);
-  --success: #22c55e;
-  --danger: #f87171;
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -16px rgb(0 0 0 / 0.7);
-  --photo-glow: rgb(59 130 246 / 0.18);
-  /* Availability badge: 15:1 text contrast */
-  --avail-bg: rgb(34 197 94 / 0.14);
-  --avail-border: rgb(34 197 94 / 0.45);
-  --avail-fg: #f0fdf4;
-  --avail-dot: #22c55e;
+  --bg: #0d0f12; /* 60%: page */
+  --surface: #131619; /* 30%: cards, header */
+  --raised: #1a1d22; /* inset blocks inside cards */
+  --line: #252a31;
+  --line-strong: #343a43;
+  --fg: #eceef1;
+  --fg-2: #c6cbd2; /* body copy on long-form pages */
+  --muted: #959ca7;
+  --accent: #8fa8ff; /* 10%: links, icons, focus */
+  --accent-solid: #3d5fd1; /* primary button fill: white text 5.6:1 */
+  --accent-solid-hover: #3553bb;
+  --accent-soft: rgb(143 168 255 / 0.1);
+  --live: #4ad48a;
+  --live-soft: rgb(74 212 138 / 0.12);
+  --dev: #f0b54a;
+  --dev-soft: rgb(240 181 74 / 0.12);
+  --neutral: #a3aab4;
+  --neutral-soft: rgb(163 170 180 / 0.12);
+  --danger: #ff8b85;
+  --shadow-overlay: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px -12px rgb(0 0 0 / 0.6);
+  --photo-tile: #161a1f;
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --base: #f8fafc;
+  --bg: #f6f6f3;
   --surface: #ffffff;
-  --raised: #f1f5f9;
-  --line: #e2e8f0;
-  --line-strong: #cbd5e1;
-  --fg: #0b0f14;
-  --muted: #475569;
-  --accent: #2563eb; /* same hue, one step darker for AA on white */
-  --accent-solid: #2563eb;
-  --accent-solid-hover: #1d4ed8;
-  --accent-soft: rgb(37 99 235 / 0.08);
-  --success: #15803d;
-  --danger: #b91c1c;
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 12px 32px -16px rgb(15 23 42 / 0.18);
-  --photo-glow: #e2e8f0; /* slate-200 */
-  --photo-tile: #e8f0fa; /* pale blue, just off the page background */
-  /* Availability badge: 8.4:1 text contrast */
-  --avail-bg: #dcfce7;
-  --avail-border: #86efac;
-  --avail-fg: #14532d;
-  --avail-dot: #16a34a;
+  --raised: #f0f0ec;
+  --line: #e2e2dc;
+  --line-strong: #cdcdc5;
+  --fg: #15171b;
+  --fg-2: #30343a;
+  --muted: #5b616b;
+  --accent: #2c4fc4;
+  --accent-solid: #2c4fc4; /* white text 6.6:1 */
+  --accent-solid-hover: #2443a8;
+  --accent-soft: rgb(44 79 196 / 0.07);
+  --live: #12784a;
+  --live-soft: rgb(18 120 74 / 0.09);
+  --dev: #8a5600;
+  --dev-soft: rgb(176 112 0 / 0.1);
+  --neutral: #575d66;
+  --neutral-soft: rgb(87 93 102 / 0.09);
+  --danger: #b4231b;
+  --shadow-overlay: 0 1px 2px rgb(20 22 26 / 0.06), 0 16px 40px -12px rgb(20 22 26 / 0.18);
+  --photo-tile: #e9ebe6;
   color-scheme: light;
 }
 
 @theme inline {
-  --color-canvas: var(--base);
+  --color-canvas: var(--bg);
   --color-surface: var(--surface);
   --color-raised: var(--raised);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
   --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-solid: var(--accent-solid);
   --color-accent-solid-hover: var(--accent-solid-hover);
   --color-accent-soft: var(--accent-soft);
-  --color-success: var(--success);
+  --color-live: var(--live);
+  --color-live-soft: var(--live-soft);
+  --color-dev: var(--dev);
+  --color-dev-soft: var(--dev-soft);
+  --color-neutral: var(--neutral);
+  --color-neutral-soft: var(--neutral-soft);
   --color-danger: var(--danger);
-  --shadow-card: var(--shadow-card);
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-code), ui-monospace, monospace;
+  --shadow-overlay: var(--shadow-overlay);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-code);
 }
 
-/* Per-locale font faces. English keeps Inter and JetBrains Mono; Arabic has no mono, so both use Plex. */
+@theme {
+  /* Radius: chips < controls < cards. */
+  --radius-chip: 6px;
+  --radius-control: 10px;
+  --radius-card: 14px;
+  /* Type: display sizes on top of Tailwind's 12/14/16/18/20/24/30/36 scale. */
+  --text-display: clamp(2rem, 1.35rem + 3.2vw, 3.75rem);
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.025em;
+  --text-title: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.02em;
+  /* Motion: state changes only. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --default-transition-duration: 160ms;
+  --default-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Per-locale faces: one superfamily (IBM Plex) so Latin and Arabic share x-height and weights. */
+/* Each layout defines only its own font variables, so never reference the other locale's here: an undefined
+   var() would invalidate the whole font-family list. */
 :root {
-  --font-body: var(--font-inter);
-  --font-code: var(--font-jetbrains);
+  --font-body: var(--font-plex, system-ui), system-ui, sans-serif;
+  --font-code: var(--font-plex-mono, ui-monospace), ui-monospace, monospace;
 }
 
 :root:lang(ar) {
-  --font-body: var(--font-plex-arabic);
-  --font-code: var(--font-plex-arabic);
+  --font-body: var(--font-plex-arabic, system-ui), system-ui, sans-serif;
+  --font-code: var(--font-plex-arabic, system-ui), system-ui, sans-serif;
 }
 
 /* ---------- Base ---------- */
 @layer base {
-  /* color-scheme is set per theme on :root above; the scrollbar is themed explicitly so no light gutter shows. */
   html {
-    background: var(--base);
-    scrollbar-color: var(--line-strong) var(--base);
+    background: var(--bg);
+    scrollbar-color: var(--line-strong) var(--bg);
     scroll-behavior: smooth;
-    scroll-padding-top: 72px;
+    scroll-padding-top: 80px;
     -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
   }
 
   body {
-    background: var(--base);
+    background: var(--bg);
     color: var(--fg);
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
+    font-synthesis: none; /* never faux bold or italic */
     text-rendering: optimizeLegibility;
   }
 
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
-    border-radius: 6px;
+    border-radius: 4px;
   }
 
   ::selection {
     background: var(--accent-solid);
     color: #fff;
   }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty; /* no orphan words on the last line */
+  }
 }
 
 /* ---------- Utilities ---------- */
 @utility container-page {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1160px;
   margin-inline: auto;
   padding-inline: 16px;
 
   @media (width >= 48rem) {
-    padding-inline: 24px;
+    padding-inline: 32px;
   }
 }
 
+/* Cards: elevation from a hairline border, not a shadow. */
 @utility card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-card);
 }
 
-/* Transparent cutout straight on the page: no box, the bottom edge fades into the background.
-   The hero source keeps the cutout's full width, so the shoulders never end in a hard side edge. */
+/* Mono kicker above section titles ("01 · Selected work"). Arabic drops case and tracking (see below). */
+@utility kicker {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Transparent portrait cutout: the bottom fades into the page in dark; a square tile in light. */
 @utility photo-cutout {
-  mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
-}
-
-/* Light theme: the photo sits in a square pale-blue tile instead of floating as a cutout. */
-@utility photo-tile {
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
   [data-theme="light"] & {
-    overflow: hidden;
-    border-radius: 16px;
-    background: var(--photo-tile);
-  }
-  [data-theme="light"] & .photo-cutout {
     mask-image: none;
   }
 }
 
-/* Hero photo box. Phones: height capped so everything down to the social icons clears the tab bar;
-   square in dark, full-width tile in light. From md: square, width-driven, up to 480px. */
-@utility hero-photo-size {
-  height: 36svh;
-  aspect-ratio: 1;
-  [data-theme="light"] & {
-    width: 100%;
-    aspect-ratio: auto;
-  }
-  @media (max-height: 760px) {
-    height: 30svh;
-  }
-  /* Below 360px the buttons stack, so the photo gives up the extra row. */
-  @media (max-width: 359px) {
-    height: 26svh;
-  }
-  @media (width >= 48rem) {
-    &,
-    [data-theme="light"] & {
-      width: 100%;
-      max-width: 480px;
-      height: auto;
-      aspect-ratio: 1;
-    }
-  }
-}
-
-/* Large soft light behind the head. Pure gradient, so it never shows an edge. */
-@utility photo-glow {
-  background: radial-gradient(closest-side, var(--photo-glow), transparent);
-}
-
-/* Faint grid with a soft accent wash, used behind project fallback cards. */
-@utility project-pattern {
-  background-image:
-    radial-gradient(90% 70% at 100% 0%, var(--accent-soft), transparent 70%),
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: auto, 24px 24px, 24px 24px;
-  background-position: 0 0, -1px -1px, -1px -1px;
-
-  [dir="rtl"] & {
-    background-image:
-      radial-gradient(90% 70% at 0% 0%, var(--accent-soft), transparent 70%),
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  }
-}
-
-/* ---------- Availability badge dot: slow pulse ---------- */
-@keyframes avail-pulse {
+/* ---------- Availability dot ---------- */
+@keyframes pulse-ring {
   0% {
     transform: scale(1);
-    opacity: 0.6;
+    opacity: 0.55;
   }
   70%,
   100% {
-    transform: scale(2.6);
+    transform: scale(2.4);
     opacity: 0;
   }
 }
 
-.avail-dot::after {
+.pulse-dot::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 999px;
-  background: var(--avail-dot);
-  animation: avail-pulse 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  background: currentColor;
+  animation: pulse-ring 2.4s var(--ease-standard) infinite;
 }
 
-/* ---------- Hero load reveal (CSS-only so it runs before hydration and never delays LCP) ---------- */
-@keyframes rise-in {
+/* ---------- Mobile menu sheet ---------- */
+@keyframes sheet-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(-6px);
   }
 }
 
-.hero-reveal > * {
-  animation: rise-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-.hero-reveal > :nth-child(2) { animation-delay: 60ms; }
-.hero-reveal > :nth-child(3) { animation-delay: 120ms; }
-.hero-reveal > :nth-child(4) { animation-delay: 180ms; }
-.hero-reveal > :nth-child(5) { animation-delay: 240ms; }
-
-/* ---------- First-visit language dialog ---------- */
-@keyframes dialog-in {
-  from {
-    opacity: 0;
-    transform: scale(0.98);
-  }
+.menu-sheet:not([hidden]) {
+  animation: sheet-in 160ms var(--ease-standard);
 }
 
-@keyframes backdrop-in {
-  from {
-    opacity: 0;
-  }
-}
-
-.lang-dialog[open] {
-  animation: dialog-in 200ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.lang-dialog[open]::backdrop {
-  animation: backdrop-in 200ms ease-out;
-}
-
-/* The page behind stays put: no background scrolling, and the gutter keeps the scrollbar's width reserved. */
-html:has(.lang-dialog[open]) {
+html:has(.menu-sheet:not([hidden])) {
   overflow: hidden;
-  scrollbar-gutter: stable;
 }
 
-/* ---------- MDX case-study prose ---------- */
-.prose-case h2 {
-  margin-top: 2.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+/* ---------- Toast (saved-language hint) ---------- */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
-.prose-case h2:first-child { margin-top: 0; }
-.prose-case h3 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+
+.toast-in {
+  animation: toast-in 200ms var(--ease-standard);
 }
+
+/* ---------- Long-form case-study text ---------- */
 .prose-case p,
 .prose-case li {
-  color: var(--muted);
+  color: var(--fg-2);
   line-height: 1.75;
 }
-.prose-case p + p { margin-top: 1rem; }
-.prose-case strong { color: var(--fg); font-weight: 600; }
-.prose-case ul:not([class]) {
-  display: grid;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+.prose-case p + p {
+  margin-top: 1rem;
 }
-.prose-case ul:not([class]) > li {
-  position: relative;
-  padding-inline-start: 1.5rem;
+.prose-case strong {
+  color: var(--fg);
+  font-weight: 600;
 }
-.prose-case ul:not([class]) > li::before {
-  content: "";
-  position: absolute;
-  inset-inline-start: 0.25rem;
-  top: 0.7em;
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--accent);
-}
-/* Link text in the foreground colour (accent on the raised card is under 4.5:1), accent underline. */
 .prose-case a:not([class]) {
   color: var(--fg);
   font-weight: 500;
@@ -315,39 +269,70 @@ html:has(.lang-dialog[open]) {
   text-underline-offset: 3px;
 }
 
+/* Bullet lists drawn with logical properties so they mirror in RTL. */
+.list-dash > li {
+  position: relative;
+  padding-inline-start: 1.25rem;
+}
+.list-dash > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.125rem;
+  top: 0.8em;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--muted);
+}
+
 /* ---------- Arabic typography ---------- */
-/* Unlayered on purpose: these have to win over Tailwind's layered utilities. Glyphs sit taller than Latin, so the
-   small sizes go up 1px and everything gets more leading. Letter-spacing and case would break letter joining. */
+/* Unlayered so it beats Tailwind's layered utilities. Arabic glyphs sit taller than Latin, so small sizes go
+   up 1px and leading opens up. Letter-spacing and case transforms would break letter joining. */
 :root:lang(ar) {
   --text-xs: 0.8125rem;
-  --text-xs--line-height: 1.75;
+  --text-xs--line-height: 1.7;
   --text-sm: 0.9375rem;
   --text-sm--line-height: 1.75;
   --text-base: 1.0625rem;
-  --text-base--line-height: 1.75;
+  --text-base--line-height: 1.8;
   --text-lg: 1.1875rem;
   --text-lg--line-height: 1.75;
 }
 
 :root:lang(ar) body {
   font-size: var(--text-base);
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 :root:lang(ar) * {
-  letter-spacing: 0;
-  text-transform: none;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
 
-:root:lang(ar) :is(h1, h2, h3, h4),
-:root:lang(ar) :is(h1, h2, h3, h4) * {
-  line-height: 1.4;
+:root:lang(ar) :is(h1, h2, h3, h4) {
+  line-height: 1.45;
+}
+
+/* ---------- Print: everything visible, no chrome ---------- */
+@media print {
+  header[data-site-header],
+  footer,
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .avail-dot::after { display: none; }
-  .lang-dialog[open]::backdrop { animation: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  .pulse-dot::after {
+    display: none;
+  }
   *,
   *::before,
   *::after {

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { NotFoundPage } from "@/components/pages/not-found-page";
 import { SiteDocument, siteViewport } from "@/components/site-document";
-import { latinFontClassName } from "@/lib/fonts-en";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -18,7 +17,8 @@ export const viewport = siteViewport;
 export default function GlobalNotFound() {
   setRequestLocale("en");
   return (
-    <SiteDocument locale="en" fontClassName={latinFontClassName} redirectToSavedLocale={false}>
+    // System font on purpose: importing next/font here would preload the Latin face on every route, Arabic included.
+    <SiteDocument locale="en" fontClassName="" showLocaleHint={false}>
       <NotFoundPage />
     </SiteDocument>
   );
