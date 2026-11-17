@@ -21,5 +21,6 @@ export const homeSources = ["messages", "src/lib/site.ts", "src/components/pages
 
 /** Files whose content makes up a case study. */
 export function projectSources(slug: string) {
-  return [`src/content/projects/${slug}.mdx`, `src/content/projects/ar/${slug}.mdx`, "messages", "src/lib/site.ts", "src/components/pages/project-page.tsx"];
+  void slug; // Case-study text lives in messages/, shared by every project.
+  return ["messages", "src/lib/site.ts", "src/components/pages/project-page.tsx"];
 }

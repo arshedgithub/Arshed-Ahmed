@@ -29,11 +29,16 @@ export function ArchitectureDiagram({ id, title, architecture }: { id: string; t
   });
   const height = architecture.rows.length * ROW_H - ROW_GAP + PAD;
   const titleOf = new Map(architecture.rows.flatMap((r) => r.nodes.map((n) => [n.id, n.title] as const)));
-  const desc = architecture.edges.map(([a, b]) => t("architectureEdge", { from: titleOf.get(a) ?? a, to: titleOf.get(b) ?? b })).join(". ");
+  // One grammatical sentence per locale: "Connections: A to B; C to D." / "الاتصالات: من A إلى B؛ من C إلى D."
+  const desc = t("architectureEdges", {
+    list: architecture.edges
+      .map(([a, b]) => t("architectureEdge", { from: titleOf.get(a) ?? a, to: titleOf.get(b) ?? b }))
+      .join(rtl ? "؛ " : "; "),
+  });
   const marker = `arrow-${id}`;
 
   return (
-    <figure className="rounded-xl border border-line bg-raised p-3 md:p-5">
+    <figure className="rounded-card border border-line bg-surface p-3 md:p-6">
       <svg
         viewBox={`0 0 ${W} ${height}`}
         role="img"
@@ -41,7 +46,7 @@ export function ArchitectureDiagram({ id, title, architecture }: { id: string; t
         className="mx-auto block h-auto w-full max-w-[560px]"
       >
         <title id={`${id}-title`}>{title}</title>
-        <desc id={`${id}-desc`}>{desc}.</desc>
+        <desc id={`${id}-desc`}>{desc}</desc>
         <defs>
           <marker id={marker} viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
             <path d="M0 0 L8 4 L0 8 z" className="fill-accent" />
@@ -78,7 +83,7 @@ export function ArchitectureDiagram({ id, title, architecture }: { id: string; t
               const cx = b.x + b.w / 2;
               return (
                 <g key={node.id}>
-                  <rect x={b.x} y={b.y} width={b.w} height={NODE_H} rx={8} className="fill-surface stroke-line-strong" strokeWidth={1} />
+                  <rect x={b.x} y={b.y} width={b.w} height={NODE_H} rx={8} className="fill-raised stroke-line-strong" strokeWidth={1} />
                   <text x={cx} y={b.y + (node.sub ? 20 : 28)} textAnchor="middle" className="fill-fg font-sans" fontSize={11.5} fontWeight={600}>
                     {node.title}
                   </text>

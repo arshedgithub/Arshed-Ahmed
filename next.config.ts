@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import createMDX from "@next/mdx";
 import createNextIntlPlugin from "next-intl/plugin";
 
 // DEPLOY_TARGET=static builds a fully static site into /out (Cloudflare Pages, Netlify).
@@ -11,7 +10,7 @@ const nextConfig: NextConfig = {
   // `dynamic = "force-static"` on sitemap/robots, which Cache Components does not allow.
   // Keeping it off means both deploy targets render identically.
   // `*.server.ts` route files (the Resend contact API) only exist in server builds.
-  pageExtensions: isStaticExport ? ["tsx", "ts", "mdx"] : ["tsx", "ts", "mdx", "server.ts"],
+  pageExtensions: isStaticExport ? ["tsx", "ts"] : ["tsx", "ts", "server.ts"],
   ...(isStaticExport ? { output: "export" as const } : {}),
   images: isStaticExport
     ? { unoptimized: true }
@@ -19,10 +18,10 @@ const nextConfig: NextConfig = {
         formats: ["image/avif", "image/webp"],
         // Largest source image is 1200px wide, so nothing above that is ever useful.
         deviceSizes: [360, 414, 640, 750, 828, 1080, 1200],
-        imageSizes: [96, 128, 192, 256, 384, 480],
+        imageSizes: [48, 96, 128, 192, 256, 384, 480],
       },
-  // No www -> apex redirect here: Vercel's domain settings own that (see README, "Canonical host").
-  // A code redirect would loop while the domain setting still points apex -> www.
+  // The canonical host is www (src/lib/site.ts). Vercel's domain settings already 308 the apex to www;
+  // public/_redirects does the same on Netlify.
   env: {
     BUILD_YEAR: String(new Date().getFullYear()),
   },
@@ -32,9 +31,22 @@ const nextConfig: NextConfig = {
     // Pin the root: a stray lockfile higher up the tree would otherwise be picked up.
     root: process.cwd(),
   },
+  async headers() {
+    // Vercel ignores public/_headers, so the same security headers are set here for server builds.
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        ],
+      },
+    ];
+  },
 };
 
-const withMDX = createMDX({});
 const withNextIntl = createNextIntlPlugin();
 
-export default withNextIntl(withMDX(nextConfig));
+export default withNextIntl(nextConfig);
