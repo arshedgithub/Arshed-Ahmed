@@ -53,7 +53,7 @@ export function HomeJsonLd() {
             email: `mailto:${site.email}`,
             telephone: site.phoneE164,
             nationality: { "@type": "Country", name: "Sri Lanka" },
-            address: { "@type": "PostalAddress", addressCountry: "AE" },
+            address: { "@type": "PostalAddress", addressLocality: "Abu Dhabi", addressCountry: "AE" },
             sameAs: [site.linkedinUrl, site.githubUrl],
             knowsAbout: [...knowsAbout],
             knowsLanguage: [...knowsLanguage],

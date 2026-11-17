@@ -15,7 +15,7 @@ function localizedEntries(path: string, entry: Omit<MetadataRoute.Sitemap[number
     alternates: {
       languages: {
         en: absolute(localePath("en", path)),
-        "ar-AE": absolute(localePath("ar", path)),
+        ar: absolute(localePath("ar", path)),
         "x-default": absolute(localePath(routing.defaultLocale, path)),
       },
     },

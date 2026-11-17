@@ -15,7 +15,7 @@ export function localeAlternates(locale: Locale, path: string): Metadata["altern
     canonical: localePath(locale, path),
     languages: {
       en: localePath("en", path),
-      "ar-AE": localePath("ar", path),
+      ar: localePath("ar", path),
       "x-default": localePath(routing.defaultLocale, path),
     },
   };
