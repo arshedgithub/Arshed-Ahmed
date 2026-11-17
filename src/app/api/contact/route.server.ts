@@ -9,8 +9,30 @@ import { site } from "@/lib/site";
  *   RESEND_API_KEY      Resend API key
  *   CONTACT_TO_EMAIL    inbox that receives messages (defaults to the site email)
  *   CONTACT_FROM_EMAIL  verified Resend sender, e.g. "Portfolio <contact@arshedahmed.com>"
+ *
+ * Spam protection: a honeypot field, and a per-IP rate limit (5 messages per 10 minutes). The limit lives in
+ * memory, so it is per server instance: enough to stop a single client hammering the form, not a global quota.
+ * For a hard limit, put Vercel's firewall rate limiting or Cloudflare Turnstile in front (see README).
  */
+const WINDOW_MS = 10 * 60 * 1000;
+const MAX_PER_WINDOW = 5;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear(); // keep memory bounded
+  return recent.length > MAX_PER_WINDOW;
+}
+
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (rateLimited(ip)) {
+    return Response.json({ ok: false, error: "Too many requests" }, { status: 429, headers: { "Retry-After": "600" } });
+  }
+
   let body: unknown;
   try {
     body = await request.json();

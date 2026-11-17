@@ -6,12 +6,12 @@ import { cn } from "@/lib/utils";
 
 // Shared by the lightweight shell and the full react-hook-form version, so both render identically.
 
-export const formClass = "card relative grid gap-4 p-5 md:p-6";
+export const formClass = "card relative grid gap-5 p-5 md:p-7";
 
 export const inputClass =
-  "w-full rounded-lg border border-line-strong bg-canvas px-3 py-2.5 text-base text-fg placeholder:text-muted/70 transition-colors focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 aria-[invalid=true]:border-danger md:text-sm";
+  "w-full rounded-control border border-line-strong bg-canvas px-3 py-2.5 text-base text-fg transition-colors focus-visible:border-accent focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-accent aria-[invalid=true]:border-danger";
 
-// Addresses are always left-to-right, even on the Arabic form.
+// Addresses are always left-to-right, even on the Arabic form; text-align start keeps them on the reading edge.
 export const emailInputClass = cn(inputClass, "text-start");
 
 export const textareaClass = cn(inputClass, "resize-y");
@@ -19,27 +19,48 @@ export const textareaClass = cn(inputClass, "resize-y");
 export function FormTitle() {
   const t = useTranslations("contact.form");
   return (
-    <h3 id="contact-form-title" className="font-semibold">
+    <h3 id="contact-form-title" className="text-lg font-semibold">
       {t("title")}
     </h3>
   );
 }
 
-export function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: ReactNode }) {
+/** Visible label always; an optional hint below it is tied to the input with aria-describedby. */
+export function Field({
+  id,
+  label,
+  hint,
+  error,
+  children,
+}: {
+  id: string;
+  label: string;
+  hint?: string;
+  error?: string;
+  children: ReactNode;
+}) {
   return (
     <div className="grid gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium">
+      <label htmlFor={id} className="text-sm font-medium text-fg">
         {label}
       </label>
+      {hint && (
+        <p id={`${id}-hint`} className="text-sm text-muted">
+          {hint}
+        </p>
+      )}
       {children}
       {error && (
-        <p id={`${id}-error`} className="text-sm text-danger">
+        <p id={`${id}-error`} className="text-sm font-medium text-danger">
           {error}
         </p>
       )}
     </div>
   );
 }
+
+export const describedBy = (id: string, hint: boolean, error: boolean) =>
+  [hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ") || undefined;
 
 /** Spam honeypot: off-screen, hidden from screen readers, out of the tab order, no visible text. */
 export function HoneypotWrapper({ children }: { children: ReactNode }) {
@@ -50,7 +71,7 @@ export function HoneypotWrapper({ children }: { children: ReactNode }) {
   );
 }
 
-export const submitClass = buttonClasses("primary", "w-full disabled:opacity-70");
+export const submitClass = buttonClasses("primary", "w-full disabled:opacity-70 sm:w-auto sm:justify-self-start");
 
 /**
  * Static stand-in rendered until the interactive form loads. Same markup and size,
@@ -75,8 +96,8 @@ export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFor
       <Field id="email" label={t("email")}>
         <input id="email" name="email" type="email" dir="ltr" inputMode="email" autoComplete="email" className={emailInputClass} />
       </Field>
-      <Field id="message" label={t("message")}>
-        <textarea id="message" name="message" rows={5} className={textareaClass} placeholder={t("messagePlaceholder")} />
+      <Field id="message" label={t("message")} hint={t("messageHint")}>
+        <textarea id="message" name="message" rows={5} className={textareaClass} aria-describedby="message-hint" />
       </Field>
       <HoneypotWrapper>
         <input id="_gotcha" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />

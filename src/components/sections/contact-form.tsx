@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleAlert, CircleCheck, LoaderCircle, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { buttonClasses } from "@/components/ui/button";
 import { contactSchema, type ContactErrorKey, type ContactInput } from "@/lib/contact-schema";
@@ -11,6 +11,7 @@ import {
   Field,
   FormTitle,
   HoneypotWrapper,
+  describedBy,
   emailInputClass,
   formClass,
   inputClass,
@@ -18,7 +19,7 @@ import {
   textareaClass,
 } from "./contact-form-ui";
 
-type Status = "idle" | "success" | "error";
+type Status = "idle" | "success" | "error" | "rateLimited";
 
 export type ContactFormProps = {
   endpoint: string | null;
@@ -29,9 +30,14 @@ export type ContactFormProps = {
   focusId?: string;
 };
 
+/**
+ * Validation runs on blur, then live once a field has been touched (react-hook-form "onTouched"), so errors
+ * never appear while someone is still typing their first attempt, and clear as soon as the value is fixed.
+ */
 export function ContactForm({ endpoint, email, initialValues, focusId }: ContactFormProps) {
   const t = useTranslations("contact.form");
   const [status, setStatus] = useState<Status>("idle");
+  const resultRef = useRef<HTMLDivElement>(null);
   const {
     register,
     handleSubmit,
@@ -50,6 +56,10 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
     if (focusId) document.getElementById(focusId)?.focus();
   }, [focusId]);
 
+  useEffect(() => {
+    if (status === "success") resultRef.current?.focus();
+  }, [status]);
+
   async function onSubmit(data: ContactInput) {
     setStatus("idle");
     // Bots fill the honeypot; pretend it worked and drop it.
@@ -67,6 +77,10 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.status === 429) {
+        setStatus("rateLimited");
+        return;
+      }
       if (!res.ok) throw new Error(String(res.status));
       reset();
       setStatus("success");
@@ -77,10 +91,10 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
 
   if (status === "success") {
     return (
-      <div role="status" className="card flex h-full flex-col items-start justify-center gap-3 p-6">
-        <CircleCheck size={28} className="text-success" aria-hidden="true" />
+      <div ref={resultRef} tabIndex={-1} role="status" className="card flex h-full flex-col items-start justify-center gap-3 p-6 focus:outline-none md:p-7">
+        <CircleCheck size={28} className="text-live" aria-hidden="true" />
         <p className="text-lg font-semibold">{t("successTitle")}</p>
-        <p className="text-muted">{t("successBody")}</p>
+        <p className="text-fg-2">{t("successBody")}</p>
         <button type="button" onClick={() => setStatus("idle")} className={buttonClasses("secondary", "mt-2")}>
           {t("sendAnother")}
         </button>
@@ -88,38 +102,36 @@ export function ContactForm({ endpoint, email, initialValues, focusId }: Contact
     );
   }
 
+  const mailLink = () => (
+    <a href={`mailto:${email}`} className="font-medium text-fg underline decoration-accent underline-offset-2">
+      <bdi dir="ltr">{email}</bdi>
+    </a>
+  );
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className={formClass} aria-labelledby="contact-form-title">
       <FormTitle />
 
       <Field id="name" label={t("name")} error={errorText(errors.name?.message)}>
-        <input id="name" type="text" autoComplete="name" className={inputClass} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} {...register("name")} />
+        <input id="name" type="text" autoComplete="name" className={inputClass} aria-invalid={!!errors.name} aria-describedby={describedBy("name", false, !!errors.name)} {...register("name")} />
       </Field>
 
       <Field id="email" label={t("email")} error={errorText(errors.email?.message)}>
-        <input id="email" type="email" dir="ltr" inputMode="email" autoComplete="email" className={emailInputClass} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} {...register("email")} />
+        <input id="email" type="email" dir="ltr" inputMode="email" autoComplete="email" className={emailInputClass} aria-invalid={!!errors.email} aria-describedby={describedBy("email", false, !!errors.email)} {...register("email")} />
       </Field>
 
-      <Field id="message" label={t("message")} error={errorText(errors.message?.message)}>
-        <textarea id="message" rows={5} className={textareaClass} placeholder={t("messagePlaceholder")} aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} {...register("message")} />
+      <Field id="message" label={t("message")} hint={t("messageHint")} error={errorText(errors.message?.message)}>
+        <textarea id="message" rows={5} className={textareaClass} aria-invalid={!!errors.message} aria-describedby={describedBy("message", true, !!errors.message)} {...register("message")} />
       </Field>
 
       <HoneypotWrapper>
         <input id="_gotcha" type="text" tabIndex={-1} autoComplete="off" {...register("_gotcha")} />
       </HoneypotWrapper>
 
-      {status === "error" && (
-        <p role="alert" className="flex items-start gap-2 rounded-lg border border-danger/40 bg-danger/10 p-3 text-sm text-fg">
+      {(status === "error" || status === "rateLimited") && (
+        <p role="alert" className="flex items-start gap-2 rounded-control border border-danger/40 p-3 text-sm text-fg">
           <CircleAlert size={18} className="mt-0.5 shrink-0 text-danger" aria-hidden="true" />
-          <span>
-            {t.rich("failed", {
-              email: () => (
-                <a href={`mailto:${email}`} className="font-medium text-accent underline underline-offset-2">
-                  <bdi dir="ltr">{email}</bdi>
-                </a>
-              ),
-            })}
-          </span>
+          <span>{t.rich(status === "rateLimited" ? "rateLimited" : "failed", { email: mailLink })}</span>
         </p>
       )}
 

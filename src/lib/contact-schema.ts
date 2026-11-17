@@ -12,8 +12,10 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "messageMin" satisfies ContactErrorKey)
     .max(2000, "messageMax" satisfies ContactErrorKey),
-  // Honeypot: hidden from people, filled in by bots. Formspree also recognises this field name.
-  _gotcha: z.string().max(0).optional(),
+  // Honeypot: hidden from people, filled in by bots. It must pass validation so the form and the API can
+  // recognise a filled one and quietly drop it (a validation error would tell the bot what went wrong).
+  // Formspree also recognises this field name.
+  _gotcha: z.string().max(500).optional(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
