@@ -1,4 +1,4 @@
-import { ArrowDown, BadgeCheck, CalendarCheck, Download, MapPin, Plane } from "lucide-react";
+import { ArrowDown, BadgeCheck, Download, MapPin } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { ButtonLink } from "@/components/ui/button";
@@ -6,8 +6,8 @@ import { SocialLinks } from "@/components/ui/social-links";
 import { cvFor } from "@/lib/cv";
 
 /**
- * 5-second test, in reading order: who (name, role) -> value (headline) -> proof (one number) -> availability
- * (notice, visa, place) -> one primary action. The portrait is a small avatar on phones so the headline and proof
+ * 5-second test, in reading order: role + availability -> value (headline) -> proof (one number) -> where
+ * (UAE-wide) -> one primary action. Work authorisation lives in Contact, not here. The portrait is a small avatar on phones so the headline and proof
  * sit above the fold at 375x667; from md it becomes the right-hand column (halo effect, first impression).
  */
 export function Hero() {
@@ -15,15 +15,11 @@ export function Hero() {
   const common = useTranslations("common");
   const locale = useLocale();
   const cv = cvFor(locale);
-  const facts = [
-    { key: "notice", Icon: CalendarCheck },
-    { key: "visa", Icon: Plane },
-    { key: "location", Icon: MapPin },
-  ] as const;
+  const facts = [{ key: "openTo", Icon: MapPin }] as const;
 
   return (
     <section id="top" aria-labelledby="hero-title" className="overflow-x-clip">
-      <div className="container-page grid items-center gap-10 pt-6 pb-12 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:pt-16 md:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16 lg:pt-20 lg:pb-24">
+      <div className="container-page grid items-center gap-10 pt-5 pb-12 md:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] md:pt-12 md:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14 lg:pt-12 lg:pb-24">
         <div className="flex flex-col items-start">
           {/* Who: avatar (phones only) + name + availability. */}
           <div className="flex items-center gap-3">
@@ -39,9 +35,8 @@ export function Hero() {
               />
             </div>
             <div>
-              {/* The name repeats the header's on phones on purpose: the headline below already carries the role,
-                  and the face + name pairing is what people remember. */}
-              <p className="text-base font-semibold text-fg">{common("name")}</p>
+              {/* The header already shows the name, so this line carries the professional identity. */}
+              <p className="kicker text-fg">{common("jobTitle")}</p>
               <p className="flex items-center gap-2 text-sm text-muted">
                 <span aria-hidden="true" className="pulse-dot relative size-1.5 shrink-0 rounded-full bg-live text-live" />
                 {common("status")}
@@ -49,19 +44,23 @@ export function Hero() {
             </div>
           </div>
 
-          <h1 id="hero-title" className="mt-6 max-w-[20ch] text-display font-semibold md:mt-8">
+          <h1 id="hero-title" className="mt-5 max-w-[23ch] text-display font-semibold md:mt-6 lg:max-w-[25ch]">
             {t("headline")}
           </h1>
 
-          <p className="mt-4 max-w-[60ch] text-base text-pretty text-fg-2 md:mt-6 md:text-lg">{t("lede")}</p>
+          <p className="mt-4 max-w-[60ch] text-base text-pretty text-fg-2 md:mt-5 md:text-lg">{t("lede")}</p>
 
-          {/* The single strongest number, anchored right under the value proposition. */}
-          <p className="mt-5 flex max-w-[60ch] items-start gap-2.5 border-s-2 border-accent ps-3 text-sm font-medium text-pretty text-fg md:text-base">
-            <BadgeCheck size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-accent max-md:hidden" />
-            {t("proof")}
-          </p>
+          {/* The single strongest number, labelled as evidence, right under the value proposition. */}
+          <div className="mt-4 max-w-[60ch] border-s-2 border-accent ps-3 md:mt-5">
+            <p className="kicker flex items-center gap-1.5 text-accent">
+              <BadgeCheck size={14} aria-hidden="true" className="shrink-0" />
+              {t("proofLabel")}
+            </p>
+            <p className="mt-1.5 text-sm font-medium text-pretty text-fg md:text-base">{t("proof")}</p>
+          </div>
 
-          <ul aria-label={t("factsAria")} className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+          {/* Availability and place are in the status line above; work authorisation is in Contact, not the hero. */}
+          <ul aria-label={t("factsAria")} className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted md:mt-5">
             {facts.map(({ key, Icon }) => (
               <li key={key} className="inline-flex items-center gap-1.5">
                 <Icon size={15} aria-hidden="true" className="shrink-0" />
@@ -70,7 +69,7 @@ export function Hero() {
             ))}
           </ul>
 
-          <div className="mt-7 flex w-full flex-col gap-3 min-[400px]:w-auto min-[400px]:flex-row min-[400px]:flex-wrap md:mt-9">
+          <div className="mt-6 flex w-full flex-col gap-3 min-[400px]:w-auto min-[400px]:flex-row min-[400px]:flex-wrap md:mt-7">
             <ButtonLink href={cv.href} hrefLang={cv.lang} download>
               <Download size={16} aria-hidden="true" />
               {cv.lang === locale ? common("downloadCv") : common("downloadCvEnglish")}
@@ -94,7 +93,7 @@ export function Hero() {
               height={1200}
               preload
               // Last entry: phones hide this column, so their preload resolves to the smallest candidate.
-              sizes="(min-width: 1024px) 416px, (min-width: 768px) 352px, 48px"
+              sizes="(min-width: 1024px) 384px, (min-width: 768px) 352px, 48px"
               className="photo-cutout absolute inset-x-0 bottom-0 h-[92%] w-full object-cover object-top"
             />
           </div>

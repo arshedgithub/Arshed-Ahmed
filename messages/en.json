@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Arshed Ahmed | Full-Stack Engineer for Payments and AI, UAE",
-    "description": "Full-stack engineer in Abu Dhabi, available now. I build payments and AI products with Next.js, TypeScript and Node.js. My Stripe billing processed 200+ transactions.",
+    "title": "Arshed Ahmed | Full-Stack Engineer: SaaS, Payments & AI",
+    "description": "Full-stack engineer in Abu Dhabi, available now. I build and ship SaaS, secure payment systems and AI products. My Stripe billing supports 200+ transactions.",
     "ogImageAlt": "Arshed Ahmed, full-stack engineer who builds payments and AI products",
     "profileName": "Arshed Ahmed | Full-Stack Software Engineer"
   },
@@ -10,8 +10,8 @@
     "firstName": "Arshed",
     "lastName": "Ahmed",
     "jobTitle": "Full-Stack Software Engineer",
-    "positioning": "Full-stack engineer who builds payments and AI products with Next.js, TypeScript and Node.js.",
-    "status": "Available now · Abu Dhabi, UAE",
+    "positioning": "Full-stack engineer who builds and ships SaaS, secure payment systems and AI-powered products.",
+    "status": "Available immediately · Abu Dhabi, UAE",
     "locationLine": "Based in Abu Dhabi · open to roles across the UAE",
     "skipToContent": "Skip to content",
     "logoHome": "{name}, home",
@@ -58,14 +58,13 @@
   },
   "hero": {
     "imageAlt": "Arshed Ahmed in a sage suit jacket and white shirt",
-    "headline": "Full-stack engineer who builds payments and AI products",
-    "lede": "I take web products from data model to production: Next.js and TypeScript in front, Node.js and PostgreSQL behind, Stripe billing and LLM features wired in, shipped through CI/CD.",
-    "proof": "Stripe billing I built at Softsora processed 200+ transactions across 10+ products.",
+    "headline": "I build and ship SaaS, secure payment systems and AI‑powered products.",
+    "lede": "Full-stack software engineer, 4+ years building software (2 full-time). I turn product requirements into production-ready applications, across backend architecture, web interfaces, payment integrations, AI features and deployment.",
+    "proofLabel": "Proven delivery",
+    "proof": "Built secure Stripe billing at Softsora (subscriptions, proration, webhooks, refunds) supporting 200+ transactions across 10+ products.",
     "factsAria": "Availability",
-    "notice": "Notice: immediate",
-    "visa": "UAE visit visa",
-    "location": "Abu Dhabi · open across the UAE",
-    "viewWork": "View selected work",
+    "openTo": "Open to opportunities across the UAE",
+    "viewWork": "Explore my work",
     "contactAria": "Contact links"
   },
   "proof": {
@@ -630,6 +629,6 @@
     "title": "This page doesn't exist",
     "description": "The link may be out of date. The projects, CV and contact details are all on the home page.",
     "goHome": "Go to the home page",
-    "viewProjects": "View selected work"
+    "viewProjects": "Explore my work"
   }
 }
