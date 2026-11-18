@@ -89,7 +89,9 @@ export function Contact() {
                     </span>
                   </span>
                 </a>
-                {key === "email" && <CopyButton value={contactEmail} label={t("copyEmail")} />}
+                {key === "email" && (
+                  <CopyButton value={contactEmail} labels={{ action: t("copyEmail"), copied: common("copied"), failed: common("copyFailed") }} />
+                )}
               </li>
             ))}
             <li>
@@ -115,7 +117,7 @@ export function Contact() {
         </div>
 
         <div className="lg:pt-2">
-          <LazyContactForm endpoint={contactEndpoint()} email={contactEmail} />
+          <LazyContactForm endpoint={contactEndpoint()} email={contactEmail} copy={catalog(locale).contact.form} />
         </div>
       </div>
     </Section>

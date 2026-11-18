@@ -1,7 +1,6 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
 import type { Messages } from "@/i18n/messages";
@@ -27,8 +26,7 @@ function savedLocale(): Locale | null {
  * the other language, a small toast offers the equivalent page in the saved one. Fixed position, so it never
  * shifts layout; rendered only in the browser, so it is not in the prerendered HTML.
  */
-export function LocaleHint({ copy }: { copy: Record<Locale, Messages["localeHint"]> }) {
-  const locale = useLocale();
+export function LocaleHint({ locale, copy }: { locale: Locale; copy: Record<Locale, Messages["localeHint"]> }) {
   const path = equivalentPath(usePathname());
   const saved = useSyncExternalStore(subscribeToNothing, savedLocale, () => null);
   const [dismissed, setDismissed] = useState(false);

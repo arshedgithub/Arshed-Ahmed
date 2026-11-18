@@ -51,10 +51,10 @@ export function Hero() {
             {t("headline")}
           </h1>
 
-          <p className="mt-4 max-w-[60ch] text-base text-fg-2 md:mt-6 md:text-lg">{t("lede")}</p>
+          <p className="mt-4 max-w-[60ch] text-base text-pretty text-fg-2 md:mt-6 md:text-lg">{t("lede")}</p>
 
           {/* The single strongest number, anchored right under the value proposition. */}
-          <p className="mt-5 flex max-w-[60ch] items-start gap-2.5 border-s-2 border-accent ps-3 text-sm font-medium text-fg md:text-base">
+          <p className="mt-5 flex max-w-[60ch] items-start gap-2.5 border-s-2 border-accent ps-3 text-sm font-medium text-pretty text-fg md:text-base">
             <BadgeCheck size={18} aria-hidden="true" className="mt-0.5 shrink-0 text-accent max-md:hidden" />
             {t("proof")}
           </p>

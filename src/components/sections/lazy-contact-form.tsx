@@ -3,14 +3,14 @@
 import { useCallback, useEffect, useRef, useState, type ComponentType } from "react";
 import type { ContactInput } from "@/lib/contact-schema";
 import type { ContactFormProps } from "./contact-form";
-import { ContactFormShell } from "./contact-form-ui";
+import { ContactFormShell, type FormCopy } from "./contact-form-ui";
 
 /**
  * Renders a static copy of the form and loads the real one (react-hook-form + zod) only when the
  * contact section nears the viewport or the visitor interacts with it. Keeps ~90 KB of JS out of
  * the initial page load.
  */
-export function LazyContactForm({ endpoint, email }: { endpoint: string | null; email: string }) {
+export function LazyContactForm({ endpoint, email, copy }: { endpoint: string | null; email: string; copy: FormCopy }) {
   const shellRef = useRef<HTMLFormElement>(null);
   const loading = useRef(false);
   const [loaded, setLoaded] = useState<{
@@ -53,7 +53,7 @@ export function LazyContactForm({ endpoint, email }: { endpoint: string | null; 
 
   if (loaded) {
     const { Form, initialValues, focusId } = loaded;
-    return <Form endpoint={endpoint} email={email} initialValues={initialValues} focusId={focusId} />;
+    return <Form endpoint={endpoint} email={email} copy={copy} initialValues={initialValues} focusId={focusId} />;
   }
-  return <ContactFormShell formRef={shellRef} onActivate={activate} />;
+  return <ContactFormShell formRef={shellRef} onActivate={activate} copy={copy} />;
 }

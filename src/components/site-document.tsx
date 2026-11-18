@@ -1,5 +1,5 @@
 import type { Viewport } from "next";
-import { NextIntlClientProvider, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { ThemeScript } from "@/components/seo/theme-script";
@@ -33,7 +33,6 @@ export function SiteDocument({
   children: ReactNode;
 }) {
   const t = useTranslations("common");
-  const { common, nav, contact } = catalog(locale);
   return (
     <html
       lang={locale}
@@ -53,14 +52,14 @@ export function SiteDocument({
         >
           {t("skipToContent")}
         </a>
-        <NextIntlClientProvider locale={locale} messages={{ common, nav, contact }} timeZone="UTC">
-          <SiteHeader />
-          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
-            {children}
-          </main>
-          <SiteFooter />
-          {showLocaleHint && <LocaleHint copy={{ en: catalog("en").localeHint, ar: catalog("ar").localeHint }} />}
-        </NextIntlClientProvider>
+        {/* No NextIntlClientProvider: client components get their strings as props, so the browser never
+            downloads the message catalogs or the ICU formatter. */}
+        <SiteHeader />
+        <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+          {children}
+        </main>
+        <SiteFooter />
+        {showLocaleHint && <LocaleHint locale={locale} copy={{ en: catalog("en").localeHint, ar: catalog("ar").localeHint }} />}
       </body>
     </html>
   );

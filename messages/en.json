@@ -80,7 +80,6 @@
     "title": "Four products, and where each one stands",
     "description": "Two of my own and two built at Softsora. Green means live with real users; amber means still in development.",
     "readCaseStudy": "Read case study",
-    "readCaseStudyAria": "Read the {title} case study",
     "linkLabels": {
       "live": "Visit live product",
       "demo": "Watch demo",

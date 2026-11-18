@@ -1,10 +1,12 @@
 import { Send } from "lucide-react";
-import { useTranslations } from "next-intl";
 import type { ReactNode, Ref } from "react";
 import { buttonClasses } from "@/components/ui/button";
+import type { Messages } from "@/i18n/messages";
 import { cn } from "@/lib/utils";
 
 // Shared by the lightweight shell and the full react-hook-form version, so both render identically.
+// Strings arrive as props (no next-intl on the client).
+export type FormCopy = Messages["contact"]["form"];
 
 export const formClass = "card relative grid gap-5 p-5 md:p-7";
 
@@ -16,11 +18,10 @@ export const emailInputClass = cn(inputClass, "text-start");
 
 export const textareaClass = cn(inputClass, "resize-y");
 
-export function FormTitle() {
-  const t = useTranslations("contact.form");
+export function FormTitle({ title }: { title: string }) {
   return (
     <h3 id="contact-form-title" className="text-lg font-semibold">
-      {t("title")}
+      {title}
     </h3>
   );
 }
@@ -77,8 +78,7 @@ export const submitClass = buttonClasses("primary", "w-full disabled:opacity-70 
  * Static stand-in rendered until the interactive form loads. Same markup and size,
  * so swapping it out causes no layout shift.
  */
-export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFormElement>; onActivate: () => void }) {
-  const t = useTranslations("contact.form");
+export function ContactFormShell({ formRef, onActivate, copy }: { formRef: Ref<HTMLFormElement>; onActivate: () => void; copy: FormCopy }) {
   return (
     <form
       ref={formRef}
@@ -89,14 +89,14 @@ export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFor
       onPointerDownCapture={onActivate}
       onSubmit={(e) => e.preventDefault()}
     >
-      <FormTitle />
-      <Field id="name" label={t("name")}>
+      <FormTitle title={copy.title} />
+      <Field id="name" label={copy.name}>
         <input id="name" name="name" type="text" autoComplete="name" className={inputClass} />
       </Field>
-      <Field id="email" label={t("email")}>
+      <Field id="email" label={copy.email}>
         <input id="email" name="email" type="email" dir="ltr" inputMode="email" autoComplete="email" className={emailInputClass} />
       </Field>
-      <Field id="message" label={t("message")} hint={t("messageHint")}>
+      <Field id="message" label={copy.message} hint={copy.messageHint}>
         <textarea id="message" name="message" rows={5} className={textareaClass} aria-describedby="message-hint" />
       </Field>
       <HoneypotWrapper>
@@ -104,7 +104,7 @@ export function ContactFormShell({ formRef, onActivate }: { formRef: Ref<HTMLFor
       </HoneypotWrapper>
       <button type="submit" className={submitClass}>
         <Send size={16} className="rtl:-scale-x-100" aria-hidden="true" />
-        {t("send")}
+        {copy.send}
       </button>
     </form>
   );

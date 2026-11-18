@@ -1,17 +1,16 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { THEME_COLORS } from "@/lib/site";
 import { cn } from "@/lib/utils";
+
+export type ThemeLabels = { toggle: string; light: string; dark: string };
 
 /**
  * Light/dark toggle. Both icons and labels are rendered and CSS picks one from data-theme, so server and client
  * markup always match. `withLabel` shows the target theme as text (mobile menu row).
  */
-export function ThemeToggle({ className, withLabel = false }: { className?: string; withLabel?: boolean }) {
-  const t = useTranslations("common");
-
+export function ThemeToggle({ labels, className, withLabel = false }: { labels: ThemeLabels; className?: string; withLabel?: boolean }) {
   function toggle() {
     const root = document.documentElement;
     const next = root.dataset.theme === "light" ? "dark" : "light";
@@ -28,10 +27,10 @@ export function ThemeToggle({ className, withLabel = false }: { className?: stri
     <button
       type="button"
       onClick={toggle}
-      aria-label={withLabel ? undefined : t("toggleThemeLabel")}
-      title={withLabel ? undefined : t("toggleThemeLabel")}
+      aria-label={withLabel ? undefined : labels.toggle}
+      title={withLabel ? undefined : labels.toggle}
       className={cn(
-        "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-[var(--radius-control)] text-muted transition-colors hover:bg-surface hover:text-fg",
+        "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control text-muted transition-colors hover:bg-surface hover:text-fg",
         className,
       )}
     >
@@ -39,8 +38,8 @@ export function ThemeToggle({ className, withLabel = false }: { className?: stri
       <Moon size={18} aria-hidden="true" className="block dark:hidden" />
       {withLabel && (
         <>
-          <span className="hidden dark:inline">{t("themeLight")}</span>
-          <span className="inline dark:hidden">{t("themeDark")}</span>
+          <span className="hidden dark:inline">{labels.light}</span>
+          <span className="inline dark:hidden">{labels.dark}</span>
         </>
       )}
     </button>

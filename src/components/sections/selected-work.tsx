@@ -75,12 +75,13 @@ function ProjectCard({ project: p }: { project: Project }) {
         </ul>
 
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
-          <LocaleLink
-            href={`/projects/${p.slug}`}
-            aria-label={t("readCaseStudyAria", { title: `${p.title} ${p.titleAccent}` })}
-            className={buttonClasses("secondary", "gap-1.5", "sm")}
-          >
+          {/* The accessible name starts with the visible words (label-in-name), then names the project. */}
+          <LocaleLink href={`/projects/${p.slug}`} className={buttonClasses("secondary", "gap-1.5", "sm")}>
             {t("readCaseStudy")}
+            <span className="sr-only">
+              {": "}
+              {p.title} {p.titleAccent}
+            </span>
             <ArrowRight size={16} aria-hidden="true" className="rtl:-scale-x-100" />
           </LocaleLink>
           {p.links.map((link) => (

@@ -1,6 +1,6 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { ReactNode } from "react";
-import type { ProjectStatus } from "@/lib/content";
+import { formatMonth, type ProjectStatus } from "@/lib/content";
 import { SHOW_TODO, isTodo } from "@/lib/todo";
 import { cn } from "@/lib/utils";
 
@@ -8,7 +8,7 @@ export function Chip({ children, className }: { children: ReactNode; className?:
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-[var(--radius-chip)] border border-line px-2 py-0.5 text-xs leading-5 font-medium text-fg-2",
+        "inline-flex items-center rounded-chip border border-line px-2 py-0.5 text-xs leading-5 font-medium text-fg-2",
         className,
       )}
     >
@@ -27,7 +27,7 @@ export function TodoMark({ children, className }: { children: ReactNode; classNa
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-[var(--radius-chip)] border border-dashed border-dev px-1.5 font-mono text-xs leading-5 text-dev",
+        "inline-flex items-center rounded-chip border border-dashed border-dev px-1.5 font-mono text-xs leading-5 text-dev",
         className,
       )}
       dir="ltr"
@@ -56,9 +56,13 @@ const statusStyles = {
  */
 export function StatusPill({ status }: { status: ProjectStatus }) {
   const t = useTranslations("status");
+  const locale = useLocale();
   if (status.kind === "TODO_STATUS") return <TodoMark>TODO_STATUS</TodoMark>;
+  // Launch date as "YYYY-MM" in site.ts, shown as "Mar 2027" / "مارس 2027".
   const kindLabel =
-    status.kind === "dev" && status.date && !isTodo(status.date) ? t("devDate", { date: status.date }) : t(status.kind);
+    status.kind === "dev" && status.date && !isTodo(status.date)
+      ? t("devDate", { date: formatMonth(status.date, locale) })
+      : t(status.kind);
   return (
     <span
       className={cn(
@@ -104,7 +108,7 @@ export function SectionHeading({
       <h2 id={id} className="text-title font-semibold">
         {title}
       </h2>
-      {description && <p className="mt-3 text-muted md:text-lg">{description}</p>}
+      {description && <p className="mt-3 text-pretty text-muted md:text-lg">{description}</p>}
     </div>
   );
 }

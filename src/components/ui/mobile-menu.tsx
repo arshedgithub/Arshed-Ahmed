@@ -1,18 +1,25 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
-import { LocaleLink } from "@/i18n/link";
-import { nav } from "@/lib/site";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle, type ThemeLabels } from "./theme-toggle";
+
+export type MobileMenuCopy = {
+  open: string;
+  close: string;
+  navAria: string;
+  appearance: string;
+  theme: ThemeLabels;
+  /** Already localized hrefs. */
+  items: { href: string; label: string }[];
+};
 
 /**
  * Phone and tablet menu: an opaque sheet under the header (nothing shows through), page scroll locked,
  * focus kept inside while open and returned to the button on close.
  */
-export function MobileMenu() {
-  const t = useTranslations("nav");
+export function MobileMenu({ copy }: { copy: MobileMenuCopy }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -59,7 +66,7 @@ export function MobileMenu() {
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label={open ? t("closeMenu") : t("openMenu")}
+        aria-label={open ? copy.close : copy.open}
         onClick={() => setOpen((v) => !v)}
         className="inline-flex size-11 items-center justify-center rounded-control text-fg hover:bg-surface"
       >
@@ -73,24 +80,20 @@ export function MobileMenu() {
         className="menu-sheet fixed inset-x-0 top-14 bottom-0 z-40 overflow-y-auto border-t border-line bg-canvas md:top-16"
       >
         <div className="container-page flex min-h-full flex-col py-4">
-          <nav aria-label={t("mobileAria")}>
+          <nav aria-label={copy.navAria}>
             <ul className="grid">
-              {nav.map((item) => (
-                <li key={item.key} className="border-b border-line">
-                  <LocaleLink
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="flex min-h-14 items-center text-xl font-medium text-fg"
-                  >
-                    {t(item.key)}
-                  </LocaleLink>
+              {copy.items.map((item) => (
+                <li key={item.href} className="border-b border-line">
+                  <Link href={item.href} onClick={() => setOpen(false)} className="flex min-h-14 items-center text-xl font-medium text-fg">
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
           <div className="mt-6 flex items-center justify-between gap-4">
-            <span className="kicker">{t("appearance")}</span>
-            <ThemeToggle withLabel className="border border-line px-3 text-fg" />
+            <span className="kicker">{copy.appearance}</span>
+            <ThemeToggle labels={copy.theme} withLabel className="border border-line px-3 text-fg" />
           </div>
         </div>
       </div>

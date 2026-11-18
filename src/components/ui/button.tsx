@@ -11,11 +11,11 @@ const variants = {
 
 const sizes = {
   md: "min-h-11 px-5 text-sm",
-  sm: "min-h-11 px-3 text-sm md:min-h-10",
+  sm: "min-h-11 px-3 text-sm",
 } as const;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-[var(--radius-control)] font-medium whitespace-nowrap transition-[background-color,border-color,color] select-none";
+  "inline-flex items-center justify-center gap-2 rounded-control font-medium whitespace-nowrap transition-[background-color,border-color,color] select-none";
 
 export type ButtonVariant = keyof typeof variants;
 

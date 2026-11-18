@@ -148,16 +148,12 @@
     color: #fff;
   }
 
+  /* Balanced headings; `text-pretty` (no orphan word) is applied per element where it matters, because
+     running it on every paragraph costs noticeable layout time on slow phones. */
   h1,
   h2,
   h3 {
     text-wrap: balance;
-  }
-
-  p,
-  li,
-  dd {
-    text-wrap: pretty; /* no orphan words on the last line */
   }
 }
 
