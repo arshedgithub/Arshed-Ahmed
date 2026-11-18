@@ -30,12 +30,14 @@ export function SiteFooter() {
         </nav>
         <SocialLinks />
       </div>
-      <div className="container-page flex items-center justify-between gap-4 border-t border-line py-4 text-xs text-muted">
-        <span>{t("rights", { year: process.env.BUILD_YEAR ?? "", name: common("name") })}</span>
-        <a href="#main" className="inline-flex min-h-11 items-center gap-1.5 hover:text-fg">
-          {navT("backToTop")}
-          <ArrowUp size={14} aria-hidden="true" />
-        </a>
+      <div className="border-t border-line">
+        <div className="container-page flex items-center justify-between gap-4 py-4 text-xs text-muted">
+          <span>{t("rights", { year: process.env.BUILD_YEAR ?? "", name: common("name") })}</span>
+          <a href="#main" className="inline-flex min-h-11 items-center gap-1.5 hover:text-fg">
+            {navT("backToTop")}
+            <ArrowUp size={14} aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </footer>
   );

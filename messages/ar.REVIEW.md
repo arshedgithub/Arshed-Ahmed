@@ -8,8 +8,12 @@ short sentences, professional but not stiff.
 wrong, and anything that overstates or changes a claim. Keep tech and product names in Latin script
 (Next.js, Stripe, SLMarket, Softsora, Solitrium Academy).
 
-**How to change a string:** edit the value in `messages/ar.json` under the listed key. Case studies are in
-`src/content/projects/ar/`. This file is a snapshot, so `ar.json` wins if the two differ.
+**How to change a string:** edit the value in `messages/ar.json` under the listed key. Case studies are in the same
+file, under `projects.<slug>.case`. This file is a snapshot, so `ar.json` wins if the two differ.
+
+**November 2026 redesign:** almost all Arabic copy was rewritten (new hero headline, proof strip, project statuses,
+case-study template, credentials and contact). Review the whole of `ar.json`, not only the questions below. Some
+questions below refer to strings that no longer exist (e.g. the Dubai/Abu Dhabi/Ajman title): skip those.
 
 ## Questions for the reviewer
 

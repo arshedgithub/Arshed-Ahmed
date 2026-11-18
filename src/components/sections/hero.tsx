@@ -39,6 +39,8 @@ export function Hero() {
               />
             </div>
             <div>
+              {/* The name repeats the header's on phones on purpose: the headline below already carries the role,
+                  and the face + name pairing is what people remember. */}
               <p className="text-base font-semibold text-fg">{common("name")}</p>
               <p className="flex items-center gap-2 text-sm text-muted">
                 <span aria-hidden="true" className="pulse-dot relative size-1.5 shrink-0 rounded-full bg-live text-live" />
@@ -96,7 +98,6 @@ export function Hero() {
               className="photo-cutout absolute inset-x-0 bottom-0 h-[92%] w-full object-cover object-top"
             />
           </div>
-          <p className="kicker mt-3">{common("jobTitle")}</p>
         </div>
       </div>
     </section>

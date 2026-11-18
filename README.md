@@ -1,23 +1,45 @@
 # arshedahmed.com
 
-Personal portfolio for Arshed Ahmed, full-stack software engineer. Built with Next.js 16 (App Router),
-TypeScript, Tailwind CSS v4, MDX case studies, `next-intl` and `motion` for animation. Every page is static.
-English lives at `/` and Arabic (RTL) at `/ar`.
+Personal portfolio for Arshed Ahmed, full-stack software engineer. Built with Next.js 16 (App Router), TypeScript,
+Tailwind CSS v4 (through PostCSS) and `next-intl`. Every page is static. English lives at `/` and Arabic (RTL) at `/ar`.
 
 ## Commands
 
 ```bash
 npm install
-npm run dev              # http://localhost:3000
+npm run dev              # http://localhost:3000 (content placeholders are visible as amber markers)
 npm run check            # i18n key check + eslint + route types + tsc
-npm run i18n:check       # fail if messages/en.json and ar.json differ in keys or placeholders
-npm run og:ar            # re-render the Arabic share images after changing Arabic titles
+npm run i18n:check       # fail if messages/en.json and ar.json differ in keys, placeholders or TODOs
+npm run og:ar            # re-render the Arabic share images after changing Arabic titles or the hero copy
 npm run build            # Vercel / Node build (.next)
 npm run start            # serve the Vercel build locally
 npm run build:static     # fully static export to ./out (Cloudflare Pages, Netlify)
 npm run preview:static   # serve ./out locally
 npm run images:photo     # rebuild portrait crops from public/images/me-cutout.png
 ```
+
+Next.js 16.4.3 stops every other `next build` to print a security advisory; running the build again continues.
+Upgrade Next.js to clear it (see TODO_CONTENT.md).
+
+## Content you still need to supply
+
+See **[TODO_CONTENT.md](TODO_CONTENT.md)**: metrics, dates, screenshots, certificate links, reply time, domain email,
+Arabic CV and the drafts to confirm.
+
+Placeholders are values that start with `TODO_` (`src/lib/todo.ts`). Production builds leave them out entirely, so the
+live site never shows a made-up value or a marker. `npm run dev`, or any build with `NEXT_PUBLIC_SHOW_TODO=1`, shows
+them as dashed amber markers.
+
+## Design system
+
+Direction: editorial-technical. Warm ink/paper neutrals carry 60% of the page, surfaces and hairlines 30%, and one cobalt
+accent 10% (primary action, links, focus). Green, amber and grey are reserved for project status. All tokens (colour
+roles for both themes, radius, type scale, motion) are at the top of `src/app/globals.css`.
+
+- Type: IBM Plex Sans + IBM Plex Mono (English) and IBM Plex Sans Arabic (Arabic), one superfamily, so both locales share
+  x-height and weights. Weights 400/500/600 only; `font-synthesis: none`. Self-hosted and subset by `next/font`, swap.
+- Elevation comes from hairline borders; shadows appear only on overlays (toast).
+- Motion only for state changes, all under `prefers-reduced-motion`. Nothing is hidden waiting for a scroll trigger.
 
 ## Deployment
 
@@ -33,24 +55,17 @@ The target is chosen at build time with `DEPLOY_TARGET` (see `next.config.ts`).
      `Portfolio <onboarding@resend.dev>` works without a domain, but Resend then only delivers to the email your
      Resend account is registered with. To use `contact@arshedahmed.com`, verify the domain in Resend first.
    - `CONTACT_TO_EMAIL`: optional **receiver**, defaults to the email in `src/lib/site.ts`.
-   Each form submission becomes one email to you, with the visitor's address as Reply-To. Without both
-   `RESEND_API_KEY` and `CONTACT_FROM_EMAIL`, the route answers 503 and the form shows its error state.
-3. Image optimisation (AVIF/WebP) is on, limited to widths up to 1200px (`images.deviceSizes` in `next.config.ts`).
+   Without both `RESEND_API_KEY` and `CONTACT_FROM_EMAIL`, the route answers 503 and the form shows its error state.
+3. The contact route has a honeypot and a per-IP limit of 5 messages per 10 minutes. The limit is in memory, so it is per
+   server instance; for a hard limit add a Vercel Firewall rate-limit rule on `/api/contact` (or Cloudflare Turnstile).
+4. Security headers are set in `next.config.ts` (`headers()`), because Vercel ignores `public/_headers`.
 
-### Canonical host (do this when you deploy)
+### Canonical host
 
-The site's canonical host is the apex, `https://arshedahmed.com` (`SITE_URL` in `src/lib/site.ts`). Canonicals,
-OG/Twitter URLs, the sitemap, robots.txt and JSON-LD all use it. Vercel currently redirects the apex **to** www,
-so flip it:
-
-1. Vercel → Project → Settings → Domains.
-2. Edit `arshedahmed.com`: remove its redirect so it serves the project.
-3. Edit `www.arshedahmed.com`: set "Redirect to" `arshedahmed.com`, status **301 Moved Permanently**.
-4. Check: `curl -I https://www.arshedahmed.com/` returns `301` with `location: https://arshedahmed.com/`.
-
-This lives in the domain settings, not in code: a redirect in `next.config.ts` or `vercel.json` would loop
-against the current apex → www setting. For Netlify, `public/_redirects` already 301s www to the apex. On
-Cloudflare Pages, add a Bulk Redirect from `www.arshedahmed.com` to `arshedahmed.com` (301).
+The canonical host is **www**: `https://www.arshedahmed.com` (`SITE_URL` in `src/lib/site.ts`). Canonicals, hreflang,
+OG/Twitter URLs, the sitemap, robots.txt, JSON-LD and internal links all use it. Vercel already redirects the apex to www,
+so nothing needs changing there. On Netlify, `public/_redirects` 301s the apex to www; on Cloudflare Pages, add a Bulk
+Redirect from `arshedahmed.com` to `www.arshedahmed.com` (301).
 
 ### Cloudflare Pages / Netlify (static export)
 
@@ -67,93 +82,75 @@ Cloudflare Pages, add a Bulk Redirect from `www.arshedahmed.com` to `arshedahmed
 
 | What | Where |
 | --- | --- |
-| Shared facts (links, dates, tech names, project structure) | `src/lib/site.ts` |
-| All wording, per locale | `messages/en.json`, `messages/ar.json` |
-| Case-study text | `src/content/projects/<slug>.mdx`, Arabic in `src/content/projects/ar/<slug>.mdx` |
+| Shared facts (links, dates, statuses, stack, structure) | `src/lib/site.ts` |
+| All wording, per locale, including case studies | `messages/en.json`, `messages/ar.json` |
+| Placeholder rules | `src/lib/todo.ts` |
 | Arabic copy awaiting native review | `messages/ar.REVIEW.md` |
-| Design tokens (colours, light/dark) | `src/app/globals.css` |
+| Design tokens (colours, type, radius, motion; light/dark) | `src/app/globals.css` |
 | Home sections | `src/components/sections/` |
+| Case-study template | `src/components/pages/project-page.tsx` |
 | Locale routing | `src/i18n/`, `src/app/(en)` and `src/app/(ar)/ar` |
-| Client-only code | `src/components/motion/*`, `ui/theme-toggle`, `ui/mobile-menu`, `ui/bottom-nav`, `ui/language-switcher`, `sections/*contact-form*` |
+| Client-only code | `ui/theme-toggle`, `ui/mobile-menu`, `ui/language-switcher`, `ui/locale-hint`, `ui/copy-button`, `sections/*contact-form*` |
 | SEO (metadata, JSON-LD, OG images, sitemap, robots) | `src/lib/metadata.ts`, `src/components/seo/`, `src/app/og-image.png/route.tsx` (home), `public/images/og/ar/` (Arabic), `src/app/projects/[slug]/og-image.png/route.tsx` (case studies), `src/app/sitemap.ts`, `src/app/robots.ts` |
 | Icons and manifest | `src/app/icon.svg`, `src/app/favicon.ico`, `src/app/apple-icon.png`, `public/icons/`, `src/app/manifest.ts` |
-| Page titles and descriptions | `meta` (home) and `seoTitle` / `seoDescription` per project in `messages/<locale>.json` |
 | Sitemap `lastmod` | last git commit touching each page's sources (`src/lib/last-modified.ts`); omitted if git is unavailable |
+
+Client components take their strings as props from server components. There is no `NextIntlClientProvider`, so the
+browser never downloads the catalogs or the ICU formatter.
 
 ### Adding a case study
 
-1. Add an entry to `projects` in `src/lib/site.ts` (slug, stack, links, screenshots, architecture rows and edges).
-2. Add its wording under `projects.<slug>` in both `messages/en.json` and `messages/ar.json`.
-3. Create `src/content/projects/<slug>.mdx` and `src/content/projects/ar/<slug>.mdx`. Use `<Stack />`,
-   `<Architecture />` and `<ProjectLinks />` where those sections belong; the page, sitemap, OG image and JSON-LD
-   pick it up automatically.
+1. Add an entry to `projects` in `src/lib/site.ts`: slug, statuses, owner, timeline, stack, proof chips, links,
+   screenshots, schematic and the architecture rows and edges.
+2. Add its wording under `projects.<slug>` in both `messages/en.json` and `messages/ar.json`, including the `case`
+   block (problem, team, context, architecture, decisions with trade-offs, challenges, improve).
+3. The page, card, sitemap, OG image and JSON-LD pick it up automatically. Run `npm run og:ar` for the Arabic card.
+
+### Project statuses
+
+Only claims that are true. `live` (green) needs a product that real users use today; `dev` (amber) can carry a launch
+month; `client` (grey) is company work; `prototype` (grey). SLMarket Flow is live; the slmarket.lk marketplace is in
+development.
 
 ### Project screenshots
 
-Projects render a designed fallback card (name, outcome, stack chips) until real images exist. Drop WebP files
-with these exact names into `public/images/projects/<slug>/` and rebuild; they are picked up automatically
-(`src/lib/project-images.ts`), and their alt text is already written in `messages/<locale>.json`.
-Browser shots at 1280x800 (16:10), phone shots at 390x845.
-
-| Folder | Files |
-| --- | --- |
-| `slmarket/` | `cover.webp`, `marketplace-home.webp`, `flow-pos.webp`, `marketplace-mobile.webp` (phone) |
-| `ai-business-support-saas/` | `cover.webp`, `payments-dashboard.webp`, `chatbot.webp` |
-| `ai-cv-builder/` | `cover.webp`, `resume-editor.webp`, `mock-interview.webp` (phone) |
-| `whatsapp-ai-order-bot/` | `cover.webp`, `chat-1.webp` (phone), `chat-2.webp` (phone) |
-
-`cover.webp` is the home-page card image; the first browser screenshot leads the case-study page.
+Cards and case studies show a labelled, data-free schematic until real images exist. Drop WebP files with the exact names
+listed in TODO_CONTENT.md into `public/images/projects/<slug>/` and rebuild; they are picked up automatically
+(`src/lib/project-images.ts`), and their alt text is already written in both catalogs. Browser shots at 1280x800 (16:10),
+phone shots at 390x845.
 
 ### Photo
 
-`public/images/me-cutout.png` is the transparent master (background removed with an ISNet model, then the
-leftover haze beside the jacket was cleaned up; face, hair and beard untouched). To use a different photo, replace it
-with another transparent PNG and run `npm run images:photo`, which writes `hero-1x1.webp` (1200x1200),
-`about-1x1.webp` (800x800), `og-portrait.png` and the inlined `src/components/seo/og-portrait.ts`.
+`public/images/me-cutout.png` is the transparent master. To use a different photo, replace it with another transparent
+PNG and run `npm run images:photo`, which writes `hero-1x1.webp` (1200x1200), `about-1x1.webp` (800x800),
+`og-portrait.png` and the inlined `src/components/seo/og-portrait.ts`.
 
 ### Languages
 
 `/` is English and `/ar` is Arabic. There is no middleware, because the static export cannot run one: each locale is
 its own route tree with its own root layout, which is also what makes `<html lang dir>` correct in prerendered HTML.
-Visitors are never redirected by browser language. The language switcher saves an explicit choice in `localStorage`
-and an inline script (`src/components/seo/locale-script.tsx`) honours it on later visits. First-time visitors get a
-language dialog (`src/components/ui/language-prompt.tsx`), shown once. Closing it saves no language preference.
 
-Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` and rebuild; `/ar` links to it automatically
-(`src/lib/cv.ts`). Until then it links to the English PDF.
-
-Arabic OG images are committed PNGs in `public/images/og/ar/`, because `next/og` cannot shape Arabic or lay out RTL
-text. After changing an Arabic title or subtitle, run `npm run og:ar` (needs Chrome and Node 22.18+).
+- The header switcher is visible at every width, names each language in its own script ("English" / "العربية"), keeps
+  the current page and section, and saves the choice in `localStorage`.
+- Nobody is ever redirected, by IP or by browser language. If a saved choice differs from the page someone opens (e.g.
+  a shared link), a small dismissible toast offers the equivalent page (`src/components/ui/locale-hint.tsx`).
+- Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` and rebuild; `/ar` links to it automatically (`src/lib/cv.ts`).
+  Until then every Arabic CV link is labelled as the English PDF.
+- Arabic OG images are committed PNGs in `public/images/og/ar/`, because `next/og` cannot shape Arabic. After changing
+  an Arabic title, subtitle or the hero copy, run `npm run og:ar` (needs Chrome and Node 22.18+).
+- Known limitation: on server builds, unmatched `/ar/*` URLs return 404 with Next's error shell, and the Arabic 404 is
+  rendered in the browser (the English 404 is fully server-rendered).
 
 ### Theme
 
-Dark is the default: `THEME_DEFAULT` in `src/lib/site.ts` is `"dark"`, so first-time visitors always see dark.
-Set it to `"system"` to follow an OS light preference instead. A visitor's toggle choice is saved either way, and
-an inline script applies it before first paint (no flash). In dark the portrait is a cutout over a soft glow; in
-light it sits in a square pale-blue tile.
+Dark is the default: `THEME_DEFAULT` in `src/lib/site.ts` is `"dark"`, and the browser theme-color starts dark to match.
+Set it to `"system"` to follow an OS light preference instead. A visitor's toggle choice is saved either way, and an
+inline script applies it before first paint (no flash).
 
-## TODO (needs your input)
+## Quality checks run for this redesign
 
-- [ ] Flip the canonical host in Vercel's domain settings (see "Canonical host").
-- [ ] Add real project screenshots (see "Project screenshots" for the exact filenames).
-- [ ] Have a native Arabic speaker review the copy (`messages/ar.REVIEW.md`).
-- [ ] Add the Arabic CV as `public/Arshed-Ahmed-CV-ar.pdf` (see "Languages").
-- [ ] Check the hreflang pairs in Google Search Console after deploying.
-- [ ] Confirm `ACADEMY_NAME` and `SLMARKET_START_ISO` ("2026-07") in `src/lib/site.ts`.
-- [ ] Fill in `contact.visaValue` in both `messages/*.json`. It renders under "Notice period" only once it is set.
-- [ ] Confirm the "live" / "soloBuilt" badges in `site.ts` (only SLMarket has them; add "live" to others if
-      they are publicly live).
-- [ ] Optional: the light theme shows a faint grey fringe around the hair at 2x zoom (dark is clean). A re-cut
-      with edge colour decontamination would remove it; replace `me-cutout.png` and run `npm run images:photo`.
-- [ ] Review every `{/* TODO: confirm */}` in `src/content/projects/*.mdx` (run `grep -rn "TODO" src`).
-- [ ] Add live/GitHub links for the three projects that have none (`links: []` in `site.ts`).
-- [ ] Elzian Agro second bullet in `messages/*.json` is a restatement of the CV line. Confirm or replace it.
-- [ ] Contact form: set `RESEND_API_KEY` and `CONTACT_FROM_EMAIL` (Vercel) or `NEXT_PUBLIC_CONTACT_ENDPOINT` (static).
-- [ ] Re-run Lighthouse on the deployed site (see notes below).
-
-## Performance notes
-
-Measured locally with Lighthouse 12 (mobile, simulated throttling) against `next start`:
-Accessibility, Best Practices and SEO 100 on the home and case-study pages, CLS 0. Performance was
-measured on a heavily loaded machine (full disk, slow CPU), which inflates blocking time. Re-measure on the
-deployed URL with PageSpeed Insights for real numbers.
+Playwright screenshots (EN/AR, 375/768/1280/1440, light/dark), axe (WCAG 2.2 AA + best practices: 0 violations), a
+keyboard walkthrough (skip link, focus rings, menu focus trap and Escape), internal link check, and Lighthouse. Desktop
+Lighthouse is 100 in all four categories. Mobile Accessibility, Best Practices and SEO are 100; mobile Performance was
+measured on a slow, memory-starved machine (Lighthouse benchmark index under 1000) and should be re-measured on the
+deployed URL with PageSpeed Insights.
